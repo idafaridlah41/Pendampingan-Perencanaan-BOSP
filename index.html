@@ -200,25 +200,28 @@
                 </div>
             </div>
 
-            <!-- Navigasi Utama (6 Modul Terpadu) -->
+            <!-- Navigasi Utama (7 Modul Terpadu) -->
             <nav class="flex overflow-x-auto gap-2 pb-3.5 pt-1" aria-label="Menu Modul Pendampingan">
                 <button type="button" onclick="switchModule('panduan')" id="nav-panduan" class="nav-btn nav-active px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap flex items-center gap-2 transition">
                     <i data-lucide="book-open" class="w-4 h-4"></i> 1. Panduan Pendampingan
                 </button>
-                <button type="button" onclick="switchModule('lembarkerja')" id="nav-lembarkerja" class="nav-btn bg-white/10 text-slate-200 hover:bg-white/20 hover:text-white px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap flex items-center gap-2 transition">
-                    <i data-lucide="calculator" class="w-4 h-4"></i> 2. Lembar Kerja & Simulasi Sekolah
-                </button>
-                <button type="button" onclick="switchModule('checklist')" id="nav-checklist" class="nav-btn bg-white/10 text-slate-200 hover:bg-white/20 hover:text-white px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap flex items-center gap-2 transition">
-                    <i data-lucide="check-square" class="w-4 h-4"></i> 3. Checklist Persiapan & WA
-                </button>
-                <button type="button" onclick="switchModule('perbandingan')" id="nav-perbandingan" class="nav-btn bg-white/10 text-slate-200 hover:bg-white/20 hover:text-white px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap flex items-center gap-2 transition">
-                    <i data-lucide="git-compare" class="w-4 h-4"></i> 4. Perbandingan Regulasi 8/2026
+                <button type="button" onclick="switchModule('kajianregulasi')" id="nav-kajianregulasi" class="nav-btn bg-white/10 text-slate-200 hover:bg-white/20 hover:text-white px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap flex items-center gap-2 transition">
+                    <i data-lucide="scale" class="w-4 h-4"></i> 2. Kajian Regulasi Permendikdasmen Nomor 8 Tahun 2026
                 </button>
                 <button type="button" onclick="switchModule('presentasi')" id="nav-presentasi" class="nav-btn bg-white/10 text-slate-200 hover:bg-white/20 hover:text-white px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap flex items-center gap-2 transition">
-                    <i data-lucide="presentation" class="w-4 h-4"></i> 5. Bahan Tayang Presentasi (12 Slide)
+                    <i data-lucide="presentation" class="w-4 h-4"></i> 3. Bahan Tayang Presentasi (12 Slide)
+                </button>
+                <button type="button" onclick="switchModule('lembarkerja')" id="nav-lembarkerja" class="nav-btn bg-white/10 text-slate-200 hover:bg-white/20 hover:text-white px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap flex items-center gap-2 transition">
+                    <i data-lucide="calculator" class="w-4 h-4"></i> 4. Lembar Kerja & Simulasi Sekolah
+                </button>
+                <button type="button" onclick="switchModule('checklist')" id="nav-checklist" class="nav-btn bg-white/10 text-slate-200 hover:bg-white/20 hover:text-white px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap flex items-center gap-2 transition">
+                    <i data-lucide="check-square" class="w-4 h-4"></i> 5. Checklist Persiapan & WA
+                </button>
+                <button type="button" onclick="switchModule('perbandingan')" id="nav-perbandingan" class="nav-btn bg-white/10 text-slate-200 hover:bg-white/20 hover:text-white px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap flex items-center gap-2 transition">
+                    <i data-lucide="git-compare" class="w-4 h-4"></i> 6. Perbandingan Regulasi 8/2026
                 </button>
                 <button type="button" onclick="switchModule('aruskas')" id="nav-aruskas" class="nav-btn bg-white/10 text-slate-200 hover:bg-white/20 hover:text-white px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap flex items-center gap-2 transition">
-                    <i data-lucide="calendar-range" class="w-4 h-4"></i> 6. Simulasi Arus Kas 12 Bulan (2027)
+                    <i data-lucide="calendar-range" class="w-4 h-4"></i> 7. Simulasi Arus Kas 12 Bulan (2027)
                 </button>
             </nav>
         </div>
@@ -1228,6 +1231,629 @@ Terima kasih, sampai bertemu besok dalam keadaan sehat walafiat.</textarea>
             </div>
         </section>
 
+        <!-- =================================================================== -->
+        <!-- MODUL 7: KAJIAN REGULASI PERMENDIKDASMEN NOMOR 8 TAHUN 2026         -->
+        <!-- =================================================================== -->
+        <section id="panel-kajianregulasi" class="tab-panel hidden space-y-8">
+            <!-- Hero Header Kajian Regulasi -->
+            <div class="bg-gradient-to-br from-slate-900 via-tealbrand-900 to-slate-900 text-white rounded-2xl shadow-md p-6 sm:p-10 border border-slate-800">
+                <div class="inline-flex flex-wrap items-center gap-2 px-3 py-1 rounded-full bg-teal-500/20 border border-teal-400/30 text-teal-200 text-xs font-semibold mb-4">
+                    <span>Berita Negara RI Tahun 2026 Nomor 89</span>
+                    <span>•</span>
+                    <span>Berlaku 6 Februari 2026</span>
+                </div>
+                <h2 class="font-display text-2xl sm:text-4xl font-extrabold tracking-tight leading-tight max-w-4xl">
+                    Kajian Mendalam & Analisis Komprehensif Permendikdasmen Nomor 8 Tahun 2026
+                </h2>
+                <p class="mt-3 text-sm sm:text-base text-slate-300 max-w-3xl leading-relaxed">
+                    Petunjuk Teknis Pengelolaan Dana Bantuan Operasional Satuan Pendidikan (BOSP) serta Integrasinya dengan Sistem Kerja Pengawasan Pengelolaan Dana BOSP Jenjang SMP Tahun Anggaran 2026.
+                </p>
+
+                <!-- Quick Jump Links Internal Kajian Regulasi -->
+                <div class="flex flex-wrap gap-2 mt-6 pt-5 border-t border-white/15 text-xs font-semibold no-print">
+                    <a href="#kr-bagian-1" class="px-3 py-1.5 rounded-lg bg-white/10 hover:bg-teal-600 text-white transition">I. Legalitas</a>
+                    <a href="#kr-bagian-2" class="px-3 py-1.5 rounded-lg bg-white/10 hover:bg-teal-600 text-white transition">II. Prinsip & Klaster</a>
+                    <a href="#kr-bagian-3" class="px-3 py-1.5 rounded-lg bg-white/10 hover:bg-teal-600 text-white transition">III. Alokasi & Salur</a>
+                    <a href="#kr-bagian-4" class="px-3 py-1.5 rounded-lg bg-white/10 hover:bg-teal-600 text-white transition">IV. Komponen & Batas</a>
+                    <a href="#kr-bagian-5" class="px-3 py-1.5 rounded-lg bg-white/10 hover:bg-teal-600 text-white transition">V. Pelaporan & Sanksi</a>
+                    <a href="#kr-bagian-6" class="px-3 py-1.5 rounded-lg bg-white/10 hover:bg-teal-600 text-white transition">VI. Tim BOS & 15 Larangan</a>
+                    <a href="#kr-bagian-7" class="px-3 py-1.5 rounded-lg bg-white/10 hover:bg-teal-600 text-white transition">VII. Integrasi Pengawasan</a>
+                    <a href="#kr-bagian-8" class="px-3 py-1.5 rounded-lg bg-white/10 hover:bg-teal-600 text-white transition">VIII. Rekomendasi</a>
+                </div>
+
+                <!-- Executive Highlight Cards -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-6">
+                    <div class="bg-white/10 backdrop-blur-sm border border-white/15 rounded-2xl p-4">
+                        <p class="text-xs font-medium text-teal-200 uppercase tracking-wider">Status Regulasi</p>
+                        <p class="text-lg font-bold text-amber-300 mt-1">Mencabut No. 8/2025</p>
+                        <p class="text-xs text-slate-300 mt-1">Ditetapkan 5 Feb 2026, diundangkan 6 Feb 2026 (Pasal 75).</p>
+                    </div>
+                    <div class="bg-white/10 backdrop-blur-sm border border-white/15 rounded-2xl p-4">
+                        <p class="text-xs font-medium text-teal-200 uppercase tracking-wider">Cut-Off Data Dapodik</p>
+                        <p class="text-lg font-bold text-amber-300 mt-1">31 Agustus T-1</p>
+                        <p class="text-xs text-slate-300 mt-1">Basis penghitungan murid ber-NISN penerima BOSP Reguler.</p>
+                    </div>
+                    <div class="bg-white/10 backdrop-blur-sm border border-white/15 rounded-2xl p-4">
+                        <p class="text-xs font-medium text-teal-200 uppercase tracking-wider">Batas Honor BOS</p>
+                        <p class="text-lg font-bold text-amber-300 mt-1">Maks. 20% / 40%</p>
+                        <p class="text-xs text-slate-300 mt-1">20% untuk Sekolah Negeri & 40% untuk Sekolah Swasta (Pasal 42).</p>
+                    </div>
+                    <div class="bg-white/10 backdrop-blur-sm border border-white/15 rounded-2xl p-4">
+                        <p class="text-xs font-medium text-teal-200 uppercase tracking-wider">Belanja Wajib Buku</p>
+                        <p class="text-lg font-bold text-amber-300 mt-1">Min. 10% (BOS/Kesetaraan)</p>
+                        <p class="text-xs text-slate-300 mt-1">Min. 5% untuk PAUD dari katalog terkurasi Kemendikdasmen.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- BAGIAN I -->
+            <div id="kr-bagian-1" class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 sm:p-8 scroll-mt-32">
+                <div class="flex items-center gap-3 mb-5">
+                    <span class="px-3 py-1 rounded-lg bg-teal-100 text-teal-900 font-bold text-xs">BAGIAN I</span>
+                    <h3 class="font-display text-xl font-bold text-slate-900">Identitas dan Legalitas Regulasi</h3>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+                    <div class="p-4 rounded-xl bg-slate-50 border border-slate-200/80">
+                        <span class="block text-xs font-semibold text-slate-500 uppercase">Nomor & Judul Regulasi</span>
+                        <p class="mt-1 font-medium text-slate-900">Peraturan Menteri Pendidikan Dasar dan Menengah (Permendikdasmen) RI Nomor 8 Tahun 2026 tentang Petunjuk Teknis Pengelolaan Dana Bantuan Operasional Satuan Pendidikan (BOSP).</p>
+                    </div>
+                    <div class="p-4 rounded-xl bg-slate-50 border border-slate-200/80">
+                        <span class="block text-xs font-semibold text-slate-500 uppercase">Penetapan & Pengundangan</span>
+                        <p class="mt-1 font-medium text-slate-900">Ditetapkan di Jakarta pada tanggal <strong>5 Februari 2026</strong> oleh Mendikdasmen (Abdul Mu'ti), diundangkan tanggal <strong>6 Februari 2026</strong> (Berita Negara RI Tahun 2026 Nomor 89).</p>
+                    </div>
+                    <div class="p-4 rounded-xl bg-slate-50 border border-slate-200/80">
+                        <span class="block text-xs font-semibold text-slate-500 uppercase">Status Hukum & Daya Laku (Pasal 75)</span>
+                        <p class="mt-1 font-medium text-slate-900">Berlaku sejak tanggal diundangkan dan secara resmi <strong>mencabut serta menyatakan tidak berlaku</strong> Permendikdasmen Nomor 8 Tahun 2025 tentang Petunjuk Teknis Pengelolaan Dana BOSP.</p>
+                    </div>
+                    <div class="p-4 rounded-xl bg-slate-50 border border-slate-200/80">
+                        <span class="block text-xs font-semibold text-slate-500 uppercase">Ketentuan Peralihan (Pasal 72)</span>
+                        <p class="mt-1 font-medium text-slate-900">Satuan biaya, penetapan penerima dana, dan besaran alokasi Dana BOP PAUD Reguler, BOS Reguler, dan BOP Kesetaraan Reguler TA 2026 yang telah ditetapkan Menteri dinyatakan tetap berlaku.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- BAGIAN II -->
+            <div id="kr-bagian-2" class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 sm:p-8 scroll-mt-32">
+                <div class="flex items-center gap-3 mb-5">
+                    <span class="px-3 py-1 rounded-lg bg-teal-100 text-teal-900 font-bold text-xs">BAGIAN II</span>
+                    <h3 class="font-display text-xl font-bold text-slate-900">Kerangka Konseptual, Prinsip, dan Ruang Lingkup</h3>
+                </div>
+
+                <h4 class="text-base font-bold text-slate-800 mb-3">A. Lima Prinsip Pengelolaan Dana BOSP (Pasal 2)</h4>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 mb-8">
+                    <div class="p-4 rounded-xl bg-teal-50/60 border border-teal-100">
+                        <div class="font-bold text-teal-900 text-sm mb-1">1. Fleksibel</div>
+                        <p class="text-xs text-slate-700 leading-relaxed">Dikelola sesuai kebutuhan riil satuan pendidikan berdasarkan komponen penggunaan dana yang diizinkan.</p>
+                    </div>
+                    <div class="p-4 rounded-xl bg-teal-50/60 border border-teal-100">
+                        <div class="font-bold text-teal-900 text-sm mb-1">2. Efektif</div>
+                        <p class="text-xs text-slate-700 leading-relaxed">Diupayakan memberikan hasil, pengaruh, dan daya guna nyata dalam mencapai tujuan pendidikan.</p>
+                    </div>
+                    <div class="p-4 rounded-xl bg-teal-50/60 border border-teal-100">
+                        <div class="font-bold text-teal-900 text-sm mb-1">3. Efisien</div>
+                        <p class="text-xs text-slate-700 leading-relaxed">Meningkatkan kualitas belajar murid dengan biaya seminimal mungkin dan hasil yang optimal.</p>
+                    </div>
+                    <div class="p-4 rounded-xl bg-teal-50/60 border border-teal-100">
+                        <div class="font-bold text-teal-900 text-sm mb-1">4. Akuntabel</div>
+                        <p class="text-xs text-slate-700 leading-relaxed">Dapat dipertanggungjawabkan secara keseluruhan berdasarkan pertimbangan logis dan bukti sah.</p>
+                    </div>
+                    <div class="p-4 rounded-xl bg-teal-50/60 border border-teal-100">
+                        <div class="font-bold text-teal-900 text-sm mb-1">5. Transparan</div>
+                        <p class="text-xs text-slate-700 leading-relaxed">Dikelola secara terbuka dan mengakomodasi aspirasi pemangku kepentingan di satuan pendidikan.</p>
+                    </div>
+                </div>
+
+                <h4 class="text-base font-bold text-slate-800 mb-3">B. Ruang Lingkup dan Klasterisasi Skema Dana BOSP (Pasal 3 – Pasal 18)</h4>
+                <div class="overflow-x-auto rounded-xl border border-slate-200">
+                    <table class="w-full text-left border-collapse table-fixed min-w-[900px]">
+                        <thead>
+                            <tr class="bg-tealbrand-900 text-white text-xs uppercase tracking-wider">
+                                <th class="w-[15%] p-3.5 font-semibold border-r border-slate-700">Klaster Dana BOSP</th>
+                                <th class="w-[17%] p-3.5 font-semibold border-r border-slate-700">Sasaran Satuan Pendidikan</th>
+                                <th class="w-[23%] p-3.5 font-semibold border-r border-slate-700">Skema Reguler (Operasional Rutin)</th>
+                                <th class="w-[27%] p-3.5 font-semibold border-r border-slate-700">Skema Kinerja (Peningkatan Mutu)</th>
+                                <th class="w-[18%] p-3.5 font-semibold">Skema Afirmasi (Daerah Khusus)</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-200 text-xs sm:text-sm align-top">
+                            <tr class="bg-white hover:bg-slate-50/80">
+                                <td class="p-3.5 font-bold text-slate-900 border-r border-slate-200 break-words">
+                                    Dana BOP PAUD<br><span class="text-xs font-normal text-slate-500">(Pasal 4–7)</span>
+                                </td>
+                                <td class="p-3.5 text-slate-700 border-r border-slate-200 break-words">
+                                    TK, KB, TPA, SPS, SKB, dan PKBM penyelenggara layanan PAUD.
+                                </td>
+                                <td class="p-3.5 text-slate-700 border-r border-slate-200 break-words leading-relaxed">
+                                    Memiliki NPSN aktif, sinkron Dapodik paling lambat <strong>31 Agustus T-1</strong>, izin operasional (swasta), Rekening Satuan Pendidikan, bukan SPK.
+                                </td>
+                                <td class="p-3.5 text-slate-700 border-r border-slate-200 break-words leading-relaxed">
+                                    Penerima BOP PAUD Reguler tahun berkenaan dan memiliki kinerja terbaik dalam pelaksanaan <strong>Survei Lingkungan Belajar PAUD</strong>.
+                                </td>
+                                <td class="p-3.5 text-slate-700 break-words leading-relaxed">
+                                    Penerima BOP PAUD Reguler tahun berkenaan dan berada di <strong>Daerah Khusus</strong> yang ditetapkan Menteri.
+                                </td>
+                            </tr>
+                            <tr class="bg-slate-50/40 hover:bg-slate-50/80">
+                                <td class="p-3.5 font-bold text-slate-900 border-r border-slate-200 break-words">
+                                    Dana BOS<br><span class="text-xs font-normal text-slate-500">(Pasal 8–13)</span>
+                                </td>
+                                <td class="p-3.5 text-slate-700 border-r border-slate-200 break-words">
+                                    SD, SMP, SMA, SLB, dan SMK.
+                                </td>
+                                <td class="p-3.5 text-slate-700 border-r border-slate-200 break-words leading-relaxed">
+                                    Memiliki NPSN aktif, sinkron Dapodik paling lambat <strong>31 Agustus T-1</strong>, izin operasional (swasta), Rekening Satuan Pendidikan, bukan SPK, bukan binaan K/L lain.
+                                </td>
+                                <td class="p-3.5 text-slate-700 border-r border-slate-200 break-words leading-relaxed space-y-2">
+                                    <p><strong>1) Sekolah Berprestasi:</strong> Meraih minimal 1 penghargaan ajang talenta Kemendikdasmen (provinsi/nasional/delegasi internasional) dalam 2 tahun terakhir.</p>
+                                    <p><strong>2) Kinerja Terbaik:</strong> Masuk <strong>10% terbaik</strong> asesmen satuan pendidikan (berdasarkan Rapor Pendidikan & indeks sosial-ekonomi) di luar sekolah berprestasi.</p>
+                                </td>
+                                <td class="p-3.5 text-slate-700 break-words leading-relaxed">
+                                    Penerima BOS Reguler tahun berkenaan dan berada di <strong>Daerah Khusus</strong> yang ditetapkan Menteri.
+                                </td>
+                            </tr>
+                            <tr class="bg-white hover:bg-slate-50/80">
+                                <td class="p-3.5 font-bold text-slate-900 border-r border-slate-200 break-words">
+                                    Dana BOP Kesetaraan<br><span class="text-xs font-normal text-slate-500">(Pasal 14–17)</span>
+                                </td>
+                                <td class="p-3.5 text-slate-700 border-r border-slate-200 break-words">
+                                    SKB dan PKBM penyelenggara Program Paket A, Paket B, dan Paket C.
+                                </td>
+                                <td class="p-3.5 text-slate-700 border-r border-slate-200 break-words leading-relaxed">
+                                    Memiliki NPSN aktif, sinkron Dapodik paling lambat <strong>31 Agustus T-1</strong>, izin operasional (swasta), Rekening Satuan Pendidikan, bukan SPK.
+                                </td>
+                                <td class="p-3.5 text-slate-700 border-r border-slate-200 break-words leading-relaxed">
+                                    Penerima BOP Kesetaraan Reguler tahun berkenaan dan masuk <strong>10% terbaik</strong> asesmen satuan pendidikan (Rapor Pendidikan & indeks sosial-ekonomi).
+                                </td>
+                                <td class="p-3.5 text-slate-700 break-words leading-relaxed">
+                                    Penerima BOP Kesetaraan Reguler tahun berkenaan dan berada di <strong>Daerah Khusus</strong> yang ditetapkan Menteri.
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- BAGIAN III -->
+            <div id="kr-bagian-3" class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 sm:p-8 scroll-mt-32">
+                <div class="flex items-center gap-3 mb-5">
+                    <span class="px-3 py-1 rounded-lg bg-teal-100 text-teal-900 font-bold text-xs">BAGIAN III</span>
+                    <h3 class="font-display text-xl font-bold text-slate-900">Formula Penghitungan Alokasi dan Mekanisme Penyaluran</h3>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <!-- Sub A -->
+                    <div class="p-5 rounded-xl bg-slate-50 border border-slate-200 space-y-3">
+                        <h4 class="text-base font-bold text-slate-900">A. Formula Alokasi & Proteksi Sekolah Kecil / Daerah Khusus (Pasal 19–31)</h4>
+                        <div class="p-3 rounded-lg bg-tealbrand-900 text-white text-xs sm:text-sm font-medium">
+                            Alokasi Reguler = Satuan Biaya Daerah (SK Menteri) × Jumlah Murid ber-NISN pada Dapodik per 31 Agustus T-1
+                        </div>
+                        <ul class="space-y-2.5 text-xs sm:text-sm text-slate-700 leading-relaxed">
+                            <li class="flex items-start gap-2">
+                                <span class="mt-1.5 w-2 h-2 rounded-full bg-teal-600 shrink-0"></span>
+                                <span><strong>BOP PAUD Reguler (Pasal 22):</strong> Satuan PAUD di Daerah Khusus dengan jumlah murid &lt; 9 orang ditetapkan penghitungannya menjadi <strong>minimal 9 murid</strong>.</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="mt-1.5 w-2 h-2 rounded-full bg-teal-600 shrink-0"></span>
+                                <span><strong>BOS Reguler (Pasal 25–26):</strong> SMP dan SMA Terbuka digabungkan dengan sekolah induk. Khusus <strong>SLB, Sekolah Terintegrasi, dan Satuan Pendidikan di Daerah Khusus</strong> dengan murid &lt; 60 orang ditetapkan menjadi <strong>minimal 60 murid</strong>.</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="mt-1.5 w-2 h-2 rounded-full bg-teal-600 shrink-0"></span>
+                                <span><strong>BOP Kesetaraan Reguler (Pasal 29–30):</strong> Menghitung murid berusia paling rendah <strong>7 tahun</strong> dan belum memasuki usia <strong>25 tahun</strong> ber-NISN. Di Daerah Khusus, murid &lt; 10 orang dihitung menjadi <strong>minimal 10 murid</strong>.</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Sub B -->
+                    <div class="p-5 rounded-xl bg-slate-50 border border-slate-200 space-y-3">
+                        <h4 class="text-base font-bold text-slate-900">B. Tata Kelola Rekening dan Penyaluran Dana (Pasal 32–36)</h4>
+                        <ul class="space-y-2.5 text-xs sm:text-sm text-slate-700 leading-relaxed">
+                            <li class="flex items-start gap-2">
+                                <span class="mt-1.5 w-2 h-2 rounded-full bg-emerald-600 shrink-0"></span>
+                                <span><strong>Kriteria Rekening Satuan Pendidikan (Pasal 33):</strong> Dibuka pada bank umum terdaftar dalam SKNBI/BI-RTGS, nama rekening sesuai nama satuan pendidikan pada Dapodik, serta <strong>penamaan rekening wajib diawali dengan NPSN</strong>.</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="mt-1.5 w-2 h-2 rounded-full bg-emerald-600 shrink-0"></span>
+                                <span><strong>Pemanfaatan Langsung (Pasal 36):</strong> Satuan pendidikan dapat langsung membelanjakan Dana BOSP segera setelah dana masuk ke Rekening Satuan Pendidikan sesuai RKAS yang telah disahkan.</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="mt-1.5 w-2 h-2 rounded-full bg-amber-600 shrink-0"></span>
+                                <span><strong>Penundaan/Penghentian Salur (Pasal 35):</strong> Menteri dapat merekomendasikan penundaan atau penghentian penyaluran kepada Menteri Keuangan apabila Pemda dan/atau Satuan Pendidikan melanggar NSPK bidang pendidikan.</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- BAGIAN IV -->
+            <div id="kr-bagian-4" class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 sm:p-8 scroll-mt-32">
+                <div class="flex items-center gap-3 mb-5">
+                    <span class="px-3 py-1 rounded-lg bg-teal-100 text-teal-900 font-bold text-xs">BAGIAN IV</span>
+                    <h3 class="font-display text-xl font-bold text-slate-900">Matriks Komponen Penggunaan Dana & Batasan Persentase (Pasal 37–52 & Lampiran I)</h3>
+                </div>
+
+                <h4 class="text-base font-bold text-slate-800 mb-3">A. Skema Dana BOSP Reguler (Batasan Wajib, Batasan Maksimal, dan Syarat Khusus)</h4>
+                <div class="overflow-x-auto rounded-xl border border-slate-200 mb-8">
+                    <table class="w-full text-left border-collapse table-fixed min-w-[960px]">
+                        <thead>
+                            <tr class="bg-tealbrand-900 text-white text-xs uppercase tracking-wider">
+                                <th class="w-[15%] p-3.5 font-semibold border-r border-slate-700">Jenis Dana BOSP Reguler</th>
+                                <th class="w-[11%] p-3.5 font-semibold border-r border-slate-700 text-center">Jumlah Komponen</th>
+                                <th class="w-[18%] p-3.5 font-semibold border-r border-slate-700">Belanja Wajib Penyediaan Buku</th>
+                                <th class="w-[16%] p-3.5 font-semibold border-r border-slate-700">Batas Maksimal Pemeliharaan Sarpras</th>
+                                <th class="w-[14%] p-3.5 font-semibold border-r border-slate-700">Batas Maksimal Honor Bulanan</th>
+                                <th class="w-[26%] p-3.5 font-semibold">Persyaratan Teknis Penerima Honor Bulanan</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-200 text-xs sm:text-sm align-top">
+                            <tr class="bg-white hover:bg-slate-50/80">
+                                <td class="p-3.5 font-bold text-slate-900 border-r border-slate-200 break-words">
+                                    BOP PAUD Reguler<br><span class="text-xs font-normal text-slate-500">(Pasal 38)</span>
+                                </td>
+                                <td class="p-3.5 text-center font-semibold text-slate-800 border-r border-slate-200">
+                                    10 Komponen
+                                </td>
+                                <td class="p-3.5 text-slate-700 border-r border-slate-200 break-words leading-relaxed">
+                                    <span class="inline-block px-2 py-0.5 rounded bg-teal-100 text-teal-900 font-bold text-xs mb-1">Minimal 5%</span><br>
+                                    Dari total alokasi untuk penyediaan buku teks/nonteks.
+                                </td>
+                                <td class="p-3.5 text-slate-700 border-r border-slate-200 break-words leading-relaxed">
+                                    <span class="inline-block px-2 py-0.5 rounded bg-amber-100 text-amber-800 font-bold text-xs mb-1">Maksimal 20%</span><br>
+                                    Kerusakan ringan nonstruktural.
+                                </td>
+                                <td class="p-3.5 text-slate-700 border-r border-slate-200 break-words leading-relaxed">
+                                    <span class="inline-block px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 font-bold text-xs mb-1">Maksimal 40%</span><br>
+                                    Dari total alokasi.
+                                </td>
+                                <td class="p-3.5 text-slate-700 break-words leading-relaxed">
+                                    Pendidik/tendik tercatat di Dapodik, memiliki surat penugasan kepala satuan PAUD, aktif bertugas, dan belum memiliki gaji pokok.
+                                </td>
+                            </tr>
+                            <tr class="bg-slate-50/40 hover:bg-slate-50/80">
+                                <td class="p-3.5 font-bold text-slate-900 border-r border-slate-200 break-words">
+                                    BOS Reguler (Negeri)<br><span class="text-xs font-normal text-slate-500">(Pasal 42–43)</span>
+                                </td>
+                                <td class="p-3.5 text-center font-semibold text-slate-800 border-r border-slate-200">
+                                    12 Komponen
+                                </td>
+                                <td class="p-3.5 text-slate-700 border-r border-slate-200 break-words leading-relaxed">
+                                    <span class="inline-block px-2 py-0.5 rounded bg-teal-100 text-teal-900 font-bold text-xs mb-1">Minimal 10%</span><br>
+                                    Penyediaan buku (rasio 1:1 murid &amp; pegangan guru).
+                                </td>
+                                <td class="p-3.5 text-slate-700 border-r border-slate-200 break-words leading-relaxed">
+                                    <span class="inline-block px-2 py-0.5 rounded bg-amber-100 text-amber-800 font-bold text-xs mb-1">Maksimal 20%</span><br>
+                                    Kerusakan ringan nonstruktural.
+                                </td>
+                                <td class="p-3.5 text-slate-700 border-r border-slate-200 break-words leading-relaxed">
+                                    <span class="inline-block px-2 py-0.5 rounded bg-rose-100 text-rose-800 font-bold text-xs mb-1">Maksimal 20%</span><br>
+                                    Dari total alokasi.
+                                </td>
+                                <td class="p-3.5 text-slate-700 break-words leading-relaxed space-y-1.5">
+                                    <p><strong>Guru:</strong> Non-ASN, tercatat di Dapodik, memiliki <strong>NUPTK</strong>, dan belum menerima TPG.</p>
+                                    <p><strong>Tendik:</strong> Non-ASN &amp; memiliki SK/surat penugasan kepala sekolah.</p>
+                                </td>
+                            </tr>
+                            <tr class="bg-white hover:bg-slate-50/80">
+                                <td class="p-3.5 font-bold text-slate-900 border-r border-slate-200 break-words">
+                                    BOS Reguler (Swasta)<br><span class="text-xs font-normal text-slate-500">(Pasal 42–43)</span>
+                                </td>
+                                <td class="p-3.5 text-center font-semibold text-slate-800 border-r border-slate-200">
+                                    12 Komponen
+                                </td>
+                                <td class="p-3.5 text-slate-700 border-r border-slate-200 break-words leading-relaxed">
+                                    <span class="inline-block px-2 py-0.5 rounded bg-teal-100 text-teal-900 font-bold text-xs mb-1">Minimal 10%</span><br>
+                                    Penyediaan buku (rasio 1:1 murid &amp; pegangan guru).
+                                </td>
+                                <td class="p-3.5 text-slate-700 border-r border-slate-200 break-words leading-relaxed">
+                                    <span class="inline-block px-2 py-0.5 rounded bg-amber-100 text-amber-800 font-bold text-xs mb-1">Maksimal 20%</span><br>
+                                    Kerusakan ringan nonstruktural.
+                                </td>
+                                <td class="p-3.5 text-slate-700 border-r border-slate-200 break-words leading-relaxed">
+                                    <span class="inline-block px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 font-bold text-xs mb-1">Maksimal 40%</span><br>
+                                    Dari total alokasi.
+                                </td>
+                                <td class="p-3.5 text-slate-700 break-words leading-relaxed">
+                                    Sama dengan persyaratan Guru &amp; Tendik BOS Reguler Negeri (syarat NUPTK dikecualikan pada masa status bencana resmi).
+                                </td>
+                            </tr>
+                            <tr class="bg-slate-50/40 hover:bg-slate-50/80">
+                                <td class="p-3.5 font-bold text-slate-900 border-r border-slate-200 break-words">
+                                    BOP Kesetaraan Reguler<br><span class="text-xs font-normal text-slate-500">(Pasal 48)</span>
+                                </td>
+                                <td class="p-3.5 text-center font-semibold text-slate-800 border-r border-slate-200">
+                                    10 Komponen
+                                </td>
+                                <td class="p-3.5 text-slate-700 border-r border-slate-200 break-words leading-relaxed">
+                                    <span class="inline-block px-2 py-0.5 rounded bg-teal-100 text-teal-900 font-bold text-xs mb-1">Minimal 10%</span><br>
+                                    Dari total alokasi untuk penyediaan buku teks/nonteks.
+                                </td>
+                                <td class="p-3.5 text-slate-700 border-r border-slate-200 break-words leading-relaxed">
+                                    <span class="inline-block px-2 py-0.5 rounded bg-amber-100 text-amber-800 font-bold text-xs mb-1">Maksimal 20%</span><br>
+                                    Dari total alokasi.
+                                </td>
+                                <td class="p-3.5 text-slate-700 border-r border-slate-200 break-words leading-relaxed">
+                                    <span class="inline-block px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 font-bold text-xs mb-1">Maksimal 40%</span><br>
+                                    Dari total alokasi.
+                                </td>
+                                <td class="p-3.5 text-slate-700 break-words leading-relaxed">
+                                    Pendidik/tendik tercatat di Dapodik, memiliki SK/surat penugasan kepala satuan pendidikan, aktif bertugas, dan belum memiliki gaji pokok.
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h4 class="text-base font-bold text-slate-800 mb-3">B. Arah Kebijakan Prioritas dalam Rincian Komponen Penggunaan (Lampiran I)</h4>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs sm:text-sm">
+                    <div class="p-4 rounded-xl bg-slate-50 border border-slate-200">
+                        <div class="font-bold text-slate-900 mb-1">1. Buku Bermutu &amp; Terkurasi</div>
+                        <p class="text-slate-600 leading-relaxed">Pembelian buku teks utama, pendamping, dan nonteks wajib mengacu pada katalog yang dinilai dan ditetapkan Kementerian pada <code class="text-teal-800 bg-teal-50 px-1 rounded">buku.kemendikdasmen.go.id</code>.</p>
+                    </div>
+                    <div class="p-4 rounded-xl bg-slate-50 border border-slate-200">
+                        <div class="font-bold text-slate-900 mb-1">2. Pembelajaran Mendalam, Koding &amp; KA</div>
+                        <p class="text-slate-600 leading-relaxed">Mendukung pengadaan media serta pelatihan guru untuk <em>Deep Learning</em>, Koding &amp; Kecerdasan Artifisial (KA), STEAM, serta <em>Tujuh Kebiasaan Anak Indonesia Hebat</em>.</p>
+                    </div>
+                    <div class="p-4 rounded-xl bg-slate-50 border border-slate-200">
+                        <div class="font-bold text-slate-900 mb-1">3. Digitalisasi PID &amp; Pengimbasan</div>
+                        <p class="text-slate-600 leading-relaxed">Optimalisasi Papan Interaktif Digital (PID) &amp; LMS pada BOS Kinerja, serta kewajiban pengimbasan bagi sekolah prestasi nasional masuk 5 terbaik provinsi (Pasal 45).</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- BAGIAN V -->
+            <div id="kr-bagian-5" class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 sm:p-8 scroll-mt-32">
+                <div class="flex items-center gap-3 mb-5">
+                    <span class="px-3 py-1 rounded-lg bg-teal-100 text-teal-900 font-bold text-xs">BAGIAN V</span>
+                    <h3 class="font-display text-xl font-bold text-slate-900">Pengelolaan Sisa Dana, Pelaporan, dan Sanksi Pemotongan (Pasal 54–60)</h3>
+                </div>
+
+                <div class="p-4 rounded-xl bg-amber-50 border border-amber-200 text-xs sm:text-sm text-amber-950 mb-6 space-y-1.5 leading-relaxed">
+                    <p><strong>Ketentuan Sisa Dana (Pasal 54–55):</strong> Sisa Dana BOSP tahun sebelumnya hanya dapat digunakan setelah dicatatkan dalam RKAS, divalidasi/diverifikasi oleh Pemerintah Daerah, dan akan diperhitungkan sebagai pengurang penyaluran tahap berikutnya. Satuan pendidikan yang tutup, menolak dana, atau tidak memenuhi syarat wajib mengembalikan dana ke RKUD (kecuali penutupan karena <em>penggabungan/merger</em> sekolah atas persetujuan Pemda).</p>
+                </div>
+
+                <h4 class="text-base font-bold text-slate-800 mb-3">Jadwal Pelaporan Realisasi dan Skema Sanksi Pengurangan Penyaluran (Pasal 56–60)</h4>
+                <div class="overflow-x-auto rounded-xl border border-slate-200">
+                    <table class="w-full text-left border-collapse table-fixed min-w-[960px]">
+                        <thead>
+                            <tr class="bg-tealbrand-900 text-white text-xs uppercase tracking-wider">
+                                <th class="w-[22%] p-3.5 font-semibold border-r border-slate-700">Jenis Laporan Realisasi</th>
+                                <th class="w-[15%] p-3.5 font-semibold border-r border-slate-700">Batas Waktu Normal (0% Potongan)</th>
+                                <th class="w-[15%] p-3.5 font-semibold border-r border-slate-700">Terlambat Bulan ke-1 (Potongan 2%)</th>
+                                <th class="w-[15%] p-3.5 font-semibold border-r border-slate-700">Terlambat Bulan ke-2 (Potongan 3%)</th>
+                                <th class="w-[16%] p-3.5 font-semibold border-r border-slate-700">Terlambat Bulan ke-3 s.d. Akhir (Potongan 4%)</th>
+                                <th class="w-[17%] p-3.5 font-semibold">Batas Kedaluwarsa (Dana Hangus)</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-200 text-xs sm:text-sm align-top">
+                            <tr class="bg-white hover:bg-slate-50/80">
+                                <td class="p-3.5 text-slate-900 border-r border-slate-200 break-words leading-relaxed">
+                                    <strong>Laporan Realisasi Tahap I</strong><br>
+                                    <span class="text-xs text-slate-600">(Syarat salur Tahap II + realisasi minimal 50% dana Tahap I)</span>
+                                </td>
+                                <td class="p-3.5 text-emerald-800 bg-emerald-50/40 font-medium border-r border-slate-200 break-words leading-relaxed">
+                                    Paling lambat <strong>31 Juli</strong> tahun anggaran berkenaan.
+                                </td>
+                                <td class="p-3.5 text-slate-700 border-r border-slate-200 break-words leading-relaxed">
+                                    <strong>1 – 31 Agustus</strong> tahun berkenaan (Tahap II dipotong 2%).
+                                </td>
+                                <td class="p-3.5 text-slate-700 border-r border-slate-200 break-words leading-relaxed">
+                                    <strong>1 – 30 September</strong> tahun berkenaan (Tahap II dipotong 3%).
+                                </td>
+                                <td class="p-3.5 text-slate-700 border-r border-slate-200 break-words leading-relaxed">
+                                    <strong>1 – 25 Oktober</strong> tahun berkenaan (Tahap II dipotong 4%).
+                                </td>
+                                <td class="p-3.5 text-rose-800 bg-rose-50/50 font-medium break-words leading-relaxed">
+                                    Melewati <strong>25 Oktober</strong> tahun berkenaan (Dana Tahap II tidak disalurkan).
+                                </td>
+                            </tr>
+                            <tr class="bg-slate-50/40 hover:bg-slate-50/80">
+                                <td class="p-3.5 text-slate-900 border-r border-slate-200 break-words leading-relaxed">
+                                    <strong>Laporan Realisasi Keseluruhan Tahunan</strong><br>
+                                    <span class="text-xs text-slate-600">(Realisasi 1 tahun, sisa dana, &amp; penyelesaian PBJ)</span>
+                                </td>
+                                <td class="p-3.5 text-emerald-800 bg-emerald-50/40 font-medium border-r border-slate-200 break-words leading-relaxed">
+                                    Paling lambat <strong>31 Januari</strong> tahun anggaran berikutnya.
+                                </td>
+                                <td class="p-3.5 text-slate-700 border-r border-slate-200 break-words leading-relaxed">
+                                    <strong>1 – akhir Februari</strong> tahun berkenaan (Tahap I dipotong 2%).
+                                </td>
+                                <td class="p-3.5 text-slate-700 border-r border-slate-200 break-words leading-relaxed">
+                                    <strong>1 – 31 Maret</strong> tahun berkenaan (Tahap I dipotong 3%).
+                                </td>
+                                <td class="p-3.5 text-slate-700 border-r border-slate-200 break-words leading-relaxed">
+                                    <strong>1 April – 25 Juni</strong> tahun berkenaan (Tahap I dipotong 4%).
+                                </td>
+                                <td class="p-3.5 text-rose-800 bg-rose-50/50 font-medium break-words leading-relaxed">
+                                    Melewati <strong>25 Juni</strong> tahun berkenaan (Tidak menerima Dana BOSP tahun berkenaan).
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- BAGIAN VI -->
+            <div id="kr-bagian-6" class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 sm:p-8 scroll-mt-32">
+                <div class="flex items-center gap-3 mb-5">
+                    <span class="px-3 py-1 rounded-lg bg-teal-100 text-teal-900 font-bold text-xs">BAGIAN VI</span>
+                    <h3 class="font-display text-xl font-bold text-slate-900">Tata Kelola Kelembagaan dan 15 Larangan Mutlak (Pasal 61–70)</h3>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                    <!-- Tim BOS -->
+                    <div class="lg:col-span-4 p-5 rounded-xl bg-teal-50/60 border border-teal-200 flex flex-col justify-between">
+                        <div>
+                            <h4 class="text-base font-bold text-teal-950 mb-3">A. Komposisi Wajib Tim BOS Sekolah (Pasal 65)</h4>
+                            <ul class="space-y-3 text-xs sm:text-sm text-slate-800">
+                                <li class="p-3 bg-white rounded-lg border border-teal-100 shadow-2xs">
+                                    <span class="text-xs font-bold text-teal-700 uppercase block">Penanggung Jawab</span>
+                                    <strong>Kepala Sekolah</strong>
+                                </li>
+                                <li class="p-3 bg-white rounded-lg border border-teal-100 shadow-2xs">
+                                    <span class="text-xs font-bold text-teal-700 uppercase block">Bendahara</span>
+                                    <strong>Bendahara Sekolah</strong>
+                                </li>
+                                <li class="p-3 bg-white rounded-lg border border-teal-100 shadow-2xs space-y-1.5">
+                                    <span class="text-xs font-bold text-teal-700 uppercase block">Anggota (3 Orang)</span>
+                                    <p>1. <strong>1 orang</strong> dari unsur Guru;</p>
+                                    <p>2. <strong>1 orang</strong> dari unsur Komite Sekolah; dan</p>
+                                    <p>3. <strong>1 orang</strong> dari unsur <strong>Orang Tua/Wali Murid di luar Komite Sekolah</strong> yang kredibel &amp; bebas konflik kepentingan.</p>
+                                </li>
+                            </ul>
+                        </div>
+                        <p class="mt-4 text-xs text-slate-600 italic">
+                            *Pasal 69: Pemerintah Daerah juga dilarang keras memungut, memaksa/mengarahkan pembelian barang/jasa tertentu, atau menghambat pencairan Dana BOSP.
+                        </p>
+                    </div>
+
+                    <!-- 15 Larangan -->
+                    <div class="lg:col-span-8 p-5 rounded-xl bg-rose-50/40 border border-rose-200">
+                        <h4 class="text-base font-bold text-rose-950 mb-3">B. Daftar 15 Larangan Mutlak Kepala Sekolah dan Tim BOS (Pasal 66)</h4>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-xs text-slate-800 leading-relaxed">
+                            <div class="p-2.5 bg-white rounded-lg border border-rose-100"><strong>1.</strong> Transfer Dana BOSP ke rekening pribadi/lain untuk kepentingan selain penggunaan dana.</div>
+                            <div class="p-2.5 bg-white rounded-lg border border-rose-100"><strong>2.</strong> Membungakan Dana BOSP untuk kepentingan pribadi.</div>
+                            <div class="p-2.5 bg-white rounded-lg border border-rose-100"><strong>3.</strong> Meminjamkan Dana BOSP kepada pihak lain (dana bergulir).</div>
+                            <div class="p-2.5 bg-white rounded-lg border border-rose-100"><strong>4.</strong> Membeli perangkat lunak pelaporan keuangan BOSP atau sejenisnya (wajib ARKAS).</div>
+                            <div class="p-2.5 bg-white rounded-lg border border-rose-100"><strong>5.</strong> Menyewa aplikasi pendataan atau aplikasi daring penerimaan murid baru (PPDB).</div>
+                            <div class="p-2.5 bg-white rounded-lg border border-rose-100"><strong>6.</strong> Membiayai kegiatan yang tidak menjadi prioritas satuan pendidikan.</div>
+                            <div class="p-2.5 bg-white rounded-lg border border-rose-100"><strong>7.</strong> Membiayai kegiatan dengan mekanisme iuran.</div>
+                            <div class="p-2.5 bg-white rounded-lg border border-rose-100"><strong>8.</strong> Membiayai kebutuhan pribadi pendidik, tenaga kependidikan, dan/atau murid.</div>
+                            <div class="p-2.5 bg-white rounded-lg border border-rose-100"><strong>9.</strong> Memelihara prasarana satuan pendidikan dengan kategori <strong>kerusakan sedang dan berat</strong>.</div>
+                            <div class="p-2.5 bg-white rounded-lg border border-rose-100"><strong>10.</strong> Membangun gedung atau ruangan baru.</div>
+                            <div class="p-2.5 bg-white rounded-lg border border-rose-100"><strong>11.</strong> Membeli instrumen investasi.</div>
+                            <div class="p-2.5 bg-white rounded-lg border border-rose-100"><strong>12.</strong> Membiayai pelatihan/sosialisasi BOSP yang diadakan pihak lain <strong>selain Dinas dan/atau Kementerian</strong>.</div>
+                            <div class="p-2.5 bg-white rounded-lg border border-rose-100"><strong>13.</strong> Membiayai kegiatan yang sudah dibiayai penuh oleh Pemerintah Pusat, Pemda, atau sumber sah lain.</div>
+                            <div class="p-2.5 bg-white rounded-lg border border-rose-100"><strong>14.</strong> Menggunakan Dana BOSP untuk kepentingan pribadi atau kelompok tertentu.</div>
+                            <div class="p-2.5 bg-white rounded-lg border border-rose-100 sm:col-span-2"><strong>15.</strong> Menjadi distributor atau pengecer bahan pembelajaran, buku, APE, dan/atau peralatan lainnya kepada satuan pendidikan dan/atau murid.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- BAGIAN VII -->
+            <div id="kr-bagian-7" class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 sm:p-8 scroll-mt-32">
+                <div class="flex items-center gap-3 mb-3">
+                    <span class="px-3 py-1 rounded-lg bg-teal-100 text-teal-900 font-bold text-xs">BAGIAN VII</span>
+                    <h3 class="font-display text-xl font-bold text-slate-900">Analisis Keselarasan Operasional dengan Sistem Kerja Pengawasan BOSP SMP 2026</h3>
+                </div>
+                <p class="text-xs sm:text-sm text-slate-600 mb-5 leading-relaxed">
+                    Berdasarkan referensi <em>Buku Panduan Utama Sistem Kerja Pengawasan Pengelolaan Dana BOSP Jenjang SMP Tahun Anggaran 2026</em>, paradigma pengawasan bergeser dari sekadar audit kepatuhan administratif menjadi <strong>pembinaan tata kelola berbasis Perencanaan Berbasis Data (PBD) dan peningkatan mutu pembelajaran</strong> melalui 6 perangkat kerja terpadu:
+                </p>
+
+                <div class="overflow-x-auto rounded-xl border border-slate-200">
+                    <table class="w-full text-left border-collapse table-fixed min-w-[920px]">
+                        <thead>
+                            <tr class="bg-tealbrand-900 text-white text-xs uppercase tracking-wider">
+                                <th class="w-[24%] p-3.5 font-semibold border-r border-slate-700">Tahap &amp; Perangkat Kerja Pengawas</th>
+                                <th class="w-[26%] p-3.5 font-semibold border-r border-slate-700">Landasan Pasal Permendikdasmen No. 8 Tahun 2026</th>
+                                <th class="w-[50%] p-3.5 font-semibold">Fokus Verifikasi Substantif &amp; Indikator Kinerja Pengawasan</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-200 text-xs sm:text-sm align-top">
+                            <tr class="bg-white hover:bg-slate-50/80">
+                                <td class="p-3.5 font-bold text-slate-900 border-r border-slate-200 break-words">
+                                    Tahap 1: Instrumen Monev BOSP<br>
+                                    <span class="text-xs font-normal text-teal-700">(39 Indikator dalam 5 Aspek)</span>
+                                </td>
+                                <td class="p-3.5 text-slate-700 border-r border-slate-200 break-words leading-relaxed">
+                                    Pasal 2 (Prinsip), Pasal 9 (Syarat Dapodik), Pasal 33 (Rekening NPSN), Pasal 42–43 (Komponen &amp; Batas Belanja), Pasal 56 (Pelaporan), Pasal 65–66 (Tim BOS &amp; Larangan).
+                                </td>
+                                <td class="p-3.5 text-slate-700 break-words leading-relaxed">
+                                    Mengukur tingkat kepatuhan menyeluruh sekolah (Skor 0–100%) pada aspek Perencanaan (8), Penerimaan (5), Penggunaan (10), Pembukuan ARKAS (8), dan Transparansi (8) dengan predikat <em>Sangat Baik</em> (90–100%), <em>Baik</em> (75–89%), <em>Cukup</em> (60–74%), atau <em>Perlu Pembinaan Khusus</em> (&lt; 60%).
+                                </td>
+                            </tr>
+                            <tr class="bg-slate-50/40 hover:bg-slate-50/80">
+                                <td class="p-3.5 font-bold text-slate-900 border-r border-slate-200 break-words">
+                                    Tahap 2: Lembar Uji Petik Transaksi Keuangan
+                                </td>
+                                <td class="p-3.5 text-slate-700 border-r border-slate-200 break-words leading-relaxed">
+                                    Pasal 53 (Mekanisme PBJ &amp; Larangan Pembiayaan Ganda), Pasal 64 ayat (2) huruf e–g, dan Lampiran II Huruf B (Penatausahaan &amp; Bukti Pendukung).
+                                </td>
+                                <td class="p-3.5 text-slate-700 break-words leading-relaxed">
+                                    Merekonstruksi alur transaksi dari kode rekening RKAS, pencatatan BKU ARKAS, faktur/BAST SiPLah, validitas setoran pajak (NTPN PPN/PPh), pencatatan aset ke Kartu Inventaris Barang (KIB), hingga dampak riil barang/jasa terhadap proses belajar murid di kelas.
+                                </td>
+                            </tr>
+                            <tr class="bg-white hover:bg-slate-50/80">
+                                <td class="p-3.5 font-bold text-slate-900 border-r border-slate-200 break-words">
+                                    Tahap 3: Matriks Telaah RKAS / ARKAS<br>
+                                    <span class="text-xs font-normal text-teal-700">(18 Aspek Perencanaan)</span>
+                                </td>
+                                <td class="p-3.5 text-slate-700 border-r border-slate-200 break-words leading-relaxed">
+                                    Pasal 42 ayat (2)–(4) (Batas Minimal Buku 10%, Maksimal Sarpras 20%, Maksimal Honor Negeri 20% / Swasta 40%), Pasal 51–52, dan Lampiran I &amp; II Huruf A.
+                                </td>
+                                <td class="p-3.5 text-slate-700 break-words leading-relaxed">
+                                    Memastikan keselarasan alokasi rupiah dengan rekomendasi benah prioritas <strong>Rapor Pendidikan</strong>, ketepatan kode rekening, kepatuhan terhadap Standar Harga Daerah (SHD), serta mengawal proporsi belanja peningkatan mutu pembelajaran agar optimal (target panduan &ge; 50%).
+                                </td>
+                            </tr>
+                            <tr class="bg-slate-50/40 hover:bg-slate-50/80">
+                                <td class="p-3.5 font-bold text-slate-900 border-r border-slate-200 break-words">
+                                    Tahap 4: Laporan Hasil Pembinaan &amp; Pengawasan
+                                </td>
+                                <td class="p-3.5 text-slate-700 border-r border-slate-200 break-words leading-relaxed">
+                                    Pasal 67–68 (Tugas Pembinaan dan Pengawasan Pemerintah Daerah yang melibatkan Pengawas Sekolah).
+                                </td>
+                                <td class="p-3.5 text-slate-700 break-words leading-relaxed">
+                                    Menyusun dokumen eksekutif 9 bagian yang memetakan profil risiko sekolah (<em>Risiko Rendah, Sedang, Tinggi</em>), akar masalah tata kelola (misalnya keterlambatan tutup BKU bulanan atau kelengkapan BAST), dan rekomendasi perbaikan terukur.
+                                </td>
+                            </tr>
+                            <tr class="bg-white hover:bg-slate-50/80">
+                                <td class="p-3.5 font-bold text-slate-900 border-r border-slate-200 break-words">
+                                    Tahap 5: Matriks Tindak Lanjut &amp; Verifikasi (RTL)
+                                </td>
+                                <td class="p-3.5 text-slate-700 border-r border-slate-200 break-words leading-relaxed">
+                                    Pasal 64 ayat (3) (Tanggung Jawab Kepala Sekolah) dan Lampiran II Huruf C (Verifikasi &amp; Validasi Pertanggungjawaban).
+                                </td>
+                                <td class="p-3.5 text-slate-700 break-words leading-relaxed">
+                                    Mengawal eksekusi rekomendasi perbaikan sekolah (misalnya revisi parsial RKAS atau pelengkapan BAST/papan transparansi) dengan tenggat waktu dan bukti fisik yang diverifikasi ulang hingga berstatus <em>Selesai (Fully Resolved)</em>.
+                                </td>
+                            </tr>
+                            <tr class="bg-slate-50/40 hover:bg-slate-50/80">
+                                <td class="p-3.5 font-bold text-slate-900 border-r border-slate-200 break-words">
+                                    Tahap 6: Dashboard Rekapitulasi Sekolah Binaan
+                                </td>
+                                <td class="p-3.5 text-slate-700 border-r border-slate-200 break-words leading-relaxed">
+                                    Pasal 68 ayat (2) dan Pasal 71 (Pemantauan dan Evaluasi Kebijakan serta Pengelolaan Dana BOSP).
+                                </td>
+                                <td class="p-3.5 text-slate-700 break-words leading-relaxed">
+                                    Mengonsolidasikan capaian Monev dan peta risiko lintas SMP binaan (<em>Cross-School Risk Matrix</em>) sebagai dasar perumusan kebijakan intervensi kolektif (klinik PBD/ARKAS) bagi Dinas Pendidikan Kabupaten/Kota.
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- BAGIAN VIII -->
+            <div id="kr-bagian-8" class="bg-gradient-to-br from-tealbrand-900 to-slate-900 text-white rounded-2xl shadow-md p-6 sm:p-8 scroll-mt-32">
+                <div class="flex items-center gap-3 mb-5">
+                    <span class="px-3 py-1 rounded-lg bg-teal-500/30 border border-teal-400/40 text-teal-200 font-bold text-xs">BAGIAN VIII</span>
+                    <h3 class="font-display text-xl font-bold text-white">Rekomendasi Strategis Implementasi (Catatan Kritis Analisis)</h3>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-5 text-xs sm:text-sm">
+                    <div class="p-5 rounded-xl bg-white/10 border border-white/15 backdrop-blur-xs">
+                        <div class="w-8 h-8 rounded-lg bg-teal-500/30 text-teal-200 flex items-center justify-center font-bold mb-3">1</div>
+                        <h4 class="font-bold text-base text-white mb-2">Harmonisasi Batas Persentase pada ARKAS</h4>
+                        <p class="text-slate-300 leading-relaxed">
+                            Tim BOS dan Pengawas Pembina wajib memastikan penguncian pagu ARKAS memenuhi tiga batas krusial Pasal 42: <strong>minimal 10%</strong> buku perpustakaan terkurasi Kemendikdasmen, <strong>maksimal 20%</strong> pemeliharaan sarpras ringan, dan <strong>maksimal 20% (Negeri) / 40% (Swasta)</strong> untuk honorarium non-ASN ber-NUPTK.
+                        </p>
+                    </div>
+                    <div class="p-5 rounded-xl bg-white/10 border border-white/15 backdrop-blur-xs">
+                        <div class="w-8 h-8 rounded-lg bg-amber-500/30 text-amber-200 flex items-center justify-center font-bold mb-3">2</div>
+                        <h4 class="font-bold text-base text-white mb-2">Mitigasi Risiko Potongan &amp; Hangus Salur</h4>
+                        <p class="text-slate-300 leading-relaxed">
+                            Sekolah harus menetapkan kalender kontrol penutupan BKU bulanan agar laporan realisasi Tahap I (serapan min. 50%) tuntas sebelum <strong>31 Juli</strong> dan laporan tahunan tuntas sebelum <strong>31 Januari</strong>, sehingga bebas dari sanksi pemotongan dana 2% hingga 4% (Pasal 59–60).
+                        </p>
+                    </div>
+                    <div class="p-5 rounded-xl bg-white/10 border border-white/15 backdrop-blur-xs">
+                        <div class="w-8 h-8 rounded-lg bg-emerald-500/30 text-emerald-200 flex items-center justify-center font-bold mb-3">3</div>
+                        <h4 class="font-bold text-base text-white mb-2">Optimalisasi Belanja Mutu Rapor Pendidikan</h4>
+                        <p class="text-slate-300 leading-relaxed">
+                            Pengawas Pembina mengawal agar belanja tidak terjebak pada rutinitas operasional semata, melainkan difokuskan pada penguatan literasi-numerasi, pelatihan <em>deep learning</em>, pembelajaran koding/KA, serta pemberdayaan Komunitas Belajar (Kombel) sekolah.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
     </main>
 
     <!-- Footer dengan Nama Pengembang: IFS -->
@@ -1261,8 +1887,16 @@ Terima kasih, sampai bertemu besok dalam keadaan sehat walafiat.</textarea>
                 title: '1. Panduan Pendampingan Perencanaan BOSP TA 2027',
                 getFileName: () => 'Panduan_Pendampingan_Perencanaan_BOSP_TA_2027'
             },
+            kajianregulasi: {
+                title: '2. Kajian Regulasi Permendikdasmen Nomor 8 Tahun 2026',
+                getFileName: () => 'Kajian_Regulasi_Permendikdasmen_Nomor_8_Tahun_2026'
+            },
+            presentasi: {
+                title: '3. Bahan Tayang Presentasi Pendampingan BOSP TA 2027',
+                getFileName: () => 'Slide_Presentasi_Pendampingan_BOSP_TA_2027'
+            },
             lembarkerja: {
-                title: '2. Lembar Kerja Pemetaan & Perencanaan BOSP TA 2027',
+                title: '4. Lembar Kerja Pemetaan & Perencanaan BOSP TA 2027',
                 getFileName: () => {
                     const schoolName = (lkState.nama || '').trim();
                     if (!schoolName) return 'Lembar_Kerja_Pemetaan_BOSP_TA_2027';
@@ -1271,19 +1905,15 @@ Terima kasih, sampai bertemu besok dalam keadaan sehat walafiat.</textarea>
                 }
             },
             checklist: {
-                title: '3. Checklist Persiapan Pengawas & Template WA',
+                title: '5. Checklist Persiapan Pengawas & Template WA',
                 getFileName: () => 'Checklist_Persiapan_Pendampingan_BOSP_2027'
             },
             perbandingan: {
-                title: '4. Perbandingan Kebijakan BOSP (Sebelum vs Permendikdasmen 8/2026)',
+                title: '6. Perbandingan Kebijakan BOSP (Sebelum vs Permendikdasmen 8/2026)',
                 getFileName: () => 'Perbandingan_Kebijakan_BOSP_Permendikdasmen_8_2026'
             },
-            presentasi: {
-                title: '5. Bahan Tayang Presentasi Pendampingan BOSP TA 2027',
-                getFileName: () => 'Slide_Presentasi_Pendampingan_BOSP_TA_2027'
-            },
             aruskas: {
-                title: '6. Simulasi Peta Arus Kas & Rencana Belanja 12 Bulan (TA 2027)',
+                title: '7. Simulasi Peta Arus Kas & Rencana Belanja 12 Bulan (TA 2027)',
                 getFileName: () => {
                     const schoolName = (lkState.nama || '').trim();
                     if (!schoolName) return 'Simulasi_Arus_Kas_12_Bulan_BOSP_2027';
@@ -1472,8 +2102,8 @@ Terima kasih, sampai bertemu besok dalam keadaan sehat walafiat.</textarea>
                 targetBtn.classList.add('nav-active');
             }
 
-            // Otomatis sarankan Landscape untuk Slide Presentasi, Perbandingan & Arus Kas 12 Bulan, Portrait untuk lainnya
-            if (modId === 'presentasi' || modId === 'perbandingan' || modId === 'aruskas') {
+            // Otomatis sarankan Landscape untuk Slide Presentasi, Perbandingan, Arus Kas & Kajian Regulasi, Portrait untuk lainnya
+            if (modId === 'presentasi' || modId === 'perbandingan' || modId === 'aruskas' || modId === 'kajianregulasi') {
                 setPrintOrientation('landscape', true);
             } else {
                 setPrintOrientation('portrait', true);
