@@ -104,6 +104,9 @@
     <!-- Toast Notification -->
     <div id="toast-container" class="fixed bottom-5 right-5 z-50 flex flex-col gap-2 no-print"></div>
 
+    <!-- Input File Tersembunyi untuk Impor Sesi JSON -->
+    <input type="file" id="import-json-input" accept=".json" onchange="handleImportJsonFile(event)" class="hidden">
+
     <!-- Modal Preview Cetak & Pengaturan Orientasi -->
     <div id="preview-modal" class="fixed inset-0 bg-slate-900/75 backdrop-blur-sm z-50 hidden flex-col no-print">
         <!-- Toolbar Modal Preview -->
@@ -171,75 +174,94 @@
                     </div>
                 </div>
 
-                <!-- Toolbar Ramah Usia 50+ (Zoom Teks) & Aksi Ekspor -->
+                <!-- Toolbar Ramah Usia 50+ (Zoom Teks) & Aksi Ekspor / Sesi -->
                 <div class="flex flex-wrap items-center gap-2">
                     <!-- Kontrol Zoom In / Out -->
                     <div class="flex items-center bg-white/10 border border-white/20 rounded-xl p-1" title="Atur Ukuran Huruf agar Nyaman Dibaca">
-                        <span class="text-xs font-semibold text-teal-200 px-2 hidden sm:inline">Ukuran Teks:</span>
-                        <button type="button" onclick="adjustZoom(-0.1)" class="px-2.5 py-1.5 rounded-lg hover:bg-white/20 text-white font-bold text-xs flex items-center gap-1 transition" title="Perkecil Teks">
-                            <i data-lucide="zoom-out" class="w-4 h-4"></i> A-
+                        <span class="text-xs font-semibold text-teal-200 px-2 hidden sm:inline">Teks:</span>
+                        <button type="button" onclick="adjustZoom(-0.1)" class="px-2 py-1.5 rounded-lg hover:bg-white/20 text-white font-bold text-xs flex items-center gap-1 transition" title="Perkecil Teks">
+                            <i data-lucide="zoom-out" class="w-3.5 h-3.5"></i> A-
                         </button>
-                        <span id="zoom-level-badge" class="px-2 text-xs font-extrabold text-amber-300">100%</span>
-                        <button type="button" onclick="adjustZoom(0.1)" class="px-2.5 py-1.5 rounded-lg bg-amber-500 hover:bg-amber-600 text-slate-950 font-extrabold text-xs flex items-center gap-1 transition" title="Perbesar Teks (Ramah Mata)">
-                            <i data-lucide="zoom-in" class="w-4 h-4"></i> A+
+                        <span id="zoom-level-badge" class="px-1.5 text-xs font-extrabold text-amber-300">100%</span>
+                        <button type="button" onclick="adjustZoom(0.1)" class="px-2 py-1.5 rounded-lg bg-amber-500 hover:bg-amber-600 text-slate-950 font-extrabold text-xs flex items-center gap-1 transition" title="Perbesar Teks (Ramah Mata)">
+                            <i data-lucide="zoom-in" class="w-3.5 h-3.5"></i> A+
                         </button>
                         <button type="button" onclick="resetZoom()" class="px-2 py-1.5 rounded-lg hover:bg-white/20 text-slate-200 text-xs ml-0.5 transition" title="Kembalikan ke 100%">
                             Reset
                         </button>
                     </div>
 
+                    <!-- Manajemen File Data Sekolah (.JSON) -->
+                    <div class="flex items-center bg-white/10 border border-white/20 rounded-xl p-1 gap-1" title="Simpan atau Buka File Kerja Sekolah Binaan (.json)">
+                        <button type="button" onclick="exportSessionJson()" class="px-2.5 py-1.5 rounded-lg bg-teal-600 hover:bg-teal-500 text-white font-bold text-xs flex items-center gap-1 transition" title="Simpan Data Sekolah Ini ke File (.json)">
+                            <i data-lucide="save" class="w-3.5 h-3.5"></i> Simpan Data (.json)
+                        </button>
+                        <button type="button" onclick="triggerImportJson()" class="px-2.5 py-1.5 rounded-lg hover:bg-white/20 text-amber-200 font-bold text-xs flex items-center gap-1 transition" title="Buka File Data Sekolah (.json)">
+                            <i data-lucide="folder-up" class="w-3.5 h-3.5"></i> Buka Data
+                        </button>
+                    </div>
+
                     <!-- Tombol Preview & Cetak -->
-                    <button type="button" onclick="openPreviewModal()" class="px-3.5 py-2 rounded-xl text-xs font-bold bg-emerald-500 hover:bg-emerald-600 text-white shadow-sm flex items-center gap-1.5 transition">
-                        <i data-lucide="eye" class="w-4 h-4"></i> Preview & Cetak PDF
+                    <button type="button" onclick="openPreviewModal()" class="px-3 py-2 rounded-xl text-xs font-bold bg-emerald-500 hover:bg-emerald-600 text-white shadow-sm flex items-center gap-1.5 transition">
+                        <i data-lucide="eye" class="w-4 h-4"></i> Preview / PDF
                     </button>
 
                     <!-- Tombol Langsung Unduh Word / Google Dokumen -->
-                    <button type="button" onclick="exportToWord()" class="px-3.5 py-2 rounded-xl text-xs font-bold bg-sky-600 hover:bg-sky-700 text-white shadow-sm flex items-center gap-1.5 transition">
-                        <i data-lucide="file-down" class="w-4 h-4"></i> Unduh Word / G-Docs
+                    <button type="button" onclick="exportToWord()" class="px-3 py-2 rounded-xl text-xs font-bold bg-sky-600 hover:bg-sky-700 text-white shadow-sm flex items-center gap-1.5 transition">
+                        <i data-lucide="file-down" class="w-4 h-4"></i> Word / G-Docs
                     </button>
                 </div>
             </div>
 
-            <!-- Navigasi Utama (8 Modul Terpadu) -->
+            <!-- Navigasi Utama (9 Modul Terpadu - Tersusun Sistematis dari Persiapan ke Praktik) -->
             <nav class="flex overflow-x-auto gap-2 pb-3.5 pt-1" aria-label="Menu Modul Pendampingan">
                 <button type="button" onclick="switchModule('panduan')" id="nav-panduan" class="nav-btn nav-active px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap flex items-center gap-2 transition">
                     <i data-lucide="book-open" class="w-4 h-4"></i> 1. Panduan Pendampingan
                 </button>
-                <button type="button" onclick="switchModule('kajianregulasi')" id="nav-kajianregulasi" class="nav-btn bg-white/10 text-slate-200 hover:bg-white/20 hover:text-white px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap flex items-center gap-2 transition">
-                    <i data-lucide="scale" class="w-4 h-4"></i> 2. Kajian Regulasi Permendikdasmen Nomor 8 Tahun 2026
-                </button>
-                <button type="button" onclick="switchModule('presentasi')" id="nav-presentasi" class="nav-btn bg-white/10 text-slate-200 hover:bg-white/20 hover:text-white px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap flex items-center gap-2 transition">
-                    <i data-lucide="presentation" class="w-4 h-4"></i> 3. Bahan Tayang Presentasi (12 Slide)
-                </button>
-                <button type="button" onclick="switchModule('lembarkerja')" id="nav-lembarkerja" class="nav-btn bg-white/10 text-slate-200 hover:bg-white/20 hover:text-white px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap flex items-center gap-2 transition">
-                    <i data-lucide="calculator" class="w-4 h-4"></i> 4. Lembar Kerja & Simulasi Sekolah
-                </button>
                 <button type="button" onclick="switchModule('checklist')" id="nav-checklist" class="nav-btn bg-white/10 text-slate-200 hover:bg-white/20 hover:text-white px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap flex items-center gap-2 transition">
-                    <i data-lucide="check-square" class="w-4 h-4"></i> 5. Checklist Persiapan & WA
+                    <i data-lucide="check-square" class="w-4 h-4"></i> 2. Checklist Persiapan & WA
+                </button>
+                <button type="button" onclick="switchModule('kajianregulasi')" id="nav-kajianregulasi" class="nav-btn bg-white/10 text-slate-200 hover:bg-white/20 hover:text-white px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap flex items-center gap-2 transition">
+                    <i data-lucide="scale" class="w-4 h-4"></i> 3. Kajian Regulasi Permendikdasmen 8/2026
                 </button>
                 <button type="button" onclick="switchModule('perbandingan')" id="nav-perbandingan" class="nav-btn bg-white/10 text-slate-200 hover:bg-white/20 hover:text-white px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap flex items-center gap-2 transition">
-                    <i data-lucide="git-compare" class="w-4 h-4"></i> 6. Perbandingan Regulasi 8/2026
+                    <i data-lucide="git-compare" class="w-4 h-4"></i> 4. Perbandingan Regulasi 8/2026
+                </button>
+                <button type="button" onclick="switchModule('presentasi')" id="nav-presentasi" class="nav-btn bg-white/10 text-slate-200 hover:bg-white/20 hover:text-white px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap flex items-center gap-2 transition">
+                    <i data-lucide="presentation" class="w-4 h-4"></i> 5. Bahan Tayang Presentasi (12 Slide)
+                </button>
+                <button type="button" onclick="switchModule('lembarkerja')" id="nav-lembarkerja" class="nav-btn bg-white/10 text-slate-200 hover:bg-white/20 hover:text-white px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap flex items-center gap-2 transition">
+                    <i data-lucide="calculator" class="w-4 h-4"></i> 6. Lembar Kerja & Simulasi Sekolah
+                </button>
+                <button type="button" onclick="switchModule('rkas')" id="nav-rkas" class="nav-btn bg-white/10 text-slate-200 hover:bg-white/20 hover:text-white px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap flex items-center gap-2 transition">
+                    <i data-lucide="file-spreadsheet" class="w-4 h-4"></i> 7. Simulator Rincian RKAS BOSP 2027
                 </button>
                 <button type="button" onclick="switchModule('aruskas')" id="nav-aruskas" class="nav-btn bg-white/10 text-slate-200 hover:bg-white/20 hover:text-white px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap flex items-center gap-2 transition">
-                    <i data-lucide="calendar-range" class="w-4 h-4"></i> 7. Simulasi Arus Kas 12 Bulan (2027)
+                    <i data-lucide="calendar-range" class="w-4 h-4"></i> 8. Simulasi Arus Kas 12 Bulan (2027)
                 </button>
                 <button type="button" onclick="switchModule('solusi')" id="nav-solusi" class="nav-btn bg-white/10 text-slate-200 hover:bg-white/20 hover:text-white px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap flex items-center gap-2 transition">
-                    <i data-lucide="lightbulb" class="w-4 h-4"></i> 8. Solusi Lapangan
+                    <i data-lucide="lightbulb" class="w-4 h-4"></i> 9. Solusi Lapangan
                 </button>
             </nav>
         </div>
     </header>
 
-    <!-- Sub-bar Informasi File Aktif -->
+    <!-- Sub-bar Informasi File Aktif, Status Auto-Save & Sinkronisasi Global -->
     <div class="bg-white border-b border-slate-200 shadow-xs no-print">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2.5 flex flex-wrap items-center justify-between gap-2 text-xs">
-            <div class="flex items-center gap-2 text-slate-700">
+            <div class="flex flex-wrap items-center gap-2 text-slate-700">
                 <i data-lucide="folder-open" class="w-4 h-4 text-teal-600"></i>
                 <span>Dokumen Aktif:</span>
                 <strong id="active-doc-title" class="text-slate-900">1. Panduan Pendampingan Perencanaan BOSP TA 2027</strong>
+                <span id="global-sync-badge" class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-900 font-bold text-[11px]">
+                    <i data-lucide="check-circle-2" class="w-3.5 h-3.5 text-emerald-700"></i> Data LK ↔ RKAS ↔ Arus Kas Tersinkron
+                </span>
+                <span id="autosave-status-badge" class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-sky-50 text-sky-900 border border-sky-200 font-semibold text-[11px]">
+                    <i data-lucide="hard-drive" class="w-3 h-3 text-sky-700"></i> Auto-Save Aktif
+                </span>
             </div>
             <div class="flex items-center gap-2 text-slate-500">
-                <span>Nama File Otomatis Saat Unduh/Cetak:</span>
+                <span>Nama File:</span>
                 <code id="active-file-slug" class="px-2 py-0.5 rounded bg-slate-100 text-teal-800 font-semibold">Panduan_Pendampingan_BOSP_TA_2027</code>
             </div>
         </div>
@@ -341,8 +363,8 @@
                                 <tr>
                                     <td class="p-3.5 font-bold bg-slate-50">4. Pemetaan Pagu & Regulasi</td>
                                     <td class="p-3.5 text-center font-semibold">60 Menit</td>
-                                    <td class="p-3.5">Hitung estimasi pagu 2027 (Siswa Dapodik × Satuan Biaya) & distribusi pagu sesuai batas buku ≥ 10%, sarpras ≤ 20%, honor ≤ 20%/40% (LK Bagian C).</td>
-                                    <td class="p-3.5">Distribusi pagu seimbang (100%) dan patuh regulasi.</td>
+                                    <td class="p-3.5">Hitung estimasi pagu 2027 (Siswa Dapodik × Satuan Biaya) & distribusi pagu sesuai batas buku ≥ 10%, sarpras ≤ 20%, honor ≤ 20%/40% (LK Bagian C & Simulator RKAS).</td>
+                                    <td class="p-3.5">Distribusi pagu seimbang (100%) dan rincian RKAS patuh regulasi.</td>
                                 </tr>
                                 <tr>
                                     <td class="p-3.5 font-bold bg-slate-50">5. Uji Kelayakan Rincian</td>
@@ -378,16 +400,16 @@
         </section>
 
         <!-- =================================================================== -->
-        <!-- MODUL 2: LEMBAR KERJA INTERAKTIF & SIMULASI (SMPN CIGEDUG & AL MU'AWANAH) -->
+        <!-- MODUL 6: LEMBAR KERJA INTERAKTIF & SIMULASI (SMPN CIGEDUG & AL MU'AWANAH) -->
         <!-- =================================================================== -->
         <section id="panel-lembarkerja" class="tab-panel hidden space-y-6">
             <!-- Control Bar Preset Sekolah -->
             <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-5 no-print">
                 <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
                     <div>
-                        <span class="text-xs font-bold uppercase tracking-wider text-teal-700">Kertas Kerja Digital & Kalkulator Otomatis</span>
+                        <span class="text-xs font-bold uppercase tracking-wider text-teal-700">Kertas Kerja Digital & Kalkulator Otomatis (Auto-Save)</span>
                         <h2 class="font-display font-extrabold text-lg text-slate-900">Pilih Mode Pengisian Lembar Kerja (LK) Pemetaan BOSP 2027</h2>
-                        <p class="text-xs text-slate-500">Gunakan template kosong untuk sekolah baru, atau muat contoh terisi penuh untuk bahan tayang simulasi.</p>
+                        <p class="text-xs text-slate-500">Data tersimpan otomatis di peramban. Gunakan tombol <strong>Simpan Data (.json)</strong> di atas untuk mengarsipkan file tiap sekolah binaan.</p>
                     </div>
                     <div class="flex flex-wrap gap-2">
                         <button type="button" onclick="loadLkPreset('blank')" id="btn-lk-blank" class="lk-preset-btn px-3.5 py-2.5 rounded-xl text-xs font-bold border border-slate-300 bg-slate-100 text-slate-800 hover:bg-slate-200 flex items-center gap-1.5 transition">
@@ -477,7 +499,12 @@
 
                 <!-- BAGIAN A: EVALUASI 2026 -->
                 <div class="space-y-3">
-                    <h3 class="font-display font-bold text-base text-teal-900">BAGIAN A: EVALUASI SERAPAN & TINDAK LANJUT BOSP TA 2026</h3>
+                    <div class="flex flex-wrap items-center justify-between gap-2">
+                        <h3 class="font-display font-bold text-base text-teal-900">BAGIAN A: EVALUASI SERAPAN & TINDAK LANJUT BOSP TA 2026</h3>
+                        <span class="text-[11px] font-semibold text-teal-800 bg-teal-50 border border-teal-200 px-2.5 py-1 rounded-full no-print">
+                            ✓ Nominal Proyeksi SiLPA (Baris 4) otomatis mengalir ke Arus Kas Januari 2027 (Menu 8)
+                        </span>
+                    </div>
                     <div class="overflow-x-auto rounded-xl border border-slate-300">
                         <table class="w-full text-left border-collapse text-xs sm:text-sm">
                             <thead>
@@ -521,7 +548,11 @@
                 <div class="space-y-3">
                     <div class="flex flex-wrap items-center justify-between gap-2">
                         <h3 class="font-display font-bold text-base text-teal-900">BAGIAN C: MATRIKS PEMETAAN PAGU & KEPATUHAN REGULASI (PERMENDIKDASMEN 8/2026)</h3>
-                        <span class="text-xs font-semibold text-teal-700 bg-teal-50 px-3 py-1 rounded-full border border-teal-200">Persentase & Status Dihitung Otomatis</span>
+                        <div class="flex flex-wrap items-center gap-2 no-print">
+                            <button type="button" onclick="switchModule('rkas')" class="text-xs font-bold text-white bg-teal-700 hover:bg-teal-800 px-3 py-1.5 rounded-full shadow-xs flex items-center gap-1 transition">
+                                <i data-lucide="file-spreadsheet" class="w-3.5 h-3.5"></i> Rincikan di Simulator RKAS (Menu 7) →
+                            </button>
+                        </div>
                     </div>
                     <div class="overflow-x-auto rounded-xl border border-slate-300">
                         <table class="w-full text-left border-collapse text-xs sm:text-sm">
@@ -551,11 +582,16 @@
                     
                     <!-- Sub 1: Daftar Honor -->
                     <div class="space-y-2">
-                        <div class="flex items-center justify-between">
+                        <div class="flex flex-wrap items-center justify-between gap-2">
                             <h4 class="font-bold text-sm text-slate-800">1. Daftar Rencana Penerima Honor BOSP TA 2027 (Pasal 43)</h4>
-                            <button type="button" onclick="addLkHonorRow()" class="px-3 py-1 rounded-lg bg-teal-50 text-teal-700 hover:bg-teal-100 text-xs font-bold flex items-center gap-1 no-print">
-                                <i data-lucide="plus" class="w-3.5 h-3.5"></i> Tambah Baris
-                            </button>
+                            <div class="flex flex-wrap items-center gap-2 no-print">
+                                <button type="button" onclick="applyHonorDToC()" class="px-3 py-1 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold flex items-center gap-1 shadow-2xs transition" title="Salin Total Honor Setahun (×12 Bln) ke Bagian C Baris 12">
+                                    <i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i> Salin Total Setahun ke Bagian C
+                                </button>
+                                <button type="button" onclick="addLkHonorRow()" class="px-3 py-1 rounded-lg bg-teal-50 text-teal-700 hover:bg-teal-100 text-xs font-bold flex items-center gap-1">
+                                    <i data-lucide="plus" class="w-3.5 h-3.5"></i> Tambah Baris
+                                </button>
+                            </div>
                         </div>
                         <div class="overflow-x-auto rounded-xl border border-slate-300">
                             <table class="w-full text-left border-collapse text-xs">
@@ -575,17 +611,25 @@
                                 <tbody id="lk-honor-body" class="divide-y divide-slate-200">
                                     <!-- Dirender via JS -->
                                 </tbody>
+                                <tfoot id="lk-honor-foot" class="bg-slate-100 text-slate-900 font-bold border-t-2 border-slate-300">
+                                    <!-- Rekap otomatis Honor Bulanan & Tahunan -->
+                                </tfoot>
                             </table>
                         </div>
                     </div>
 
                     <!-- Sub 2: Daftar Pemeliharaan Sarpras -->
                     <div class="space-y-2 pt-2">
-                        <div class="flex items-center justify-between">
+                        <div class="flex flex-wrap items-center justify-between gap-2">
                             <h4 class="font-bold text-sm text-slate-800">2. Daftar Rencana Pemeliharaan Ringan Sarpras (Maks. 20%)</h4>
-                            <button type="button" onclick="addLkSarprasRow()" class="px-3 py-1 rounded-lg bg-teal-50 text-teal-700 hover:bg-teal-100 text-xs font-bold flex items-center gap-1 no-print">
-                                <i data-lucide="plus" class="w-3.5 h-3.5"></i> Tambah Baris
-                            </button>
+                            <div class="flex flex-wrap items-center gap-2 no-print">
+                                <button type="button" onclick="applySarprasDToC()" class="px-3 py-1 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold flex items-center gap-1 shadow-2xs transition" title="Salin Total Pemeliharaan Sarpras ke Bagian C Baris 9">
+                                    <i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i> Salin Total ke Bagian C
+                                </button>
+                                <button type="button" onclick="addLkSarprasRow()" class="px-3 py-1 rounded-lg bg-teal-50 text-teal-700 hover:bg-teal-100 text-xs font-bold flex items-center gap-1">
+                                    <i data-lucide="plus" class="w-3.5 h-3.5"></i> Tambah Baris
+                                </button>
+                            </div>
                         </div>
                         <div class="overflow-x-auto rounded-xl border border-slate-300">
                             <table class="w-full text-left border-collapse text-xs">
@@ -602,6 +646,9 @@
                                 <tbody id="lk-sarpras-body" class="divide-y divide-slate-200">
                                     <!-- Dirender via JS -->
                                 </tbody>
+                                <tfoot id="lk-sarpras-foot" class="bg-slate-100 text-slate-900 font-bold border-t-2 border-slate-300">
+                                    <!-- Rekap otomatis Sarpras -->
+                                </tfoot>
                             </table>
                         </div>
                     </div>
@@ -650,7 +697,7 @@
         </section>
 
         <!-- =================================================================== -->
-        <!-- MODUL 3: CHECKLIST PERSIAPAN PENGAWAS & TEMPLATE PESAN WHATSAPP     -->
+        <!-- MODUL 2: CHECKLIST PERSIAPAN PENGAWAS & TEMPLATE PESAN WHATSAPP     -->
         <!-- =================================================================== -->
         <section id="panel-checklist" class="tab-panel hidden space-y-6">
             <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 sm:p-8 space-y-6">
@@ -712,12 +759,12 @@ Terima kasih, sampai bertemu besok dalam keadaan sehat walafiat.</textarea>
                                 <tr>
                                     <td class="p-3.5 font-bold">08.45 – 09.15</td>
                                     <td class="p-3.5 text-center">30'</td>
-                                    <td class="p-3.5">Bedah <strong>Contoh LK</strong> (simulasi perbedaan sekolah Negeri vs Swasta & cara menjaga keseimbangan pagu 100%).</td>
+                                    <td class="p-3.5">Bedah <strong>Contoh LK & Simulator RKAS</strong> (simulasi perbedaan sekolah Negeri vs Swasta & cara menjaga keseimbangan pagu 100%).</td>
                                 </tr>
                                 <tr>
                                     <td class="p-3.5 font-bold">09.15 – 10.30</td>
                                     <td class="p-3.5 text-center">75'</td>
-                                    <td class="p-3.5"><strong>Praktik Kerja Mandiri Tim Sekolah</strong> mengisi LK Bagian A s.d. D (Pengawas membimbing & memverifikasi kelayakan honor serta Rapor Pendidikan).</td>
+                                    <td class="p-3.5"><strong>Praktik Kerja Mandiri Tim Sekolah</strong> mengisi LK Bagian A s.d. D & rincian RKAS BOSP 2027 (Pengawas membimbing & memverifikasi kelayakan honor serta Rapor Pendidikan).</td>
                                 </tr>
                                 <tr>
                                     <td class="p-3.5 font-bold">10.30 – 11.15</td>
@@ -737,16 +784,30 @@ Terima kasih, sampai bertemu besok dalam keadaan sehat walafiat.</textarea>
         </section>
 
         <!-- =================================================================== -->
-        <!-- MODUL 4: PERBANDINGAN KEBIJAKAN (SEBELUM VS SESUDAH 8/2026)         -->
+        <!-- MODUL 4: PERBANDINGAN KEBIJAKAN (TERSELARAS DENGAN MODUL 3)         -->
         <!-- =================================================================== -->
         <section id="panel-perbandingan" class="tab-panel hidden space-y-6">
             <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 sm:p-8 space-y-6">
                 <div class="border-b-2 border-teal-700 pb-4">
-                    <span class="px-3 py-1 rounded-full bg-teal-50 text-teal-800 text-xs font-bold uppercase">Analisis Perubahan Regulasi</span>
+                    <span class="px-3 py-1 rounded-full bg-teal-50 text-teal-800 text-xs font-bold uppercase">Analisis Perubahan Regulasi (Sinkron dengan Menu 3)</span>
                     <h2 class="font-display font-extrabold text-2xl text-slate-900 mt-2">
                         MATRIKS PERBANDINGAN KEBIJAKAN PERENCANAAN BOSP
                     </h2>
-                    <p class="text-sm text-slate-600 mt-1">Era Sebelumnya (Permendikbudristek 63/2022 & Transisi 2025) vs Permendikdasmen No. 8 Tahun 2026</p>
+                    <p class="text-sm text-slate-600 mt-1">
+                        Evolusi Juknis Terdahulu (Era Permendikbudristek 63/2022 jo. 63/2023 s.d. Permendikdasmen 8/2025) vs <strong>Permendikdasmen No. 8 Tahun 2026</strong>
+                    </p>
+                </div>
+
+                <!-- Banner Rantai Kronologi Hukum (Selaras dengan Pasal 75 pada Menu 3) -->
+                <div class="p-4 rounded-xl bg-slate-50 border border-slate-200 text-xs sm:text-sm text-slate-800 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                    <div>
+                        <strong class="text-teal-900">Rantai Pencabutan Regulasi (Pasal 75):</strong>
+                        <span>Permendikbudristek No. 63/2022 (jo. No. 63/2023)</span>
+                        <span class="mx-1.5 font-bold text-teal-700">→</span>
+                        <span>Dicabut oleh <strong>Permendikdasmen No. 8/2025</strong></span>
+                        <span class="mx-1.5 font-bold text-teal-700">→</span>
+                        <span>Dicabut &amp; digantikan oleh <strong>Permendikdasmen No. 8/2026</strong> (Berlaku 6 Feb 2026).</span>
+                    </div>
                 </div>
 
                 <div class="overflow-x-auto rounded-xl border border-slate-300">
@@ -755,8 +816,8 @@ Terima kasih, sampai bertemu besok dalam keadaan sehat walafiat.</textarea>
                             <tr class="bg-tealbrand-900 text-white">
                                 <th class="p-3.5 w-12 text-center">No</th>
                                 <th class="p-3.5 w-48">Aspek Perencanaan</th>
-                                <th class="p-3.5">Pola Sebelumnya (Permendikbudristek 63/2022)</th>
-                                <th class="p-3.5">Kebijakan Baru (Permendikdasmen No. 8/2026)</th>
+                                <th class="p-3.5">Pola Regulasi Terdahulu (Era 63/2022 s.d. Transisi 8/2025)</th>
+                                <th class="p-3.5">Kebijakan Baru (Permendikdasmen No. 8 Tahun 2026)</th>
                                 <th class="p-3.5">Dampak Langsung ke RKAS 2027</th>
                             </tr>
                         </thead>
@@ -764,51 +825,58 @@ Terima kasih, sampai bertemu besok dalam keadaan sehat walafiat.</textarea>
                             <tr>
                                 <td class="p-3.5 text-center font-bold">1</td>
                                 <td class="p-3.5 font-bold bg-slate-50">Batas Maksimal Honor</td>
-                                <td class="p-3.5">Maksimal <strong>50%</strong> dari total pagu BOS Reguler (umum untuk negeri maupun swasta).</td>
+                                <td class="p-3.5">Pada era awal (63/2022) honor diizinkan hingga <strong>50%</strong> (umum), lalu mulai dibatasi pada era transisi 2025 (8/2025).</td>
                                 <td class="p-3.5 bg-teal-50/40 font-semibold"><strong>Sekolah Negeri: Maks. 20%</strong><br><strong>Sekolah Swasta: Maks. 40%</strong> (Pasal 42 ayat 4).</td>
                                 <td class="p-3.5">Sekolah Negeri wajib memangkas porsi honor di bawah 20%. Kelebihan guru non-ASN dikoordinasikan dengan Pemda.</td>
                             </tr>
                             <tr>
                                 <td class="p-3.5 text-center font-bold">2</td>
                                 <td class="p-3.5 font-bold bg-slate-50">Alokasi Minimal Buku</td>
-                                <td class="p-3.5">Tidak selalu dikunci ketat secara persentase otomatis di sistem untuk semua komponen.</td>
-                                <td class="p-3.5 bg-teal-50/40 font-semibold"><strong>Wajib Minimal 10%</strong> untuk jenjang Dikdasmen & Kesetaraan, serta min. 5% PAUD (Pasal 42 ayat 2).</td>
-                                <td class="p-3.5">RKAS 2027 otomatis tertolak jika total kode kegiatan pengadaan buku di bawah 10% pagu.</td>
+                                <td class="p-3.5">Pada pola lama belum dikunci otomatis secara persentase di sistem untuk semua komponen.</td>
+                                <td class="p-3.5 bg-teal-50/40 font-semibold"><strong>Wajib Minimal 10%</strong> (BOS Dikdasmen &amp; Kesetaraan) serta min. 5% PAUD dari <strong>katalog terkurasi</strong> Kemendikdasmen (Pasal 42 ayat 2).</td>
+                                <td class="p-3.5">RKAS 2027 otomatis tertolak jika total kode kegiatan pengadaan buku di bawah 10% pagu atau di luar katalog <code class="text-xs bg-slate-100 px-1 rounded">buku.kemendikdasmen.go.id</code>.</td>
                             </tr>
                             <tr>
                                 <td class="p-3.5 text-center font-bold">3</td>
                                 <td class="p-3.5 font-bold bg-slate-50">Batas Pemeliharaan Sarpras</td>
-                                <td class="p-3.5">Belum dikunci plafon persentase tetap (sering menyerap porsi besar).</td>
+                                <td class="p-3.5">Pada era 63/2022 belum dikunci plafon persentase tetap sehingga sering menyerap porsi besar.</td>
                                 <td class="p-3.5 bg-teal-50/40 font-semibold"><strong>Maksimal 20%</strong> dari total pagu, khusus <strong>kerusakan ringan non-struktural</strong> (Pasal 42 ayat 3).</td>
-                                <td class="p-3.5">Tidak boleh menghabiskan &gt;20% untuk fisik. Rehab sedang/berat wajib diajukan ke DAK Fisik/APBD.</td>
+                                <td class="p-3.5">Tidak boleh menghabiskan &gt;20% untuk fisik. Rehab sedang/berat wajib diajukan ke DAK Fisik/APBD (Larangan Pasal 66).</td>
                             </tr>
                             <tr>
                                 <td class="p-3.5 text-center font-bold">4</td>
-                                <td class="p-3.5 font-bold bg-slate-50">Skema & Nomenklatur</td>
-                                <td class="p-3.5">Reguler & Kinerja (istilah PPDB).</td>
-                                <td class="p-3.5 bg-teal-50/40 font-semibold"><strong>Reguler, Kinerja, dan Afirmasi</strong> dengan penyesuaian istilah <strong>SPMB</strong> (Sistem Penerimaan Murid Baru).</td>
-                                <td class="p-3.5">Penyesuaian sub-program pada ARKAS 2027 serta integrasi jika menerima BOSP Kinerja/Afirmasi.</td>
+                                <td class="p-3.5 font-bold bg-slate-50">Skema &amp; Nomenklatur</td>
+                                <td class="p-3.5">Berawal dari Reguler &amp; Kinerja (63/2022) dan mengalami penyesuaian bertahap hingga 8/2025.</td>
+                                <td class="p-3.5 bg-teal-50/40 font-semibold"><strong>Reguler, Kinerja (Sekolah Berprestasi &amp; 10% Terbaik), dan Afirmasi (Daerah Khusus)</strong> serta istilah <strong>SPMB</strong> (Pasal 3–18).</td>
+                                <td class="p-3.5">Penyesuaian sub-program pada ARKAS 2027 serta integrasi jika menerima BOS Kinerja/Afirmasi (termasuk PID/LMS &amp; pengimbasan).</td>
                             </tr>
                             <tr>
                                 <td class="p-3.5 text-center font-bold">5</td>
                                 <td class="p-3.5 font-bold bg-slate-50">Validasi Sistem ARKAS</td>
-                                <td class="p-3.5">Validasi lebih longgar; kesalahan proporsi sering baru ditemukan saat Monev akhir tahun.</td>
-                                <td class="p-3.5 bg-teal-50/40 font-semibold"><strong>Validasi Ketat Berbasis Kode Rekening</strong> di ARKAS 4; kertas kerja tidak bisa disahkan jika melanggar plafon.</td>
-                                <td class="p-3.5">Wajib menghitung proporsi di LK Pemetaan terlebih dahulu sebelum input ke ARKAS.</td>
+                                <td class="p-3.5">Validasi era awal lebih longgar; kesalahan proporsi sering baru ditemukan saat Monev akhir tahun.</td>
+                                <td class="p-3.5 bg-teal-50/40 font-semibold"><strong>Validasi Ketat Berbasis Kode Rekening</strong> di ARKAS 4; kertas kerja tidak bisa disahkan jika melanggar plafon Pasal 42.</td>
+                                <td class="p-3.5">Wajib menghitung proporsi di LK Pemetaan &amp; Simulator RKAS terlebih dahulu sebelum input ke ARKAS.</td>
                             </tr>
                             <tr>
                                 <td class="p-3.5 text-center font-bold">6</td>
                                 <td class="p-3.5 font-bold bg-slate-50">Keterkaitan Rapor Pendidikan</td>
-                                <td class="p-3.5">Bersifat anjuran/rekomendasi umum.</td>
-                                <td class="p-3.5 bg-teal-50/40 font-semibold"><strong>Wajib Terintegrasi PBD:</strong> Akar masalah Rapor Pendidikan menjadi dasar penilaian kesesuaian program.</td>
+                                <td class="p-3.5">Pada awal implementasi masih bersifat anjuran/rekomendasi umum.</td>
+                                <td class="p-3.5 bg-teal-50/40 font-semibold"><strong>Wajib Terintegrasi PBD:</strong> Akar masalah Rapor Pendidikan (termasuk <em>Deep Learning</em>, Koding &amp; KA) menjadi dasar kesesuaian program.</td>
                                 <td class="p-3.5">Setiap kegiatan non-rutin harus selaras dengan indikator merah/kuning Rapor Pendidikan.</td>
                             </tr>
                             <tr>
                                 <td class="p-3.5 text-center font-bold">7</td>
                                 <td class="p-3.5 font-bold bg-slate-50">Syarat Penerima Honor</td>
-                                <td class="p-3.5">Sering ditemukan penerima honor belum masuk Dapodik atau merangkap TPG.</td>
-                                <td class="p-3.5 bg-teal-50/40 font-semibold">Diperketat (<strong>Pasal 43</strong>): Tercatat Dapodik, Non-ASN, ada SK tugas, dan <strong>belum menerima TPG/sertifikasi</strong>.</td>
-                                <td class="p-3.5">Bendahara wajib menyandingkan daftar penerima honor dengan data cut-off Dapodik.</td>
+                                <td class="p-3.5">Sering ditemukan penerima honor belum masuk Dapodik, belum ber-NUPTK, atau merangkap TPG.</td>
+                                <td class="p-3.5 bg-teal-50/40 font-semibold">Diperketat (<strong>Pasal 43</strong>): Tercatat Dapodik, Non-ASN, memiliki <strong>NUPTK</strong> (bagi guru), ada SK tugas, dan <strong>belum menerima TPG/sertifikasi</strong>.</td>
+                                <td class="p-3.5">Bendahara wajib menyandingkan daftar penerima honor dengan data cut-off Dapodik (31 Agustus T-1) &amp; Info GTK.</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3.5 text-center font-bold">8</td>
+                                <td class="p-3.5 font-bold bg-slate-50">Komposisi Tim BOS Sekolah</td>
+                                <td class="p-3.5">Sering hanya melibatkan internal manajemen sekolah dan perwakilan komite secara terbatas.</td>
+                                <td class="p-3.5 bg-teal-50/40 font-semibold">Ditegaskan 5 Unsur (<strong>Pasal 65</strong>): Kepala Sekolah, Bendahara, 1 Guru, 1 Komite Sekolah, dan <strong>1 Orang Tua/Wali Murid di luar Komite</strong>.</td>
+                                <td class="p-3.5">SK Tim BOS Sekolah TA 2027 wajib memuat unsur orang tua/wali murid di luar pengurus Komite Sekolah.</td>
                             </tr>
                         </tbody>
                     </table>
@@ -818,15 +886,15 @@ Terima kasih, sampai bertemu besok dalam keadaan sehat walafiat.</textarea>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4 pt-2">
                     <div class="p-4 rounded-xl bg-teal-50 border border-teal-200">
                         <h4 class="font-bold text-sm text-teal-950 mb-1.5">1. Mengapa Harus LK Pemetaan?</h4>
-                        <p class="text-xs sm:text-sm text-slate-700">Karena porsi 10% buku + maks. 20% sarpras + maks. 20%/40% honor sudah dikunci, sisa ruang fleksibel sekolah hanya 30%–50%. Pola <em>copy-paste</em> RKAS lama pasti tertolak sistem.</p>
+                        <p class="text-xs sm:text-sm text-slate-700">Karena porsi 10% buku + maks. 20% sarpras + maks. 20%/40% honor sudah dikunci Pasal 42 Permendikdasmen 8/2026, sisa ruang fleksibel sekolah hanya 30%–50%. Pola <em>copy-paste</em> RKAS lama pasti tertolak sistem.</p>
                     </div>
                     <div class="p-4 rounded-xl bg-amber-50 border border-amber-200">
                         <h4 class="font-bold text-sm text-amber-950 mb-1.5">2. Antisipasi Juknis 2027</h4>
-                        <p class="text-xs sm:text-sm text-slate-700">Penyusunan November 2026 memakai Permendikdasmen 8/2026 sebagai patokan mutakhir. Jika ada pembaruan di awal 2027, sekolah cukup melakukan pergeseran pos yang berubah saja.</p>
+                        <p class="text-xs sm:text-sm text-slate-700">Penyusunan November 2026 memakai Permendikdasmen 8/2026 (yang mencabut No. 8/2025) sebagai patokan mutakhir. Jika ada pembaruan di awal 2027, sekolah cukup melakukan pergeseran pos yang berubah saja.</p>
                     </div>
                     <div class="p-4 rounded-xl bg-sky-50 border border-sky-200">
                         <h4 class="font-bold text-sm text-sky-950 mb-1.5">3. Disiplin Kode Kegiatan ARKAS</h4>
-                        <p class="text-xs sm:text-sm text-slate-700">Persentase 10% buku dihitung sistem hanya pada kode kegiatan perpustakaan/buku tertentu. Salah memilih kode kegiatan membuat sistem menganggap kuota 10% belum terpenuhi.</p>
+                        <p class="text-xs sm:text-sm text-slate-700">Persentase 10% buku dihitung sistem hanya pada kode kegiatan perpustakaan/buku tertentu dan katalog terkurasi. Salah memilih kode kegiatan membuat sistem menganggap kuota 10% belum terpenuhi.</p>
                     </div>
                 </div>
             </div>
@@ -871,25 +939,25 @@ Terima kasih, sampai bertemu besok dalam keadaan sehat walafiat.</textarea>
 
                 <!-- SLIDE 3 -->
                 <div class="slide-card bg-white text-slate-900 p-8 sm:p-12 flex flex-col">
-                    <p contenteditable="true" class="text-xs sm:text-sm font-bold uppercase tracking-wider text-amber-600">Transformasi Regulasi</p>
+                    <p contenteditable="true" class="text-xs sm:text-sm font-bold uppercase tracking-wider text-amber-600">Transformasi Regulasi (63/2022 → 8/2025 → 8/2026)</p>
                     <h2 contenteditable="true" class="font-display font-extrabold text-2xl sm:text-4xl mt-1 mb-6">Perubahan Pola Perencanaan BOSP</h2>
                     <div class="flex-grow grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
                         <div class="bg-slate-100 p-6 sm:p-8 rounded-2xl h-full flex flex-col justify-center">
-                            <h3 contenteditable="true" class="font-display font-bold text-xl sm:text-2xl text-slate-600 mb-4">Pola Lama (Permendikbud 63/2022)</h3>
+                            <h3 contenteditable="true" class="font-display font-bold text-xl sm:text-2xl text-slate-600 mb-4">Pola Terdahulu (Era 63/2022 s.d. 8/2025)</h3>
                             <ul class="space-y-3 text-base sm:text-lg text-slate-700">
-                                <li contenteditable="true">• Batas honor umum maksimal 50%</li>
-                                <li contenteditable="true">• Pengadaan buku belum dikunci otomatis</li>
-                                <li contenteditable="true">• Belanja pemeliharaan sarpras tanpa plafon</li>
+                                <li contenteditable="true">• Era awal honor maks. 50%, lalu dibatasi di transisi 8/2025</li>
+                                <li contenteditable="true">• Pengadaan buku belum dikunci otomatis di sistem</li>
+                                <li contenteditable="true">• Belanja pemeliharaan sarpras tanpa plafon tetap</li>
                                 <li contenteditable="true">• Cenderung menyalin RKAS tahun lalu</li>
                             </ul>
                         </div>
                         <div class="bg-emerald-50 p-6 sm:p-8 rounded-2xl h-full flex flex-col justify-center">
                             <h3 contenteditable="true" class="font-display font-bold text-xl sm:text-2xl text-teal-800 mb-4">Kebijakan Baru (Permendikdasmen 8/2026)</h3>
                             <ul class="space-y-3 text-base sm:text-lg text-slate-900">
-                                <li contenteditable="true">• Honor Negeri maks. 20%, Swasta 40%</li>
-                                <li contenteditable="true">• Pengadaan buku wajib minimal 10%</li>
-                                <li contenteditable="true">• Pemeliharaan ringan maksimal 20%</li>
-                                <li contenteditable="true">• Program wajib selaras Rapor Pendidikan</li>
+                                <li contenteditable="true">• Honor Negeri maks. 20%, Swasta 40% (wajib NUPTK)</li>
+                                <li contenteditable="true">• Pengadaan buku terkurasi wajib minimal 10%</li>
+                                <li contenteditable="true">• Pemeliharaan ringan sarpras maksimal 20%</li>
+                                <li contenteditable="true">• Program wajib selaras PBD Rapor Pendidikan</li>
                             </ul>
                         </div>
                     </div>
@@ -1032,9 +1100,9 @@ Terima kasih, sampai bertemu besok dalam keadaan sehat walafiat.</textarea>
                             </thead>
                             <tbody class="divide-y divide-slate-200">
                                 <tr><td class="p-4 font-bold">1. Status Kepegawaian</td><td class="p-4">Berstatus Non-ASN (bukan PNS / PPPK)</td><td class="p-4">SK Pengangkatan Yayasan/Sekolah</td></tr>
-                                <tr><td class="p-4 font-bold">2. Pendataan Nasional</td><td class="p-4">Tercatat aktif pada sistem Dapodik</td><td class="p-4">Profil GTK & Cut-off Dapodik</td></tr>
+                                <tr><td class="p-4 font-bold">2. Pendataan Nasional</td><td class="p-4">Tercatat aktif di Dapodik &amp; memiliki NUPTK (Guru)</td><td class="p-4">Profil GTK &amp; Cut-off Dapodik</td></tr>
                                 <tr><td class="p-4 font-bold">3. Penugasan Resmi</td><td class="p-4">Memiliki tugas mengajar atau administrasi jelas</td><td class="p-4">SK Pembagian Tugas Kepala Sekolah</td></tr>
-                                <tr><td class="p-4 font-bold">4. Tunjangan Profesi</td><td class="p-4">Belum menerima TPG / sertifikasi guru</td><td class="p-4">Info GTK & Daftar Penerima TPG</td></tr>
+                                <tr><td class="p-4 font-bold">4. Tunjangan Profesi</td><td class="p-4">Belum menerima TPG / sertifikasi guru</td><td class="p-4">Info GTK &amp; Daftar Penerima TPG</td></tr>
                             </tbody>
                         </table>
                     </div>
@@ -1114,60 +1182,232 @@ Terima kasih, sampai bertemu besok dalam keadaan sehat walafiat.</textarea>
         </section>
 
         <!-- =================================================================== -->
-        <!-- MODUL 6: SIMULASI PETA ARUS KAS & RENCANA BELANJA 12 BULAN (2027)    -->
+        <!-- MODUL 7: SIMULATOR RINCIAN RKAS BOSP TA 2027 (TERINTEGRASI)         -->
+        <!-- =================================================================== -->
+        <section id="panel-rkas" class="tab-panel hidden space-y-6">
+            <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 sm:p-8 space-y-6">
+                <!-- Header Simulator RKAS -->
+                <div class="border-b-2 border-teal-700 pb-4 flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+                    <div>
+                        <span class="px-3 py-1 rounded-full bg-teal-50 text-teal-800 text-xs font-bold uppercase tracking-wider">Kertas Kerja Mikro ARKAS • Volume × Harga Satuan</span>
+                        <h2 class="font-display font-extrabold text-2xl text-slate-900 mt-2">
+                            SIMULATOR RINCIAN RKAS BOSP TA 2027
+                        </h2>
+                        <p class="text-sm text-slate-600 mt-1">
+                            Memecah alokasi makro per komponen menjadi rincian belanja (SSH/SBU), kode kegiatan ARKAS, dan keselarasan PBD Rapor Pendidikan.
+                        </p>
+                    </div>
+                    <div class="flex flex-wrap items-center gap-2 no-print">
+                        <label class="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-teal-50 border border-teal-200 text-teal-950 text-xs font-bold cursor-pointer select-none" title="Jika aktif, setiap perubahan volume/harga di RKAS langsung memperbarui LK Bagian C & Arus Kas 12 Bulan secara otomatis">
+                            <input type="checkbox" id="rkas-autosync-toggle" checked onchange="toggleRkasAutoSync(this.checked)" class="w-4 h-4 rounded text-teal-600 focus:ring-teal-500">
+                            <span>Auto-Sync ke LK & Arus Kas</span>
+                        </label>
+                        <button type="button" onclick="syncRkasToLkAndCashflow(true)" id="btn-sync-rkas" class="px-4 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold flex items-center gap-1.5 shadow-sm transition" title="Kirim total tiap komponen RKAS ini ke LK Bagian C dan Arus Kas 12 Bulan">
+                            <i data-lucide="refresh-cw" class="w-4 h-4"></i> Sinkronkan Sekarang
+                        </button>
+                        <button type="button" onclick="openPreviewModal('landscape')" class="px-3.5 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-900 text-white text-xs font-bold flex items-center gap-1.5 shadow-sm transition">
+                            <i data-lucide="printer" class="w-4 h-4"></i> Cetak Draf RKAS
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Info Sekolah & Preset RKAS -->
+                <div class="bg-slate-50 rounded-2xl p-4 sm:p-5 border border-slate-200 flex flex-col lg:flex-row lg:items-center justify-between gap-4 no-print">
+                    <div class="space-y-1">
+                        <div class="flex flex-wrap items-center gap-2 text-xs">
+                            <span class="font-bold text-slate-500 uppercase">Sekolah Aktif:</span>
+                            <strong id="rkas-school-badge" class="px-2.5 py-0.5 rounded-md bg-teal-900 text-amber-300 font-bold">SMPN Cigedug (Negeri)</strong>
+                            <span id="rkas-pagu-badge" class="px-2.5 py-0.5 rounded-md bg-white border border-slate-300 text-slate-800 font-bold">Pagu: Rp 660.000.000</span>
+                            <span id="rkas-sync-status-pill" class="px-2.5 py-0.5 rounded-md bg-emerald-100 text-emerald-900 font-bold">✓ Tersinkron Otomatis ke LK & Arus Kas</span>
+                        </div>
+                        <p class="text-xs text-slate-500">Perubahan rincian di bawah ini otomatis menghitung persentase kepatuhan Pasal 42 Permendikdasmen 8/2026 serta porsi belanja PBD Rapor Pendidikan.</p>
+                    </div>
+                    <div class="flex flex-wrap items-center gap-2">
+                        <button type="button" onclick="loadRkasPreset('cigedug')" class="px-3 py-2 rounded-xl text-xs font-bold border border-teal-600 bg-teal-50 text-teal-900 hover:bg-teal-100 transition">
+                            Muat Draf RKAS SMPN Cigedug
+                        </button>
+                        <button type="button" onclick="loadRkasPreset('almuawanah')" class="px-3 py-2 rounded-xl text-xs font-bold border border-amber-600 bg-amber-50 text-amber-900 hover:bg-amber-100 transition">
+                            Muat Draf RKAS SMP IT Al Mu'awanah
+                        </button>
+                        <button type="button" onclick="loadRkasPreset('blank')" class="px-3 py-2 rounded-xl text-xs font-bold border border-slate-300 bg-white text-slate-700 hover:bg-slate-100 transition">
+                            Kosongkan RKAS
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 4 Kartu Monitoring Kepatuhan Pasal 42 Real-Time -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5 text-xs">
+                    <div class="p-4 rounded-2xl bg-slate-900 text-white space-y-1">
+                        <span class="text-[11px] uppercase tracking-wider text-teal-200 font-bold">Total Rincian RKAS vs Pagu</span>
+                        <p id="rkas-card-total" class="font-display font-extrabold text-lg text-amber-300">Rp 0</p>
+                        <p id="rkas-card-sisa" class="text-[11px] text-slate-300">Sisa Pagu: Rp 0 (100%)</p>
+                    </div>
+                    <div id="rkas-card-buku-box" class="p-4 rounded-2xl bg-emerald-50 border border-emerald-200 space-y-1">
+                        <div class="flex items-center justify-between">
+                            <span class="text-[11px] uppercase tracking-wider text-emerald-900 font-bold">1. Belanja Buku (Min. 10%)</span>
+                            <span id="rkas-card-buku-pct" class="px-2 py-0.5 rounded bg-emerald-200 text-emerald-950 font-extrabold">0%</span>
+                        </div>
+                        <p id="rkas-card-buku-val" class="font-display font-extrabold text-base text-slate-900">Rp 0</p>
+                        <p id="rkas-card-buku-st" class="text-[11px] font-bold text-emerald-800">✓ Memenuhi syarat ≥ 10%</p>
+                    </div>
+                    <div id="rkas-card-sarpras-box" class="p-4 rounded-2xl bg-emerald-50 border border-emerald-200 space-y-1">
+                        <div class="flex items-center justify-between">
+                            <span class="text-[11px] uppercase tracking-wider text-emerald-900 font-bold">2. Sarpras Ringan (Maks. 20%)</span>
+                            <span id="rkas-card-sarpras-pct" class="px-2 py-0.5 rounded bg-emerald-200 text-emerald-950 font-extrabold">0%</span>
+                        </div>
+                        <p id="rkas-card-sarpras-val" class="font-display font-extrabold text-base text-slate-900">Rp 0</p>
+                        <p id="rkas-card-sarpras-st" class="text-[11px] font-bold text-emerald-800">✓ Aman di bawah batas 20%</p>
+                    </div>
+                    <div id="rkas-card-honor-box" class="p-4 rounded-2xl bg-emerald-50 border border-emerald-200 space-y-1">
+                        <div class="flex items-center justify-between">
+                            <span id="rkas-card-honor-label" class="text-[11px] uppercase tracking-wider text-emerald-900 font-bold">3. Honor Non-ASN (Maks. 20%)</span>
+                            <span id="rkas-card-honor-pct" class="px-2 py-0.5 rounded bg-emerald-200 text-emerald-950 font-extrabold">0%</span>
+                        </div>
+                        <p id="rkas-card-honor-val" class="font-display font-extrabold text-base text-slate-900">Rp 0</p>
+                        <p id="rkas-card-honor-st" class="text-[11px] font-bold text-emerald-800">✓ Aman sesuai status sekolah</p>
+                    </div>
+                </div>
+
+                <!-- Bar Filter Komponen & Tambah Baris Belanja -->
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-teal-50/60 p-4 rounded-2xl border border-teal-200 no-print">
+                    <div class="flex flex-wrap items-center gap-2">
+                        <label for="rkas-filter-komponen" class="text-xs font-bold text-teal-950">Filter Komponen BOSP:</label>
+                        <select id="rkas-filter-komponen" onchange="renderRkasTable()" class="rounded-xl border border-slate-300 px-3 py-2 text-xs bg-white font-semibold text-slate-800 max-w-xs sm:max-w-md">
+                            <option value="ALL">Tampilkan Semua 12 Komponen BOSP</option>
+                        </select>
+                    </div>
+                    <button type="button" onclick="addRkasItem()" class="px-4 py-2 rounded-xl bg-teal-700 hover:bg-teal-800 text-white text-xs font-bold flex items-center gap-1.5 shadow-sm transition self-start sm:self-auto">
+                        <i data-lucide="plus-circle" class="w-4 h-4"></i> Tambah Rincian Belanja RKAS
+                    </button>
+                </div>
+
+                <!-- Tabel Rincian RKAS BOSP 2027 -->
+                <div class="overflow-x-auto rounded-xl border border-slate-300">
+                    <table class="w-full text-left border-collapse text-xs">
+                        <thead>
+                            <tr class="bg-tealbrand-900 text-white uppercase tracking-wider text-[11px]">
+                                <th class="p-3 w-10 text-center">No</th>
+                                <th class="p-3 w-48">Komponen & Kode ARKAS</th>
+                                <th class="p-3">Uraian Kegiatan & Rincian Barang/Jasa (SSH/SBU)</th>
+                                <th class="p-3 w-36">Tagging PBD Rapor</th>
+                                <th class="p-3 w-20 text-center">Vol</th>
+                                <th class="p-3 w-24">Satuan</th>
+                                <th class="p-3 w-32 text-right">Harga Satuan (Rp)</th>
+                                <th class="p-3 w-36 text-right">Jumlah Total (Rp)</th>
+                                <th class="p-3 w-10 text-center no-print">Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody id="rkas-table-body" class="divide-y divide-slate-200 bg-white">
+                            <!-- Dirender otomatis via JS -->
+                        </tbody>
+                        <tfoot id="rkas-table-foot" class="bg-slate-900 text-white font-bold">
+                            <!-- Total otomatis -->
+                        </tfoot>
+                    </table>
+                </div>
+
+                <!-- Rekapitulasi Porsi Belanja PBD Rapor Pendidikan vs Operasional Rutin -->
+                <div class="bg-teal-50/50 rounded-2xl p-5 border border-teal-200 space-y-3">
+                    <div class="flex flex-wrap items-center justify-between gap-2">
+                        <div>
+                            <h3 class="font-display font-bold text-sm text-teal-950 flex items-center gap-2">
+                                <i data-lucide="bar-chart-3" class="w-4 h-4 text-teal-700"></i>
+                                Rekapitulasi Porsi Belanja Berbasis PBD Rapor Pendidikan vs Operasional Rutin
+                            </h3>
+                            <p class="text-xs text-slate-600">Membantu Pengawas Pembina menilai keselarasan anggaran terhadap peningkatan mutu pembelajaran (Rapor Pendidikan).</p>
+                        </div>
+                        <span id="rkas-pbd-mutu-badge" class="px-3 py-1 rounded-full bg-emerald-100 text-emerald-900 font-extrabold text-xs">
+                            Porsi Mutu Pembelajaran (PBD): 0%
+                        </span>
+                    </div>
+                    <div id="rkas-pbd-breakdown" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 text-xs">
+                        <!-- Dirender otomatis via JS -->
+                    </div>
+                </div>
+
+                <!-- Ringkasan Rekapitulasi per Komponen -->
+                <div class="space-y-2 pt-2">
+                    <h3 class="font-display font-bold text-sm text-teal-950">Rekapitulasi Otomatis per Komponen Penggunaan Dana BOSP (12 Komponen Pasal 42 Permendikdasmen 8/2026)</h3>
+                    <div class="overflow-x-auto rounded-xl border border-slate-300">
+                        <table class="w-full text-left border-collapse text-xs">
+                            <thead>
+                                <tr class="bg-slate-800 text-white">
+                                    <th class="p-2.5 w-10 text-center">No</th>
+                                    <th class="p-2.5">Komponen Penggunaan Dana BOSP (Pasal 42 ayat 1)</th>
+                                    <th class="p-2.5 w-32 text-center">Jumlah Item</th>
+                                    <th class="p-2.5 w-40 text-right">Total Rincian RKAS (Rp)</th>
+                                    <th class="p-2.5 w-24 text-center">Porsi (%)</th>
+                                </tr>
+                            </thead>
+                            <tbody id="rkas-rekap-body" class="divide-y divide-slate-200 bg-white">
+                                <!-- Dirender via JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- =================================================================== -->
+        <!-- MODUL 8: SIMULASI PETA ARUS KAS & RENCANA BELANJA 12 BULAN (2027)    -->
         <!-- =================================================================== -->
         <section id="panel-aruskas" class="tab-panel hidden space-y-6">
             <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 sm:p-8 space-y-6">
                 <!-- Header Modul Arus Kas -->
                 <div class="border-b-2 border-teal-700 pb-4 flex flex-col lg:flex-row lg:items-center justify-between gap-3">
                     <div>
-                        <span class="px-3 py-1 rounded-full bg-teal-50 text-teal-800 text-xs font-bold uppercase tracking-wider">Skema Penyaluran 12 Tahap (1/12 per Bulan)</span>
+                        <span class="px-3 py-1 rounded-full bg-teal-50 text-teal-800 text-xs font-bold uppercase tracking-wider">Skema Penyaluran 12 Tahap (1/12 per Bulan) • Belanja Modal Maks. TW 3</span>
                         <h2 class="font-display font-extrabold text-2xl text-slate-900 mt-2">
                             Simulasi Peta Arus Kas & Rencana Belanja 12 Bulan (Januari – Desember 2027)
                         </h2>
                         <p class="text-sm text-slate-600 mt-1">
-                            Panduan bagi Bendahara untuk memastikan <strong>Saldo Kas Akhir Bulan tidak pernah minus</strong> serta <strong>Serapan Anggaran mencapai 100% di Desember 2027</strong>.
+                            Memastikan <strong>Saldo Kas Akhir Bulan tidak minus</strong>, <strong>Serapan Semester 1 ≥ 50% Tahap I (Syarat Salur Tahap II sebelum 31 Juli)</strong>, dan <strong>Belanja Modal tuntas maksimal Triwulan 3 (September)</strong>.
                         </p>
                     </div>
                     <div id="ak-status-badge" class="px-4 py-2 rounded-xl bg-emerald-100 text-emerald-900 border border-emerald-300 text-xs font-extrabold flex items-center gap-2 shrink-0 self-start">
                         <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-700"></i>
-                        <span>Arus Kas Sehat (Bebas Minus & Serapan Optimal)</span>
+                        <span>Arus Kas Sehat &amp; Bebas Belanja Modal di TW 4</span>
                     </div>
                 </div>
 
-                <!-- Panel Pengaturan Simulasi (Tersinkronisasi dengan LK Bagian C) -->
+                <!-- Panel Pengaturan Simulasi (Tersinkronisasi dengan LK Bagian A & C) -->
                 <div class="bg-slate-50 rounded-2xl p-5 border border-slate-200 space-y-4 no-print">
                     <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-200 pb-2.5">
                         <h3 class="font-display font-bold text-sm text-teal-950 flex items-center gap-2">
                             <i data-lucide="sliders-horizontal" class="w-4 h-4 text-teal-700"></i>
-                            Pengaturan Simulasi Arus Kas (Terhubung Otomatis dengan Data LK Sekolah)
+                            Pengaturan Simulasi Arus Kas (Terhubung Otomatis dengan Data LK Bagian A, C &amp; RKAS)
                         </h3>
                         <button type="button" onclick="resetArusKasDefault()" class="px-3 py-1.5 rounded-lg bg-teal-700 hover:bg-teal-800 text-white text-xs font-bold transition">
-                            Terapkan Jadwal Ideal (Mei & Okt / Jun & Des)
+                            Terapkan Jadwal Ideal (Bebas Defisit &amp; Modal Maks. TW 3)
                         </button>
                     </div>
 
                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-xs">
                         <div>
-                            <label class="block font-bold text-slate-700 mb-1">Estimasi SiLPA 2026 (Saldo Awal Jan)</label>
-                            <input type="number" id="ak-silpa" value="0" min="0" step="100000" oninput="renderArusKasTable()" class="w-full rounded-xl border border-slate-300 px-3 py-2 bg-white font-bold text-slate-900">
-                            <span class="text-[11px] text-slate-500 mt-0.5 block">Default Rp 0 untuk simulasi murni 100%</span>
+                            <div class="flex items-center justify-between mb-1">
+                                <label class="font-bold text-slate-700">Estimasi SiLPA 2026 (Saldo Awal Jan)</label>
+                                <button type="button" onclick="syncSilpaFromLk(true)" class="text-[10px] font-bold text-teal-700 hover:underline" title="Ambil ulang nominal SiLPA dari LK Bagian A Baris 4">Ambil dari LK A</button>
+                            </div>
+                            <input type="number" id="ak-silpa" value="0" min="0" step="100000" oninput="onManualSilpaChange(this.value)" class="w-full rounded-xl border border-slate-300 px-3 py-2 bg-white font-bold text-slate-900">
+                            <span id="ak-silpa-source-label" class="text-[11px] text-teal-700 font-semibold mt-0.5 block">✓ Tersinkron dari LK Bagian A Baris 4</span>
                         </div>
                         <div>
-                            <label class="block font-bold text-slate-700 mb-1">Jadwal Belanja Buku (SIPLah)</label>
+                            <label class="block font-bold text-slate-700 mb-1">Jadwal Belanja Modal (Buku &amp; TIK • Maks. TW 3)</label>
                             <select id="ak-sched-buku" onchange="renderArusKasTable()" class="w-full rounded-xl border border-slate-300 px-3 py-2 bg-white font-semibold text-slate-900">
-                                <option value="mei_okt" selected>2 Termin: Mei & Oktober (Rekomendasi)</option>
-                                <option value="apr_sep">2 Termin: April & September</option>
-                                <option value="mar_ags">2 Termin: Maret & Agustus (Uji Risiko)</option>
-                                <option value="ags_full">1 Termin Penuh: Agustus</option>
-                                <option value="bulanan">Dicicil Rata 12 Bulan</option>
+                                <option value="mei_sep" selected>2 Termin TW 2 &amp; TW 3: Mei &amp; September (Rekomendasi)</option>
+                                <option value="apr_ags">2 Termin TW 2 &amp; TW 3: April &amp; Agustus</option>
+                                <option value="mar_ags">2 Termin TW 1 &amp; TW 3: Maret &amp; Agustus (Uji Kas)</option>
+                                <option value="ags_full">1 Termin Penuh TW 3: Agustus</option>
+                                <option value="sep_full">1 Termin Penuh TW 3: September (Batas Akhir Modal)</option>
                             </select>
+                            <span class="text-[11px] text-teal-700 font-semibold mt-0.5 block">✓ Terkunci maks. September (TW 3) sesuai aturan aset</span>
                         </div>
                         <div>
-                            <label class="block font-bold text-slate-700 mb-1">Jadwal Pemeliharaan Sarpras</label>
+                            <label class="block font-bold text-slate-700 mb-1">Jadwal Pemeliharaan Ringan (Non-Modal)</label>
                             <select id="ak-sched-sarpras" onchange="renderArusKasTable()" class="w-full rounded-xl border border-slate-300 px-3 py-2 bg-white font-semibold text-slate-900">
-                                <option value="jun_des" selected>2 Termin: Juni & Desember (Rekomendasi)</option>
-                                <option value="jun_nov">2 Termin: Juni & November</option>
+                                <option value="jun_des" selected>2 Termin: Juni (TW 2) &amp; Desember (Bebas Defisit Nov)</option>
+                                <option value="jun_nov">2 Termin: Juni (TW 2) &amp; November (Uji Kas Nov)</option>
+                                <option value="jun_sep">2 Termin: Juni (TW 2) &amp; September (TW 3)</option>
                                 <option value="triwulan">Per Triwulan (Mar, Jun, Sep, Des)</option>
                                 <option value="bulanan">Perawatan Rutin 12 Bulan</option>
                             </select>
@@ -1177,6 +1417,22 @@ Terima kasih, sampai bertemu besok dalam keadaan sehat walafiat.</textarea>
                             <span id="ak-school-summary" class="font-bold text-xs text-amber-300 mt-0.5">SMPN Cigedug • Rp 660.000.000</span>
                             <span id="ak-monthly-inflow-label" class="text-[11px] text-slate-200 mt-0.5">Dana Cair: Rp 55.000.000 / bln</span>
                         </div>
+                    </div>
+                </div>
+
+                <!-- Indikator Uji Syarat Pelaporan Tahap I (Serapan >= 50% Sebelum 31 Juli - Pasal 56) -->
+                <div id="ak-tahap1-box" class="p-4 sm:p-5 rounded-2xl bg-sky-50 border border-sky-200 flex flex-col md:flex-row md:items-center justify-between gap-4 text-xs sm:text-sm">
+                    <div class="space-y-1">
+                        <div class="flex items-center gap-2">
+                            <span class="px-2.5 py-0.5 rounded bg-sky-800 text-white font-bold text-[11px] uppercase">Uji Syarat Salur Tahap II (Pasal 56)</span>
+                            <strong class="text-sky-950">Target Realisasi Semester 1 (Jan–Jun) ≥ 50% Pagu Tahap I</strong>
+                        </div>
+                        <p id="ak-tahap1-detail" class="text-slate-700">
+                            Akumulasi belanja Jan–Jun 2027: <strong>Rp 0</strong> dari pagu Tahap I (50% setahun = <strong>Rp 0</strong>). Wajib dilaporkan paling lambat <strong>31 Juli 2027</strong>.
+                        </p>
+                    </div>
+                    <div id="ak-tahap1-badge" class="px-4 py-2 rounded-xl bg-emerald-100 text-emerald-900 border border-emerald-300 font-extrabold text-xs shrink-0 text-center">
+                        ✓ Memenuhi Syarat Salur Tahap II
                     </div>
                 </div>
 
@@ -1193,19 +1449,19 @@ Terima kasih, sampai bertemu besok dalam keadaan sehat walafiat.</textarea>
                         <p class="text-[11px] text-slate-500 mt-0.5">Salur rutin tiap bulan ke rekening</p>
                     </div>
                     <div class="p-4 rounded-xl bg-slate-50 border border-slate-200">
-                        <span class="text-slate-500 font-bold uppercase text-[10px]">2. Honor & Ops Rutin / Bulan</span>
+                        <span class="text-slate-500 font-bold uppercase text-[10px]">2. Honor &amp; Ops Rutin / Bulan</span>
                         <p id="ak-card-rutin" class="font-display font-extrabold text-base text-slate-900 mt-1">Rp 0</p>
                         <p class="text-[11px] text-slate-500 mt-0.5">Dibayarkan rutin setiap bulan (12x)</p>
                     </div>
                     <div class="p-4 rounded-xl bg-slate-50 border border-slate-200">
-                        <span class="text-slate-500 font-bold uppercase text-[10px]">3. Tabungan Buku (SIPLah) / Thn</span>
+                        <span class="text-slate-500 font-bold uppercase text-[10px]">3. Belanja Modal (Buku &amp; TIK) / Thn</span>
                         <p id="ak-card-buku" class="font-display font-extrabold text-base text-emerald-700 mt-1">Rp 0</p>
-                        <p id="ak-card-buku-sub" class="text-[11px] text-slate-500 mt-0.5">Dieksekusi Mei & Oktober</p>
+                        <p id="ak-card-buku-sub" class="text-[11px] text-slate-500 mt-0.5">Dieksekusi Mei &amp; September (Maks. TW 3)</p>
                     </div>
                     <div class="p-4 rounded-xl bg-slate-50 border border-slate-200">
-                        <span class="text-slate-500 font-bold uppercase text-[10px]">4. Tabungan Sarpras / Thn</span>
+                        <span class="text-slate-500 font-bold uppercase text-[10px]">4. Pemeliharaan Ringan / Thn</span>
                         <p id="ak-card-sarpras" class="font-display font-extrabold text-base text-amber-700 mt-1">Rp 0</p>
-                        <p id="ak-card-sarpras-sub" class="text-[11px] text-slate-500 mt-0.5">Dieksekusi Juni & Desember</p>
+                        <p id="ak-card-sarpras-sub" class="text-[11px] text-slate-500 mt-0.5">Dieksekusi Juni &amp; Desember</p>
                     </div>
                 </div>
 
@@ -1216,11 +1472,11 @@ Terima kasih, sampai bertemu besok dalam keadaan sehat walafiat.</textarea>
                             <tr class="bg-tealbrand-900 text-white uppercase tracking-wider text-[11px]">
                                 <th class="p-3 w-32">Bulan (2027)</th>
                                 <th class="p-3 text-right">Dana Masuk (+SiLPA Jan)</th>
-                                <th class="p-3 text-right">Honor & Ops Rutin</th>
-                                <th class="p-3 text-right">Buku (SIPLah) & Sarpras</th>
+                                <th class="p-3 text-right">Honor &amp; Ops Rutin</th>
+                                <th class="p-3 text-right">Modal (Buku/TIK) &amp; Sarpras</th>
                                 <th class="p-3 text-right">Total Belanja Bln</th>
                                 <th class="p-3 text-right">Saldo Kas Akhir</th>
-                                <th class="p-3">Fokus Pendampingan & Pelaporan</th>
+                                <th class="p-3">Fokus Pendampingan &amp; Pelaporan</th>
                             </tr>
                         </thead>
                         <tbody id="ak-table-body" class="divide-y divide-slate-200">
@@ -1235,7 +1491,7 @@ Terima kasih, sampai bertemu besok dalam keadaan sehat walafiat.</textarea>
         </section>
 
         <!-- =================================================================== -->
-        <!-- MODUL 7: KAJIAN REGULASI PERMENDIKDASMEN NOMOR 8 TAHUN 2026         -->
+        <!-- MODUL 3: KAJIAN REGULASI PERMENDIKDASMEN NOMOR 8 TAHUN 2026         -->
         <!-- =================================================================== -->
         <section id="panel-kajianregulasi" class="tab-panel hidden space-y-8">
             <!-- Hero Header Kajian Regulasi -->
@@ -1858,7 +2114,7 @@ Terima kasih, sampai bertemu besok dalam keadaan sehat walafiat.</textarea>
         </section>
 
         <!-- =================================================================== -->
-        <!-- MODUL 8: SOLUSI LAPANGAN & TINDAKAN COACHING PENGAWAS               -->
+        <!-- MODUL 9: SOLUSI LAPANGAN & TINDAKAN COACHING PENGAWAS               -->
         <!-- =================================================================== -->
         <section id="panel-solusi" class="tab-panel hidden space-y-6">
             <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 sm:p-8 space-y-6">
@@ -1942,7 +2198,7 @@ Terima kasih, sampai bertemu besok dalam keadaan sehat walafiat.</textarea>
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs">
             <div>
                 <p class="font-bold text-white">Portal Terpadu Pendampingan Perencanaan BOSP TA 2027</p>
-                <p class="text-slate-400 mt-0.5">Mendukung Aksesibilitas Zoom Teks • Cetak PDF Portrait/Landscape Presisi • Ekspor Word/Google Dokumen</p>
+                <p class="text-slate-400 mt-0.5">Mendukung Aksesibilitas Zoom Teks • Auto-Save &amp; Arsip File JSON • Cetak PDF Portrait/Landscape • Ekspor Word/Google Dokumen</p>
             </div>
             <div class="flex items-center gap-2.5 px-4 py-2.5 rounded-xl bg-tealbrand-900/90 border border-teal-500/40 text-teal-100 shadow-sm">
                 <i data-lucide="code-2" class="w-4 h-4 text-amber-400"></i>
@@ -1956,73 +2212,126 @@ Terima kasih, sampai bertemu besok dalam keadaan sehat walafiat.</textarea>
     <!-- ===================================================================== -->
     <script>
         // =========================================================================
-        // 1. STATE & KONFIGURASI NAVIGASI (NAMA FILE OTOMATIS SESUAI TAB)
+        // 1. STATE GLOBAL APLIKASI & AUTO-SAVE STORAGE
         // =========================================================================
+        const STORAGE_KEY = 'portal_bosp_2027_session_v1';
 
-        let currentModule = 'panduan';
         let currentZoom = 1.0;
+        let currentModule = 'panduan';
         let currentOrientation = 'portrait';
+        let rkasAutoSync = true;
+        let isRkasSynced = true;
+        let silpaManualOverride = false;
+        let autoSaveTimer = null;
 
         const MODULE_META = {
             panduan: {
                 title: '1. Panduan Pendampingan Perencanaan BOSP TA 2027',
-                getFileName: () => 'Panduan_Pendampingan_Perencanaan_BOSP_TA_2027'
-            },
-            kajianregulasi: {
-                title: '2. Kajian Regulasi Permendikdasmen Nomor 8 Tahun 2026',
-                getFileName: () => 'Kajian_Regulasi_Permendikdasmen_Nomor_8_Tahun_2026'
-            },
-            presentasi: {
-                title: '3. Bahan Tayang Presentasi Pendampingan BOSP TA 2027',
-                getFileName: () => 'Slide_Presentasi_Pendampingan_BOSP_TA_2027'
-            },
-            lembarkerja: {
-                title: '4. Lembar Kerja Pemetaan & Perencanaan BOSP TA 2027',
-                getFileName: () => {
-                    const schoolName = (lkState.nama || '').trim();
-                    if (!schoolName) return 'Lembar_Kerja_Pemetaan_BOSP_TA_2027';
-                    const cleanName = schoolName.replace(/[^a-zA-Z0-9\s]/g, '').replace(/\s+/g, '_');
-                    return `LK_Pemetaan_BOSP_2027_${cleanName}`;
-                }
+                getFileName: () => 'Panduan_Pendampingan_BOSP_TA_2027'
             },
             checklist: {
-                title: '5. Checklist Persiapan Pengawas & Template WA',
-                getFileName: () => 'Checklist_Persiapan_Pendampingan_BOSP_2027'
+                title: '2. Checklist Persiapan Pengawas & Template WA',
+                getFileName: () => 'Checklist_Persiapan_Pengawas_BOSP_TA_2027'
+            },
+            kajianregulasi: {
+                title: '3. Kajian Regulasi Permendikdasmen Nomor 8 Tahun 2026',
+                getFileName: () => 'Kajian_Regulasi_Permendikdasmen_No_8_Tahun_2026'
             },
             perbandingan: {
-                title: '6. Perbandingan Kebijakan BOSP (Sebelum vs Permendikdasmen 8/2026)',
-                getFileName: () => 'Perbandingan_Kebijakan_BOSP_Permendikdasmen_8_2026'
+                title: '4. Matriks Perbandingan Regulasi Permendikdasmen 8/2026',
+                getFileName: () => 'Perbandingan_Regulasi_Permendikdasmen_8_Tahun_2026'
+            },
+            presentasi: {
+                title: '5. Bahan Tayang Presentasi Pendampingan (12 Slide)',
+                getFileName: () => 'Bahan_Tayang_Presentasi_BOSP_TA_2027'
+            },
+            lembarkerja: {
+                title: '6. Lembar Kerja Pemetaan & Perencanaan BOSP TA 2027',
+                getFileName: () => {
+                    const namaSekolah = (lkState.nama || '').trim().replace(/[^a-zA-Z0-9\s]/g, '').replace(/\s+/g, '_');
+                    return namaSekolah ? `LK_Pemetaan_BOSP_2027_${namaSekolah}` : 'LK_Pemetaan_BOSP_TA_2027_Kosong';
+                }
+            },
+            rkas: {
+                title: '7. Simulator Rincian RKAS BOSP TA 2027 (SSH/SBU & Kode ARKAS)',
+                getFileName: () => {
+                    const namaSekolah = (lkState.nama || '').trim().replace(/[^a-zA-Z0-9\s]/g, '').replace(/\s+/g, '_');
+                    return namaSekolah ? `RKAS_BOSP_2027_${namaSekolah}` : 'RKAS_BOSP_TA_2027';
+                }
             },
             aruskas: {
-                title: '7. Simulasi Peta Arus Kas & Rencana Belanja 12 Bulan (TA 2027)',
+                title: '8. Simulasi Peta Arus Kas & Rencana Belanja 12 Bulan (TA 2027)',
                 getFileName: () => {
-                    const schoolName = (lkState.nama || '').trim();
-                    if (!schoolName) return 'Simulasi_Arus_Kas_12_Bulan_BOSP_2027';
-                    const cleanName = schoolName.replace(/[^a-zA-Z0-9\s]/g, '').replace(/\s+/g, '_');
-                    return `Simulasi_Arus_Kas_12_Bulan_BOSP_2027_${cleanName}`;
+                    const namaSekolah = (lkState.nama || '').trim().replace(/[^a-zA-Z0-9\s]/g, '').replace(/\s+/g, '_');
+                    return namaSekolah ? `Simulasi_Arus_Kas_12_Bulan_2027_${namaSekolah}` : 'Simulasi_Arus_Kas_12_Bulan_BOSP_TA_2027';
                 }
             },
             solusi: {
-                title: '8. Solusi Lapangan & Tindakan Coaching Pengawas',
-                getFileName: () => 'Solusi_Lapangan_Coaching_Pengawas_BOSP_2027'
+                title: '9. Matriks Solusi Lapangan & Tindakan Coaching Pengawas',
+                getFileName: () => 'Matriks_Solusi_Lapangan_Coaching_Pengawas_BOSP'
             }
         };
 
         // =========================================================================
-        // 2. DATA PRESET LEMBAR KERJA (KOSONG, SMPN CIGEDUG, SMP IT AL MU'AWANAH)
+        // 2. DATA PRESET LEMBAR KERJA & SIMULATOR RKAS BOSP 2027 (12 KOMPONEN PASAL 42)
         // =========================================================================
 
         const KOMPONEN_BOSP = [
-            { no: 1, nama: 'Pengembangan Perpustakaan & Layanan Pojok Baca (Pengadaan Buku Teks & Non-Teks)', batas: 'Minimal 10%', rule: 'MIN_10' },
-            { no: 2, nama: 'Pemeliharaan Sarana dan Prasarana Sekolah (Pemeliharaan ringan non-struktural)', batas: 'Maksimal 20%', rule: 'MAX_20' },
-            { no: 3, nama: 'Pembayaran Honor Guru / Tenaga Kependidikan Non-ASN', batas: 'Negeri ≤ 20% / Swasta ≤ 40%', rule: 'MAX_HONOR' },
-            { no: 4, nama: 'Penerimaan Peserta Didik Baru (SPMB/PPDB)', batas: 'Sesuai kebutuhan', rule: 'NORMAL' },
-            { no: 5, nama: 'Pelaksanaan Kegiatan Pembelajaran dan Ekstrakurikuler', batas: 'Sesuai kebutuhan', rule: 'NORMAL' },
-            { no: 6, nama: 'Pelaksanaan Kegiatan Asesmen dan Evaluasi Pembelajaran', batas: 'Sesuai kebutuhan', rule: 'NORMAL' },
-            { no: 7, nama: 'Pelaksanaan Administrasi Kegiatan Satuan Pendidikan (termasuk daya & jasa)', batas: 'Sesuai kebutuhan', rule: 'NORMAL' },
-            { no: 8, nama: 'Pengembangan Profesi Guru dan Tenaga Kependidikan', batas: 'Sesuai kebutuhan', rule: 'NORMAL' },
-            { no: 9, nama: 'Penyediaan Alat Multi Media Pembelajaran', batas: 'Sesuai kebutuhan', rule: 'NORMAL' }
+            { no: 1, kode: '03.01', nama: 'Penerimaan Murid Baru (SPMB / PPDB)', batas: 'Sesuai kebutuhan', rule: 'NORMAL' },
+            { no: 2, kode: '05.02', nama: 'Pengembangan Perpustakaan dan/atau Layanan Pojok Baca (Non-Buku)', batas: 'Sesuai kebutuhan', rule: 'NORMAL' },
+            { no: 3, kode: '05.02.B', nama: 'Penyediaan Buku Teks Utama, Pendamping, dan Buku Nonteks (Katalog Terkurasi)', batas: 'Minimal 10%', rule: 'MIN_10' },
+            { no: 4, kode: '03.03', nama: 'Pelaksanaan Kegiatan Pembelajaran dan Bermain (Kokurikuler & Ekstrakurikuler)', batas: 'Sesuai kebutuhan', rule: 'NORMAL' },
+            { no: 5, kode: '08.04', nama: 'Pelaksanaan Evaluasi / Asesmen Pembelajaran dan Bermain', batas: 'Sesuai kebutuhan', rule: 'NORMAL' },
+            { no: 6, kode: '06.05', nama: 'Pelaksanaan Administrasi Kegiatan Satuan Pendidikan (ATK, Rumah Tangga, Rapat)', batas: 'Sesuai kebutuhan', rule: 'NORMAL' },
+            { no: 7, kode: '04.06', nama: 'Pengembangan Profesi Pendidik dan Tenaga Kependidikan (Kombel & Pelatihan)', batas: 'Sesuai kebutuhan', rule: 'NORMAL' },
+            { no: 8, kode: '06.07', nama: 'Pembiayaan Langganan Daya dan Jasa (Listrik, Air, Telepon, Internet)', batas: 'Sesuai kebutuhan', rule: 'NORMAL' },
+            { no: 9, kode: '05.08', nama: 'Pemeliharaan Sarana dan Prasarana Satuan Pendidikan (Rusak Ringan Non-Struktural)', batas: 'Maksimal 20%', rule: 'MAX_20' },
+            { no: 10, kode: '05.09', nama: 'Penyediaan Alat Multimedia Pembelajaran (TIK, Proyektor, Perangkat Digital)', batas: 'Sesuai kebutuhan', rule: 'NORMAL' },
+            { no: 11, kode: '03.10', nama: 'Penyelenggaraan Kegiatan Peningkatan Kompetensi Keahlian / Pembelajaran Mendalam, Koding & KA', batas: 'Sesuai kebutuhan', rule: 'NORMAL' },
+            { no: 12, kode: '07.12', nama: 'Pembayaran Honor Guru dan Tenaga Kependidikan Non-ASN', batas: 'Negeri ≤ 20% / Swasta ≤ 40%', rule: 'MAX_HONOR' }
         ];
+
+        const RKAS_PRESETS = {
+            blank: [
+                { kompIdx: 2, kode: '05.02.01', uraian: 'Pengadaan Buku Teks Utama & Pendamping Kurikulum (SIPLah)', pbd: 'A.1 Kemampuan Literasi', vol: 1, satuan: 'Paket', harga: 0 }
+            ],
+            cigedug: [
+                { kompIdx: 0, kode: '03.01.01', uraian: 'Pelaksanaan Sistem Penerimaan Murid Baru (SPMB) & MPLS TA 2027/2028', pbd: 'D.8 Iklim Kebinekaan', vol: 1, satuan: 'Kegiatan', harga: 16500000 },
+                { kompIdx: 1, kode: '05.02.00', uraian: 'Pengelolaan Layanan Pojok Baca Kelas, Katalogisasi & Lomba Literasi Sekolah', pbd: 'A.1 Kemampuan Literasi', vol: 1, satuan: 'Paket', harga: 12000000 },
+                { kompIdx: 2, kode: '05.02.01', uraian: 'Pengadaan Buku Teks Utama Kurikulum Merdeka Kelas VII–IX (SIPLah)', pbd: 'A.1 Kemampuan Literasi', vol: 600, satuan: 'Eksemplar', harga: 75000 },
+                { kompIdx: 2, kode: '05.02.02', uraian: 'Pengadaan Buku Pengayaan Literasi & Nonteks Katalog Terkurasi Kemendikdasmen', pbd: 'A.1 Kemampuan Literasi', vol: 460, satuan: 'Eksemplar', harga: 60000 },
+                { kompIdx: 3, kode: '03.03.01', uraian: 'Pengadaan Alat Peraga Numerasi Kontekstual & Bahan Praktikum IPA', pbd: 'A.2 Kemampuan Numerasi', vol: 1, satuan: 'Paket', harga: 38500000 },
+                { kompIdx: 3, kode: '03.03.02', uraian: 'Kegiatan Kokurikuler Penguatan Karakter, Anti-Perundungan & Ekstrakurikuler', pbd: 'A.3 Karakter Murid', vol: 1, satuan: 'Paket', harga: 55000000 },
+                { kompIdx: 4, kode: '08.04.01', uraian: 'Pelaksanaan Asesmen Sumatif (ASTS/ASAS), ANBK & Try Out Numerasi', pbd: 'A.2 Kemampuan Numerasi', vol: 2, satuan: 'Semester', harga: 29700000 },
+                { kompIdx: 5, kode: '06.05.01', uraian: 'Pengadaan ATK, Bahan Habis Pakai Pembelajaran & Kebersihan Sekolah (12 Bln)', pbd: 'Operasional Rutin', vol: 12, satuan: 'Bulan', harga: 4000000 },
+                { kompIdx: 6, kode: '04.06.01', uraian: 'IHT Pembelajaran Mendalam (Deep Learning), Numerasi & Aktivasi Kombel', pbd: 'D.2 Refleksi Pembelajaran', vol: 1, satuan: 'Paket', harga: 25000000 },
+                { kompIdx: 7, kode: '06.07.01', uraian: 'Langganan Daya & Jasa (Listrik, Internet Fiber Optik & Air) 12 Bulan', pbd: 'Operasional Rutin', vol: 12, satuan: 'Bulan', harga: 4800000 },
+                { kompIdx: 8, kode: '05.08.01', uraian: 'Pemeliharaan Ringan Plafon & Talang Air 3 Ruang Kelas VII', pbd: 'D.4 Iklim Keamanan', vol: 1, satuan: 'Paket', harga: 45000000 },
+                { kompIdx: 8, kode: '05.08.02', uraian: 'Perbaikan Sanitasi, Pintu & Kran 6 Toilet Siswa (Rusak Ringan)', pbd: 'D.4 Iklim Keamanan', vol: 1, satuan: 'Paket', harga: 29000000 },
+                { kompIdx: 8, kode: '05.08.03', uraian: 'Pengecatan Ruang Perpustakaan & Penataan Rak Pojok Baca', pbd: 'A.1 Kemampuan Literasi', vol: 1, satuan: 'Paket', harga: 25000000 },
+                { kompIdx: 9, kode: '05.09.01', uraian: 'Pengadaan 4 Unit Proyektor LCD & Perangkat Multimedia Kelas (SIPLah)', pbd: 'D.1 Kualitas Pembelajaran', vol: 4, satuan: 'Unit', harga: 9900000 },
+                { kompIdx: 10, kode: '03.10.01', uraian: 'Workshop & Perangkat Modul Praktik Koding dan Kecerdasan Artifisial (KA) Siswa', pbd: 'D.1 Kualitas Pembelajaran', vol: 1, satuan: 'Paket', harga: 18000000 },
+                { kompIdx: 11, kode: '07.12.01', uraian: 'Honorarium 3 Guru Non-ASN Ber-NUPTK & Non-TPG (12 Bulan)', pbd: 'D.1 Kualitas Pembelajaran', vol: 12, satuan: 'Bulan', harga: 6400000 },
+                { kompIdx: 11, kode: '07.12.02', uraian: 'Honorarium 2 Tenaga Kependidikan Non-ASN (Pustakawan & Penjaga)', pbd: 'Pengelolaan Sekolah', vol: 12, satuan: 'Bulan', harga: 3500000 }
+            ],
+            almuawanah: [
+                { kompIdx: 0, kode: '03.01.01', uraian: 'Pelaksanaan SPMB & Masa Pengenalan Lingkungan Sekolah (MPLS)', pbd: 'D.8 Iklim Kebinekaan', vol: 1, satuan: 'Kegiatan', harga: 10395000 },
+                { kompIdx: 1, kode: '05.02.00', uraian: 'Penataan Sudut Baca Kelas & Langganan E-Library Sekolah', pbd: 'A.1 Kemampuan Literasi', vol: 1, satuan: 'Paket', harga: 5500000 },
+                { kompIdx: 2, kode: '05.02.01', uraian: 'Pengadaan Buku Teks Utama Pendamping Kurikulum Merdeka (SIPLah)', pbd: 'A.1 Kemampuan Literasi', vol: 315, satuan: 'Eksemplar', harga: 70000 },
+                { kompIdx: 2, kode: '05.02.02', uraian: 'Pengadaan Buku Pengayaan Sains Populer, Dwibahasa & Jurnal Literasi', pbd: 'A.1 Kemampuan Literasi', vol: 268, satuan: 'Eksemplar', harga: 60000 },
+                { kompIdx: 3, kode: '03.03.01', uraian: 'Klinik Numerasi AKM, LDKS Kepemimpinan & Pembinaan Ekstrakurikuler', pbd: 'A.2 Kemampuan Numerasi', vol: 1, satuan: 'Paket', harga: 38010000 },
+                { kompIdx: 4, kode: '08.04.01', uraian: 'Pelaksanaan Asesmen Diagnostik, Sumatif Semester & ANBK', pbd: 'A.2 Kemampuan Numerasi', vol: 2, satuan: 'Semester', harga: 13860000 },
+                { kompIdx: 5, kode: '06.05.01', uraian: 'Pengadaan ATK, Perlengkapan UKS/P3K & Administrasi Sekolah (12 Bln)', pbd: 'Operasional Rutin', vol: 12, satuan: 'Bulan', harga: 1465000 },
+                { kompIdx: 6, kode: '04.06.01', uraian: 'Workshop Penyusunan Modul Ajar Aktif, Asesmen Digital & Kombel', pbd: 'D.2 Refleksi Pembelajaran', vol: 1, satuan: 'Paket', harga: 10395000 },
+                { kompIdx: 7, kode: '06.07.01', uraian: 'Langganan Listrik, Internet Sekolah & Air Bersih (12 Bulan)', pbd: 'Operasional Rutin', vol: 12, satuan: 'Bulan', harga: 2000000 },
+                { kompIdx: 8, kode: '05.08.01', uraian: 'Pemeliharaan Ringan Instalasi Listrik & Lampu LED 6 Ruang Kelas', pbd: 'D.4 Iklim Keamanan', vol: 1, satuan: 'Paket', harga: 14650000 },
+                { kompIdx: 8, kode: '05.08.02', uraian: 'Perbaikan Ringan Meja-Kursi Siswa, Papan Tulis & Ventilasi UKS', pbd: 'D.4 Iklim Keamanan', vol: 1, satuan: 'Paket', harga: 20000000 },
+                { kompIdx: 9, kode: '05.09.01', uraian: 'Pengadaan Perangkat Audio Visual & Media Pembelajaran Interaktif', pbd: 'D.1 Kualitas Pembelajaran', vol: 1, satuan: 'Paket', harga: 10395000 },
+                { kompIdx: 10, kode: '03.10.01', uraian: 'Program Ekstrakurikuler Koding Dasar & Literasi Kecerdasan Artifisial (KA)', pbd: 'D.1 Kualitas Pembelajaran', vol: 1, satuan: 'Paket', harga: 5000000 },
+                { kompIdx: 11, kode: '07.12.01', uraian: 'Honorarium 5 Guru Tetap Yayasan (GTY) Ber-NUPTK & Non-TPG (12 Bulan)', pbd: 'D.1 Kualitas Pembelajaran', vol: 12, satuan: 'Bulan', harga: 8895000 },
+                { kompIdx: 11, kode: '07.12.02', uraian: 'Honorarium 1 Tenaga Administrasi Sekolah Non-ASN (12 Bulan)', pbd: 'Pengelolaan Sekolah', vol: 12, satuan: 'Bulan', harga: 1500000 }
+            ]
+        };
 
         const LK_PRESETS = {
             blank: {
@@ -2033,7 +2342,7 @@ Terima kasih, sampai bertemu besok dalam keadaan sehat walafiat.</textarea>
                     { uraian: 'Total Pagu BOSP Reguler TA 2026', nilai: 'Rp ', implikasi: '' },
                     { uraian: 'Realisasi Belanja s.d. Bulan November 2026', nilai: 'Rp ', implikasi: '' },
                     { uraian: 'Rencana Belanja Bulan Desember 2026', nilai: 'Rp ', implikasi: '' },
-                    { uraian: 'Proyeksi Sisa Dana (SiLPA) Akhir 2026', nilai: 'Rp ', implikasi: 'Wajib diperhitungkan dalam RKAS 2027' },
+                    { uraian: 'Proyeksi Sisa Dana (SiLPA) Akhir 2026', nilai: 'Rp 0', implikasi: 'Wajib diperhitungkan dalam RKAS 2027' },
                     { uraian: 'Kegiatan 2026 yang belum terlaksana/tertunda', nilai: '', implikasi: '' },
                     { uraian: 'Catatan/Rekomendasi Hasil Monev Pengawas 2026', nilai: '', implikasi: '' }
                 ],
@@ -2045,7 +2354,7 @@ Terima kasih, sampai bertemu besok dalam keadaan sehat walafiat.</textarea>
                     { indikator: 'Iklim Keamanan & Inklusivitas', capaian: '', masalah: '', benahi: '', anggaran: 0 },
                     { indikator: 'Kompetensi Pendidik & Tendik', capaian: '', masalah: '', benahi: '', anggaran: 0 }
                 ],
-                alokasiC: [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                alokasiC: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
                 honor: [
                     { nama: '', jabatan: '', status: 'Non-ASN', dapodik: 'Ya', sk: 'Ya', nontpg: 'Ya', nominal: 0 }
                 ],
@@ -2080,7 +2389,7 @@ Terima kasih, sampai bertemu besok dalam keadaan sehat walafiat.</textarea>
                     { indikator: 'Iklim Keamanan & Inklusivitas', capaian: 'Baik (Hijau)', masalah: 'Plafon 3 ruang kelas VII bocor & kunci toilet rusak ringan', benahi: 'Pemeliharaan ringan atap/plafon kelas & sanitasi toilet', anggaran: 66000000 },
                     { indikator: 'Kompetensi Pendidik & Tendik', capaian: 'Sedang (Kuning)', masalah: 'Pemanfaatan TIK dan asesmen digital guru belum merata', benahi: 'Pelatihan penyusunan asesmen digital bagi guru', anggaran: 18000000 }
                 ],
-                alokasiC: [72600000, 99000000, 118800000, 16500000, 115500000, 59400000, 105600000, 33000000, 39600000],
+                alokasiC: [16500000, 12000000, 72600000, 93500000, 59400000, 48000000, 25000000, 57600000, 99000000, 39600000, 18000000, 118800000],
                 honor: [
                     { nama: 'Asep Saepuloh, S.Pd.', jabatan: 'Guru Mapel PJOK', status: 'Non-ASN', dapodik: 'Ya', sk: 'Ya', nontpg: 'Ya', nominal: 2200000 },
                     { nama: 'Neng Rina Marlina, S.Pd.', jabatan: 'Guru Seni Budaya', status: 'Non-ASN', dapodik: 'Ya', sk: 'Ya', nontpg: 'Ya', nominal: 2200000 },
@@ -2121,7 +2430,7 @@ Terima kasih, sampai bertemu besok dalam keadaan sehat walafiat.</textarea>
                     { indikator: 'Iklim Keamanan & Inklusivitas', capaian: 'Sedang (Kuning)', masalah: 'Belum ada papan alur pengaduan & perlengkapan UKS kurang', benahi: 'Pengadaan perlengkapan UKS/P3K & poster anti-bullying', anggaran: 14000000 },
                     { indikator: 'Kompetensi Pendidik & Tendik', capaian: 'Sedang (Kuning)', masalah: 'Guru butuh pelatihan asesmen diagnostik & media interaktif', benahi: 'Workshop internal asesmen diagnostik & media digital', anggaran: 10395000 }
                 ],
-                alokasiC: [38115000, 34650000, 124740000, 10395000, 48510000, 27720000, 41580000, 10395000, 10395000],
+                alokasiC: [10395000, 5500000, 38115000, 38010000, 27720000, 17580000, 10395000, 24000000, 34650000, 10395000, 5000000, 124740000],
                 honor: [
                     { nama: 'Nurul Hidayah, S.Pd.', jabatan: 'Guru Matematika', status: 'GTY', dapodik: 'Ya', sk: 'Ya', nontpg: 'Ya', nominal: 1850000 },
                     { nama: 'Dewi Sartika, S.Pd.', jabatan: 'Guru Bhs. Indonesia', status: 'GTY', dapodik: 'Ya', sk: 'Ya', nontpg: 'Ya', nominal: 1850000 },
@@ -2146,6 +2455,141 @@ Terima kasih, sampai bertemu besok dalam keadaan sehat walafiat.</textarea>
 
         // Default memuat Contoh 1 (SMPN Cigedug) agar langsung terlihat jelas
         let lkState = JSON.parse(JSON.stringify(LK_PRESETS.cigedug));
+        let rkasItems = JSON.parse(JSON.stringify(RKAS_PRESETS.cigedug));
+
+        // =========================================================================
+        // 2B. AUTO-SAVE LOCALSTORAGE & EKSPOR/IMPOR FILE SESI SEKOLAH (.JSON)
+        // =========================================================================
+
+        function scheduleAutoSave() {
+            const badge = document.getElementById('autosave-status-badge');
+            if (badge) {
+                badge.innerHTML = `<i data-lucide="loader-2" class="w-3 h-3 text-amber-600 animate-spin"></i> Menyimpan...`;
+                lucide.createIcons();
+            }
+            clearTimeout(autoSaveTimer);
+            autoSaveTimer = setTimeout(() => {
+                saveSessionToLocal();
+            }, 600);
+        }
+
+        function saveSessionToLocal() {
+            try {
+                const payload = {
+                    version: '2027.1',
+                    savedAt: new Date().toISOString(),
+                    lkState: lkState,
+                    rkasItems: rkasItems,
+                    rkasAutoSync: rkasAutoSync,
+                    silpaManualOverride: silpaManualOverride,
+                    akSilpa: document.getElementById('ak-silpa')?.value || 0,
+                    akSchedBuku: document.getElementById('ak-sched-buku')?.value || 'mei_sep',
+                    akSchedSarpras: document.getElementById('ak-sched-sarpras')?.value || 'jun_des'
+                };
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(payload));
+                const badge = document.getElementById('autosave-status-badge');
+                if (badge) {
+                    const jam = new Date().toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' });
+                    badge.innerHTML = `<i data-lucide="hard-drive" class="w-3 h-3 text-sky-700"></i> Tersimpan (${jam})`;
+                    lucide.createIcons();
+                }
+            } catch (e) {
+                console.warn('Gagal menyimpan otomatis ke localStorage:', e);
+            }
+        }
+
+        function loadSessionFromLocal() {
+            try {
+                const raw = localStorage.getItem(STORAGE_KEY);
+                if (!raw) return false;
+                const parsed = JSON.parse(raw);
+                if (parsed && parsed.lkState && Array.isArray(parsed.rkasItems)) {
+                    lkState = parsed.lkState;
+                    rkasItems = parsed.rkasItems;
+                    if (typeof parsed.rkasAutoSync === 'boolean') rkasAutoSync = parsed.rkasAutoSync;
+                    if (typeof parsed.silpaManualOverride === 'boolean') silpaManualOverride = parsed.silpaManualOverride;
+                    return parsed;
+                }
+            } catch (e) {
+                console.warn('Gagal memulihkan sesi dari localStorage:', e);
+            }
+            return false;
+        }
+
+        function exportSessionJson() {
+            saveSessionToLocal();
+            const namaSekolah = (lkState.nama || '').trim().replace(/[^a-zA-Z0-9\s]/g, '').replace(/\s+/g, '_');
+            const fileName = namaSekolah ? `Data_Pendampingan_BOSP_2027_${namaSekolah}.json` : 'Data_Pendampingan_BOSP_2027.json';
+
+            const payload = {
+                app: 'Portal Terpadu Pendampingan Perencanaan BOSP TA 2027',
+                exportedAt: new Date().toISOString(),
+                lkState: lkState,
+                rkasItems: rkasItems,
+                akSilpa: document.getElementById('ak-silpa')?.value || 0,
+                akSchedBuku: document.getElementById('ak-sched-buku')?.value || 'mei_sep',
+                akSchedSarpras: document.getElementById('ak-sched-sarpras')?.value || 'jun_des'
+            };
+
+            const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = fileName;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+
+            showToast(`Arsip data sekolah "${fileName}" berhasil diunduh!`);
+        }
+
+        function triggerImportJson() {
+            const input = document.getElementById('import-json-input');
+            if (input) {
+                input.value = '';
+                input.click();
+            }
+        }
+
+        function handleImportJsonFile(event) {
+            const file = event.target.files?.[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    const data = JSON.parse(e.target.result);
+                    if (!data || !data.lkState || !Array.isArray(data.rkasItems)) {
+                        showToast('Format file .json tidak dikenali oleh Portal BOSP 2027.', 'error');
+                        return;
+                    }
+                    lkState = data.lkState;
+                    rkasItems = data.rkasItems;
+                    silpaManualOverride = false;
+
+                    renderLkAll();
+                    renderRkasTable();
+                    if (data.akSilpa !== undefined) {
+                        document.getElementById('ak-silpa').value = data.akSilpa;
+                    } else {
+                        syncSilpaFromLk(false);
+                    }
+                    if (data.akSchedBuku) document.getElementById('ak-sched-buku').value = data.akSchedBuku;
+                    if (data.akSchedSarpras) document.getElementById('ak-sched-sarpras').value = data.akSchedSarpras;
+
+                    renderArusKasTable();
+                    updateGlobalSyncIndicator(true);
+                    updateActiveDocInfo();
+                    saveSessionToLocal();
+
+                    const schoolLabel = lkState.nama || file.name;
+                    showToast(`Data sekolah "${schoolLabel}" berhasil dibuka & dipulihkan!`);
+                } catch (err) {
+                    showToast('Gagal membaca file .json. Pastikan file tidak rusak.', 'error');
+                }
+            };
+            reader.readAsText(file);
+        }
 
         // =========================================================================
         // 3. FUNGSI ZOOM RAMAH USIA 50+, NAVIGASI & TOAST
@@ -2166,6 +2610,10 @@ Terima kasih, sampai bertemu besok dalam keadaan sehat walafiat.</textarea>
         }
 
         function switchModule(modId) {
+            if (currentModule === 'rkas' && rkasAutoSync && !isRkasSynced) {
+                syncRkasToLkAndCashflow(false);
+            }
+
             currentModule = modId;
             document.querySelectorAll('.tab-panel').forEach(p => {
                 p.classList.add('hidden');
@@ -2187,14 +2635,22 @@ Terima kasih, sampai bertemu besok dalam keadaan sehat walafiat.</textarea>
                 targetBtn.classList.add('nav-active');
             }
 
-            // Otomatis sarankan Landscape untuk Slide Presentasi, Perbandingan, Arus Kas, Kajian Regulasi & Solusi Lapangan, Portrait untuk lainnya
-            if (modId === 'presentasi' || modId === 'perbandingan' || modId === 'aruskas' || modId === 'kajianregulasi' || modId === 'solusi') {
+            if (['presentasi', 'perbandingan', 'rkas', 'aruskas', 'kajianregulasi', 'solusi'].includes(modId)) {
                 setPrintOrientation('landscape', true);
             } else {
                 setPrintOrientation('portrait', true);
             }
 
+            if (modId === 'lembarkerja') {
+                renderLkBagianC();
+                renderLkHonor();
+                renderLkSarpras();
+            }
+            if (modId === 'rkas') {
+                renderRkasTable();
+            }
             if (modId === 'aruskas') {
+                if (!silpaManualOverride) syncSilpaFromLk(false);
                 renderArusKasTable();
             }
             if (modId === 'solusi') {
@@ -2211,6 +2667,33 @@ Terima kasih, sampai bertemu besok dalam keadaan sehat walafiat.</textarea>
             document.getElementById('active-doc-title').textContent = meta.title;
             document.getElementById('active-file-slug').textContent = fileName;
             document.title = fileName;
+        }
+
+        function updateGlobalSyncIndicator(synced) {
+            isRkasSynced = synced;
+            const globalBadge = document.getElementById('global-sync-badge');
+            const rkasPill = document.getElementById('rkas-sync-status-pill');
+
+            if (synced) {
+                if (globalBadge) {
+                    globalBadge.className = 'inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-900 font-bold text-[11px]';
+                    globalBadge.innerHTML = `<i data-lucide="check-circle-2" class="w-3.5 h-3.5 text-emerald-700"></i> Data LK ↔ RKAS ↔ Arus Kas Tersinkron`;
+                }
+                if (rkasPill) {
+                    rkasPill.className = 'px-2.5 py-0.5 rounded-md bg-emerald-100 text-emerald-900 font-bold';
+                    rkasPill.textContent = '✓ Tersinkron Otomatis ke LK & Arus Kas';
+                }
+            } else {
+                if (globalBadge) {
+                    globalBadge.className = 'inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-amber-100 text-amber-900 font-bold text-[11px]';
+                    globalBadge.innerHTML = `<i data-lucide="alert-circle" class="w-3.5 h-3.5 text-amber-700"></i> Ada Perubahan RKAS Belum Disinkron ke LK`;
+                }
+                if (rkasPill) {
+                    rkasPill.className = 'px-2.5 py-0.5 rounded-md bg-amber-100 text-amber-900 font-bold';
+                    rkasPill.textContent = '⚠ Perubahan RKAS Belum Disinkron (Klik Sinkronkan Sekarang)';
+                }
+            }
+            lucide.createIcons();
         }
 
         function showToast(msg, type = 'success') {
@@ -2231,10 +2714,59 @@ Terima kasih, sampai bertemu besok dalam keadaan sehat walafiat.</textarea>
         // 4. LOGIKA LEMBAR KERJA (LK) & KALKULATOR OTOMATIS
         // =========================================================================
 
+        function parseCurrencyFromText(text) {
+            if (!text) return 0;
+            const match = String(text).match(/[\d.]+/);
+            if (!match) return 0;
+            const cleaned = match[0].replace(/\./g, '');
+            return parseInt(cleaned, 10) || 0;
+        }
+
+        function syncSilpaFromLk(notify = false) {
+            const silpaText = lkState.bagianA?.[3]?.nilai || '';
+            const silpaVal = parseCurrencyFromText(silpaText);
+            const akSilpaEl = document.getElementById('ak-silpa');
+            const sourceLbl = document.getElementById('ak-silpa-source-label');
+
+            if (akSilpaEl) {
+                akSilpaEl.value = silpaVal;
+            }
+            silpaManualOverride = false;
+            if (sourceLbl) {
+                sourceLbl.className = 'text-[11px] text-teal-700 font-semibold mt-0.5 block';
+                sourceLbl.textContent = `✓ Tersinkron dari LK Bagian A (${formatRupiah(silpaVal)})`;
+            }
+            renderArusKasTable();
+            scheduleAutoSave();
+            if (notify) {
+                showToast(`Estimasi SiLPA 2026 (${formatRupiah(silpaVal)}) berhasil diambil dari LK Bagian A.`);
+            }
+        }
+
+        function onManualSilpaChange(val) {
+            silpaManualOverride = true;
+            const sourceLbl = document.getElementById('ak-silpa-source-label');
+            if (sourceLbl) {
+                sourceLbl.className = 'text-[11px] text-amber-700 font-semibold mt-0.5 block';
+                sourceLbl.textContent = '✎ Mode simulasi manual (klik "Ambil dari LK A" untuk reset)';
+            }
+            renderArusKasTable();
+            scheduleAutoSave();
+        }
+
+        function onLkBagianAChange(idx, field, val) {
+            lkState.bagianA[idx][field] = val;
+            if (idx === 3 && field === 'nilai') {
+                syncSilpaFromLk(false);
+            }
+            scheduleAutoSave();
+        }
+
         function loadLkPreset(presetKey) {
             lkState = JSON.parse(JSON.stringify(LK_PRESETS[presetKey]));
+            rkasItems = JSON.parse(JSON.stringify(RKAS_PRESETS[presetKey] || RKAS_PRESETS.blank));
+            silpaManualOverride = false;
 
-            // Update styling tombol preset
             document.querySelectorAll('.lk-preset-btn').forEach(btn => {
                 btn.className = 'lk-preset-btn px-3.5 py-2.5 rounded-xl text-xs font-bold border border-slate-300 bg-white text-slate-700 hover:bg-slate-100 flex items-center gap-1.5 transition';
             });
@@ -2244,26 +2776,35 @@ Terima kasih, sampai bertemu besok dalam keadaan sehat walafiat.</textarea>
             }
 
             renderLkAll();
-            renderArusKasTable();
+            renderRkasTable();
+            syncSilpaFromLk(false);
+            updateGlobalSyncIndicator(true);
             updateActiveDocInfo();
+            saveSessionToLocal();
             const labelMap = {
-                blank: 'Lembar Kerja Kosong siap diisi',
-                cigedug: 'Contoh LK 1: SMPN Cigedug (Negeri - 600 Siswa) dimuat',
-                almuawanah: "Contoh LK 2: SMP IT Al Mu'awanah (Swasta - 315 Siswa) dimuat"
+                blank: 'Lembar Kerja & Draf RKAS Kosong siap diisi',
+                cigedug: 'Contoh LK & RKAS 1: SMPN Cigedug (Negeri - 600 Siswa) dimuat',
+                almuawanah: "Contoh LK & RKAS 2: SMP IT Al Mu'awanah (Swasta - 315 Siswa) dimuat"
             };
             showToast(labelMap[presetKey]);
         }
 
         function syncLkField(field, val) {
             lkState[field] = val;
-            if (field === 'status') renderLkBagianC();
+            if (field === 'status') {
+                renderLkBagianC();
+                renderLkHonor();
+                renderRkasTable();
+            }
             if (field === 'nama') {
                 updateActiveDocInfo();
+                renderRkasTable();
                 renderArusKasTable();
             }
             if (field === 'kepsek') document.getElementById('lk-sign-kepsek').textContent = val ? `( ${val} )` : '( ........................................ )';
             if (field === 'bendahara') document.getElementById('lk-sign-bendahara').textContent = val ? `( ${val} )` : '( ........................................ )';
             if (field === 'tempatTgl') document.getElementById('lk-sign-location').textContent = val;
+            scheduleAutoSave();
         }
 
         function recalcLkPagu() {
@@ -2272,11 +2813,14 @@ Terima kasih, sampai bertemu besok dalam keadaan sehat walafiat.</textarea>
             const totalPagu = lkState.siswa * lkState.satuan;
             document.getElementById('lk-total-pagu-display').textContent = formatRupiah(totalPagu);
             renderLkBagianC();
+            renderLkHonor();
+            renderLkSarpras();
+            renderRkasTable();
             renderArusKasTable();
+            scheduleAutoSave();
         }
 
         function renderLkAll() {
-            // Identitas
             document.getElementById('lk-nama').value = lkState.nama;
             document.getElementById('lk-npsn').value = lkState.npsn;
             document.getElementById('lk-status').value = lkState.status;
@@ -2298,11 +2842,11 @@ Terima kasih, sampai bertemu besok dalam keadaan sehat walafiat.</textarea>
 
             // Bagian A
             document.getElementById('lk-bagian-a-body').innerHTML = lkState.bagianA.map((row, idx) => `
-                <tr>
+                <tr class="${idx === 3 ? 'bg-amber-50/40' : ''}">
                     <td class="p-2.5 text-center font-bold">${idx + 1}</td>
-                    <td class="p-2.5 font-semibold bg-slate-50">${row.uraian}</td>
-                    <td class="p-2"><input type="text" value="${escapeAttr(row.nilai)}" oninput="lkState.bagianA[${idx}].nilai=this.value" class="w-full rounded-lg border border-slate-200 px-2.5 py-1.5"></td>
-                    <td class="p-2"><input type="text" value="${escapeAttr(row.implikasi)}" oninput="lkState.bagianA[${idx}].implikasi=this.value" class="w-full rounded-lg border border-slate-200 px-2.5 py-1.5"></td>
+                    <td class="p-2.5 font-semibold ${idx === 3 ? 'bg-amber-100/60 text-amber-950' : 'bg-slate-50'}">${row.uraian}</td>
+                    <td class="p-2"><input type="text" value="${escapeAttr(row.nilai)}" oninput="onLkBagianAChange(${idx}, 'nilai', this.value)" class="w-full rounded-lg border border-slate-200 px-2.5 py-1.5 ${idx === 3 ? 'font-bold text-teal-900 bg-white' : ''}"></td>
+                    <td class="p-2"><input type="text" value="${escapeAttr(row.implikasi)}" oninput="onLkBagianAChange(${idx}, 'implikasi', this.value)" class="w-full rounded-lg border border-slate-200 px-2.5 py-1.5"></td>
                 </tr>
             `).join('');
 
@@ -2311,10 +2855,10 @@ Terima kasih, sampai bertemu besok dalam keadaan sehat walafiat.</textarea>
                 <tr>
                     <td class="p-2.5 text-center font-bold">${idx + 1}</td>
                     <td class="p-2.5 font-bold bg-slate-50">${row.indikator}</td>
-                    <td class="p-2"><input type="text" value="${escapeAttr(row.capaian)}" oninput="lkState.bagianB[${idx}].capaian=this.value" placeholder="Baik/Sedang/Kurang" class="w-full rounded-lg border border-slate-200 px-2.5 py-1.5"></td>
-                    <td class="p-2"><input type="text" value="${escapeAttr(row.masalah)}" oninput="lkState.bagianB[${idx}].masalah=this.value" placeholder="Akar masalah..." class="w-full rounded-lg border border-slate-200 px-2.5 py-1.5"></td>
-                    <td class="p-2"><input type="text" value="${escapeAttr(row.benahi)}" oninput="lkState.bagianB[${idx}].benahi=this.value" placeholder="Program benahi..." class="w-full rounded-lg border border-slate-200 px-2.5 py-1.5"></td>
-                    <td class="p-2"><input type="number" value="${row.anggaran || ''}" oninput="lkState.bagianB[${idx}].anggaran=parseInt(this.value)||0" placeholder="0" class="w-full rounded-lg border border-slate-200 px-2 py-1.5 text-right font-semibold"></td>
+                    <td class="p-2"><input type="text" value="${escapeAttr(row.capaian)}" oninput="lkState.bagianB[${idx}].capaian=this.value;scheduleAutoSave()" placeholder="Baik/Sedang/Kurang" class="w-full rounded-lg border border-slate-200 px-2.5 py-1.5"></td>
+                    <td class="p-2"><input type="text" value="${escapeAttr(row.masalah)}" oninput="lkState.bagianB[${idx}].masalah=this.value;scheduleAutoSave()" placeholder="Akar masalah..." class="w-full rounded-lg border border-slate-200 px-2.5 py-1.5"></td>
+                    <td class="p-2"><input type="text" value="${escapeAttr(row.benahi)}" oninput="lkState.bagianB[${idx}].benahi=this.value;scheduleAutoSave()" placeholder="Program benahi..." class="w-full rounded-lg border border-slate-200 px-2.5 py-1.5"></td>
+                    <td class="p-2"><input type="number" value="${row.anggaran || ''}" oninput="lkState.bagianB[${idx}].anggaran=parseInt(this.value)||0;scheduleAutoSave()" placeholder="0" class="w-full rounded-lg border border-slate-200 px-2.5 py-1.5 text-right font-semibold"></td>
                 </tr>
             `).join('');
 
@@ -2331,10 +2875,10 @@ Terima kasih, sampai bertemu besok dalam keadaan sehat walafiat.</textarea>
             document.getElementById('lk-bagian-e-body').innerHTML = lkState.bagianE.map((row, idx) => `
                 <tr>
                     <td class="p-2.5 text-center font-bold">${idx + 1}</td>
-                    <td class="p-2"><input type="text" value="${escapeAttr(row.tahap)}" oninput="lkState.bagianE[${idx}].tahap=this.value" class="w-full rounded-lg border border-slate-200 px-2.5 py-1.5 font-medium"></td>
-                    <td class="p-2"><input type="text" value="${escapeAttr(row.pj)}" oninput="lkState.bagianE[${idx}].pj=this.value" class="w-full rounded-lg border border-slate-200 px-2.5 py-1.5"></td>
-                    <td class="p-2"><input type="text" value="${escapeAttr(row.waktu)}" oninput="lkState.bagianE[${idx}].waktu=this.value" class="w-full rounded-lg border border-slate-200 px-2.5 py-1.5"></td>
-                    <td class="p-2"><input type="text" value="${escapeAttr(row.bukti)}" oninput="lkState.bagianE[${idx}].bukti=this.value" class="w-full rounded-lg border border-slate-200 px-2.5 py-1.5"></td>
+                    <td class="p-2"><input type="text" value="${escapeAttr(row.tahap)}" oninput="lkState.bagianE[${idx}].tahap=this.value;scheduleAutoSave()" class="w-full rounded-lg border border-slate-200 px-2.5 py-1.5 font-medium"></td>
+                    <td class="p-2"><input type="text" value="${escapeAttr(row.pj)}" oninput="lkState.bagianE[${idx}].pj=this.value;scheduleAutoSave()" class="w-full rounded-lg border border-slate-200 px-2.5 py-1.5"></td>
+                    <td class="p-2"><input type="text" value="${escapeAttr(row.waktu)}" oninput="lkState.bagianE[${idx}].waktu=this.value;scheduleAutoSave()" class="w-full rounded-lg border border-slate-200 px-2.5 py-1.5"></td>
+                    <td class="p-2"><input type="text" value="${escapeAttr(row.bukti)}" oninput="lkState.bagianE[${idx}].bukti=this.value;scheduleAutoSave()" class="w-full rounded-lg border border-slate-200 px-2.5 py-1.5"></td>
                 </tr>
             `).join('');
 
@@ -2424,7 +2968,10 @@ Terima kasih, sampai bertemu besok dalam keadaan sehat walafiat.</textarea>
             });
 
             updateLkBagianCFooter(totalAlokasi, pagu);
+            if (idx === 11) updateLkHonorFooter();
+            if (idx === 8) updateLkSarprasFooter();
             renderArusKasTable();
+            scheduleAutoSave();
         }
 
         function updateLkBagianCFooter(totalAlokasi, pagu) {
@@ -2451,58 +2998,469 @@ Terima kasih, sampai bertemu besok dalam keadaan sehat walafiat.</textarea>
             document.getElementById('lk-honor-body').innerHTML = lkState.honor.map((h, idx) => `
                 <tr>
                     <td class="p-2 text-center font-bold">${idx + 1}</td>
-                    <td class="p-1.5"><input type="text" value="${escapeAttr(h.nama)}" oninput="lkState.honor[${idx}].nama=this.value" class="w-full rounded border border-slate-200 px-2 py-1"></td>
-                    <td class="p-1.5"><input type="text" value="${escapeAttr(h.jabatan)}" oninput="lkState.honor[${idx}].jabatan=this.value" class="w-full rounded border border-slate-200 px-2 py-1"></td>
-                    <td class="p-1.5"><input type="text" value="${escapeAttr(h.status)}" oninput="lkState.honor[${idx}].status=this.value" class="w-full rounded border border-slate-200 px-2 py-1"></td>
+                    <td class="p-1.5"><input type="text" value="${escapeAttr(h.nama)}" oninput="lkState.honor[${idx}].nama=this.value;scheduleAutoSave()" class="w-full rounded border border-slate-200 px-2 py-1"></td>
+                    <td class="p-1.5"><input type="text" value="${escapeAttr(h.jabatan)}" oninput="lkState.honor[${idx}].jabatan=this.value;scheduleAutoSave()" class="w-full rounded border border-slate-200 px-2 py-1"></td>
+                    <td class="p-1.5"><input type="text" value="${escapeAttr(h.status)}" oninput="lkState.honor[${idx}].status=this.value;scheduleAutoSave()" class="w-full rounded border border-slate-200 px-2 py-1"></td>
                     <td class="p-1.5 text-center">
-                        <select onchange="lkState.honor[${idx}].dapodik=this.value" class="rounded border border-slate-200 px-1.5 py-1 bg-white">
+                        <select onchange="lkState.honor[${idx}].dapodik=this.value;updateLkHonorFooter();scheduleAutoSave()" class="rounded border border-slate-200 px-1.5 py-1 bg-white">
                             <option value="Ya" ${h.dapodik === 'Ya' ? 'selected' : ''}>Ya</option>
                             <option value="Tidak" ${h.dapodik === 'Tidak' ? 'selected' : ''}>Tidak</option>
                         </select>
                     </td>
                     <td class="p-1.5 text-center">
-                        <select onchange="lkState.honor[${idx}].sk=this.value" class="rounded border border-slate-200 px-1.5 py-1 bg-white">
+                        <select onchange="lkState.honor[${idx}].sk=this.value;updateLkHonorFooter();scheduleAutoSave()" class="rounded border border-slate-200 px-1.5 py-1 bg-white">
                             <option value="Ya" ${h.sk === 'Ya' ? 'selected' : ''}>Ya</option>
                             <option value="Tidak" ${h.sk === 'Tidak' ? 'selected' : ''}>Tidak</option>
                         </select>
                     </td>
                     <td class="p-1.5 text-center">
-                        <select onchange="lkState.honor[${idx}].nontpg=this.value" class="rounded border border-slate-200 px-1.5 py-1 bg-white">
+                        <select onchange="lkState.honor[${idx}].nontpg=this.value;updateLkHonorFooter();scheduleAutoSave()" class="rounded border border-slate-200 px-1.5 py-1 bg-white">
                             <option value="Ya" ${h.nontpg === 'Ya' ? 'selected' : ''}>Ya (Layak)</option>
                             <option value="Tidak" ${h.nontpg === 'Tidak' ? 'selected' : ''}>Sudah TPG</option>
                         </select>
                     </td>
-                    <td class="p-1.5"><input type="number" value="${h.nominal || ''}" oninput="lkState.honor[${idx}].nominal=parseInt(this.value)||0" class="w-full rounded border border-slate-200 px-2 py-1 text-right font-semibold"></td>
+                    <td class="p-1.5"><input type="number" value="${h.nominal || ''}" oninput="lkState.honor[${idx}].nominal=parseInt(this.value)||0;updateLkHonorFooter();scheduleAutoSave()" class="w-full rounded border border-slate-200 px-2 py-1 text-right font-semibold"></td>
                     <td class="p-1.5 text-center no-print">
-                        <button type="button" onclick="lkState.honor.splice(${idx},1);renderLkHonor()" class="text-rose-600 hover:text-rose-800 font-bold">×</button>
+                        <button type="button" onclick="lkState.honor.splice(${idx},1);renderLkHonor();scheduleAutoSave()" class="text-rose-600 hover:text-rose-800 font-bold">×</button>
                     </td>
                 </tr>
             `).join('');
+            updateLkHonorFooter();
+        }
+
+        function updateLkHonorFooter() {
+            const footEl = document.getElementById('lk-honor-foot');
+            if (!footEl) return;
+
+            const totalBulan = lkState.honor.reduce((acc, h) => acc + (parseInt(h.nominal) || 0), 0);
+            const totalTahun = totalBulan * 12;
+            const alokasiHonorC = parseInt(lkState.alokasiC[11]) || 0;
+            const selisih = alokasiHonorC - totalTahun;
+            const ineligibleCount = lkState.honor.filter(h => (h.nominal > 0) && (h.dapodik !== 'Ya' || h.sk !== 'Ya' || h.nontpg !== 'Ya')).length;
+
+            let compareBadge = '';
+            if (ineligibleCount > 0) {
+                compareBadge = `<span class="px-2 py-0.5 rounded bg-rose-100 text-rose-800 text-[11px]">⚠ Ada ${ineligibleCount} penerima belum memenuhi syarat Pasal 43</span>`;
+            } else if (totalTahun === alokasiHonorC) {
+                compareBadge = `<span class="px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 text-[11px]">✓ Cocok 100% dengan Bagian C Baris 12</span>`;
+            } else {
+                compareBadge = `<span class="px-2 py-0.5 rounded bg-amber-100 text-amber-900 text-[11px]">Selisih vs Bagian C: ${formatRupiah(selisih)}</span>`;
+            }
+
+            footEl.innerHTML = `
+                <tr>
+                    <td colspan="4" class="p-2.5 text-left text-xs">${compareBadge}</td>
+                    <td colspan="3" class="p-2.5 text-right text-xs">Total Honor / Bulan:<br><span class="text-teal-800">Total Setahun (×12 Bln):</span></td>
+                    <td class="p-2.5 text-right text-xs">${formatRupiah(totalBulan)}<br><span class="text-teal-900 text-sm">${formatRupiah(totalTahun)}</span></td>
+                    <td class="p-2.5 no-print"></td>
+                </tr>
+            `;
+        }
+
+        function applyHonorDToC() {
+            const totalBulan = lkState.honor.reduce((acc, h) => acc + (parseInt(h.nominal) || 0), 0);
+            const totalTahun = totalBulan * 12;
+            lkState.alokasiC[11] = totalTahun;
+            renderLkBagianC();
+            updateLkHonorFooter();
+            renderArusKasTable();
+            scheduleAutoSave();
+            showToast(`Total honor setahun (${formatRupiah(totalTahun)}) berhasil disalin ke Bagian C Baris 12!`);
         }
 
         function addLkHonorRow() {
             lkState.honor.push({ nama: '', jabatan: '', status: 'Non-ASN', dapodik: 'Ya', sk: 'Ya', nontpg: 'Ya', nominal: 0 });
             renderLkHonor();
+            scheduleAutoSave();
         }
 
         function renderLkSarpras() {
             document.getElementById('lk-sarpras-body').innerHTML = lkState.sarpras.map((s, idx) => `
                 <tr>
                     <td class="p-2 text-center font-bold">${idx + 1}</td>
-                    <td class="p-1.5"><input type="text" value="${escapeAttr(s.nama)}" oninput="lkState.sarpras[${idx}].nama=this.value" class="w-full rounded border border-slate-200 px-2 py-1"></td>
-                    <td class="p-1.5"><input type="text" value="${escapeAttr(s.kondisi)}" oninput="lkState.sarpras[${idx}].kondisi=this.value" class="w-full rounded border border-slate-200 px-2 py-1"></td>
-                    <td class="p-1.5"><input type="text" value="${escapeAttr(s.urgensi)}" oninput="lkState.sarpras[${idx}].urgensi=this.value" class="w-full rounded border border-slate-200 px-2 py-1"></td>
-                    <td class="p-1.5"><input type="number" value="${s.biaya || ''}" oninput="lkState.sarpras[${idx}].biaya=parseInt(this.value)||0" class="w-full rounded border border-slate-200 px-2 py-1 text-right font-semibold"></td>
+                    <td class="p-1.5"><input type="text" value="${escapeAttr(s.nama)}" oninput="lkState.sarpras[${idx}].nama=this.value;scheduleAutoSave()" class="w-full rounded border border-slate-200 px-2 py-1"></td>
+                    <td class="p-1.5"><input type="text" value="${escapeAttr(s.kondisi)}" oninput="lkState.sarpras[${idx}].kondisi=this.value;scheduleAutoSave()" class="w-full rounded border border-slate-200 px-2 py-1"></td>
+                    <td class="p-1.5"><input type="text" value="${escapeAttr(s.urgensi)}" oninput="lkState.sarpras[${idx}].urgensi=this.value;scheduleAutoSave()" class="w-full rounded border border-slate-200 px-2 py-1"></td>
+                    <td class="p-1.5"><input type="number" value="${s.biaya || ''}" oninput="lkState.sarpras[${idx}].biaya=parseInt(this.value)||0;updateLkSarprasFooter();scheduleAutoSave()" class="w-full rounded border border-slate-200 px-2 py-1 text-right font-semibold"></td>
                     <td class="p-1.5 text-center no-print">
-                        <button type="button" onclick="lkState.sarpras.splice(${idx},1);renderLkSarpras()" class="text-rose-600 hover:text-rose-800 font-bold">×</button>
+                        <button type="button" onclick="lkState.sarpras.splice(${idx},1);renderLkSarpras();scheduleAutoSave()" class="text-rose-600 hover:text-rose-800 font-bold">×</button>
                     </td>
                 </tr>
             `).join('');
+            updateLkSarprasFooter();
+        }
+
+        function updateLkSarprasFooter() {
+            const footEl = document.getElementById('lk-sarpras-foot');
+            if (!footEl) return;
+
+            const totalSarpras = lkState.sarpras.reduce((acc, s) => acc + (parseInt(s.biaya) || 0), 0);
+            const alokasiSarprasC = parseInt(lkState.alokasiC[8]) || 0;
+            const selisih = alokasiSarprasC - totalSarpras;
+
+            const compareBadge = totalSarpras === alokasiSarprasC
+                ? `<span class="px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 text-[11px]">✓ Cocok 100% dengan Bagian C Baris 9</span>`
+                : `<span class="px-2 py-0.5 rounded bg-amber-100 text-amber-900 text-[11px]">Selisih vs Bagian C: ${formatRupiah(selisih)}</span>`;
+
+            footEl.innerHTML = `
+                <tr>
+                    <td colspan="3" class="p-2.5 text-left text-xs">${compareBadge}</td>
+                    <td class="p-2.5 text-right text-xs">Total Rencana Pemeliharaan Sarpras:</td>
+                    <td class="p-2.5 text-right text-teal-900 text-sm">${formatRupiah(totalSarpras)}</td>
+                    <td class="p-2.5 no-print"></td>
+                </tr>
+            `;
+        }
+
+        function applySarprasDToC() {
+            const totalSarpras = lkState.sarpras.reduce((acc, s) => acc + (parseInt(s.biaya) || 0), 0);
+            lkState.alokasiC[8] = totalSarpras;
+            renderLkBagianC();
+            updateLkSarprasFooter();
+            renderArusKasTable();
+            scheduleAutoSave();
+            showToast(`Total pemeliharaan sarpras (${formatRupiah(totalSarpras)}) berhasil disalin ke Bagian C Baris 9!`);
         }
 
         function addLkSarprasRow() {
             lkState.sarpras.push({ nama: '', kondisi: '', urgensi: '', biaya: 0 });
             renderLkSarpras();
+            scheduleAutoSave();
+        }
+
+        // =========================================================================
+        // 4B. LOGIKA SIMULATOR RINCIAN RKAS BOSP TA 2027 (MODUL 7)
+        // =========================================================================
+
+        function populateRkasFilter() {
+            const select = document.getElementById('rkas-filter-komponen');
+            if (!select) return;
+            const currentVal = select.value || 'ALL';
+            select.innerHTML = `<option value="ALL">Tampilkan Semua 12 Komponen BOSP (${rkasItems.length} Item)</option>` +
+                KOMPONEN_BOSP.map((k, idx) => `<option value="${idx}">${k.no}. [${k.kode}] ${k.nama.split('(')[0].trim()}</option>`).join('');
+            select.value = currentVal;
+        }
+
+        function toggleRkasAutoSync(enabled) {
+            rkasAutoSync = enabled;
+            scheduleAutoSave();
+            if (rkasAutoSync && !isRkasSynced) {
+                syncRkasToLkAndCashflow(true);
+            } else {
+                showToast(enabled ? 'Mode Auto-Sync RKAS ke LK & Arus Kas diaktifkan.' : 'Mode Auto-Sync dimatikan (gunakan tombol Sinkronkan Sekarang).', 'info');
+            }
+        }
+
+        function loadRkasPreset(presetKey) {
+            rkasItems = JSON.parse(JSON.stringify(RKAS_PRESETS[presetKey] || RKAS_PRESETS.blank));
+            renderRkasTable();
+            if (rkasAutoSync) {
+                syncRkasToLkAndCashflow(false);
+            } else {
+                updateGlobalSyncIndicator(false);
+            }
+            scheduleAutoSave();
+            showToast(`Draf rincian RKAS (${presetKey.toUpperCase()}) berhasil dimuat.`);
+        }
+
+        function addRkasItem() {
+            const filterVal = document.getElementById('rkas-filter-komponen')?.value || 'ALL';
+            const defaultKomp = filterVal !== 'ALL' ? parseInt(filterVal) : 3;
+            const kodePrefix = KOMPONEN_BOSP[defaultKomp]?.kode || '03.03';
+            rkasItems.push({
+                kompIdx: defaultKomp,
+                kode: `${kodePrefix}.01`,
+                uraian: '',
+                pbd: 'A.1 Kemampuan Literasi',
+                vol: 1,
+                satuan: 'Paket',
+                harga: 0
+            });
+            renderRkasTable();
+            if (rkasAutoSync) {
+                syncRkasToLkAndCashflow(false);
+            } else {
+                updateGlobalSyncIndicator(false);
+            }
+            scheduleAutoSave();
+            showToast('Baris rincian belanja RKAS ditambahkan.', 'info');
+        }
+
+        function removeRkasItem(idx) {
+            rkasItems.splice(idx, 1);
+            renderRkasTable();
+            if (rkasAutoSync) {
+                syncRkasToLkAndCashflow(false);
+            } else {
+                updateGlobalSyncIndicator(false);
+            }
+            scheduleAutoSave();
+        }
+
+        function updateRkasField(idx, field, val) {
+            if (!rkasItems[idx]) return;
+            if (field === 'kompIdx') {
+                rkasItems[idx].kompIdx = parseInt(val) || 0;
+                const prefix = KOMPONEN_BOSP[rkasItems[idx].kompIdx]?.kode || '03.03';
+                rkasItems[idx].kode = `${prefix}.01`;
+                renderRkasTable();
+                if (rkasAutoSync) {
+                    syncRkasToLkAndCashflow(false);
+                } else {
+                    updateGlobalSyncIndicator(false);
+                }
+                scheduleAutoSave();
+                return;
+            }
+            if (field === 'vol' || field === 'harga') {
+                rkasItems[idx][field] = parseFloat(val) || 0;
+                const rowSub = (rkasItems[idx].vol || 0) * (rkasItems[idx].harga || 0);
+                const subEl = document.getElementById(`rkas-row-total-${idx}`);
+                if (subEl) subEl.textContent = formatRupiah(Math.round(rowSub));
+                recalcRkasSummary();
+                if (rkasAutoSync) {
+                    syncRkasToLkAndCashflow(false);
+                } else {
+                    updateGlobalSyncIndicator(false);
+                }
+                scheduleAutoSave();
+                return;
+            }
+            rkasItems[idx][field] = val;
+            if (field === 'pbd') {
+                recalcRkasSummary();
+            }
+            scheduleAutoSave();
+        }
+
+        function syncRkasToLkAndCashflow(notify = true) {
+            const sums = Array(12).fill(0);
+            rkasItems.forEach(item => {
+                const kIdx = parseInt(item.kompIdx) || 0;
+                if (kIdx >= 0 && kIdx < 12) {
+                    sums[kIdx] += Math.round((item.vol || 0) * (item.harga || 0));
+                }
+            });
+            lkState.alokasiC = sums;
+            renderLkBagianC();
+            renderLkHonor();
+            renderLkSarpras();
+            renderArusKasTable();
+            updateGlobalSyncIndicator(true);
+            scheduleAutoSave();
+            if (notify) {
+                showToast('Total 12 komponen RKAS berhasil disinkronkan ke LK Bagian C & Simulasi Arus Kas 12 Bulan!');
+            }
+        }
+
+        function recalcRkasSummary() {
+            const pagu = (lkState.siswa || 0) * (lkState.satuan || 0);
+            const isNegeri = lkState.status === 'Negeri';
+            const maxHonorPct = isNegeri ? 20 : 40;
+
+            const sums = Array(12).fill(0);
+            const counts = Array(12).fill(0);
+            let grandTotal = 0;
+
+            // Agregasi PBD Rapor Pendidikan vs Operasional Rutin
+            const pbdClusters = {
+                'Literasi & Numerasi (A.1 / A.2)': 0,
+                'Karakter & Kebinekaan (A.3 / D.8)': 0,
+                'Kualitas Pembelajaran & GTK (D.1 / D.2)': 0,
+                'Iklim Keamanan & Ops Rutin (D.4 / Rutin)': 0
+            };
+            let totalMutuPbd = 0;
+
+            rkasItems.forEach(item => {
+                const kIdx = parseInt(item.kompIdx) || 0;
+                const sub = Math.round((item.vol || 0) * (item.harga || 0));
+                if (kIdx >= 0 && kIdx < 12) {
+                    sums[kIdx] += sub;
+                    counts[kIdx] += 1;
+                }
+                grandTotal += sub;
+
+                const pbdTag = (item.pbd || '').toLowerCase();
+                if (pbdTag.includes('literasi') || pbdTag.includes('numerasi') || pbdTag.includes('a.1') || pbdTag.includes('a.2')) {
+                    pbdClusters['Literasi & Numerasi (A.1 / A.2)'] += sub;
+                    totalMutuPbd += sub;
+                } else if (pbdTag.includes('karakter') || pbdTag.includes('kebinekaan') || pbdTag.includes('a.3') || pbdTag.includes('d.8')) {
+                    pbdClusters['Karakter & Kebinekaan (A.3 / D.8)'] += sub;
+                    totalMutuPbd += sub;
+                } else if (pbdTag.includes('pembelajaran') || pbdTag.includes('refleksi') || pbdTag.includes('d.1') || pbdTag.includes('d.2')) {
+                    pbdClusters['Kualitas Pembelajaran & GTK (D.1 / D.2)'] += sub;
+                    totalMutuPbd += sub;
+                } else {
+                    pbdClusters['Iklim Keamanan & Ops Rutin (D.4 / Rutin)'] += sub;
+                }
+            });
+
+            // Update Badge Sekolah & Pagu
+            const schoolName = (lkState.nama || '').trim() || 'Satuan Pendidikan Binaan';
+            document.getElementById('rkas-school-badge').textContent = `${schoolName} (${lkState.status})`;
+            document.getElementById('rkas-pagu-badge').textContent = `Pagu: ${formatRupiah(pagu)}`;
+
+            // Update 4 Kartu Monitoring
+            const selisih = pagu - grandTotal;
+            document.getElementById('rkas-card-total').textContent = formatRupiah(grandTotal);
+            const sisaEl = document.getElementById('rkas-card-sisa');
+            if (pagu <= 0) {
+                sisaEl.textContent = 'Atur jumlah siswa di Modul 6';
+            } else if (selisih === 0) {
+                sisaEl.innerHTML = `<span class="text-emerald-300 font-bold">✓ Seimbang 100% dengan Pagu</span>`;
+            } else if (selisih > 0) {
+                sisaEl.textContent = `Sisa Pagu Belum Terinci: ${formatRupiah(selisih)}`;
+            } else {
+                sisaEl.innerHTML = `<span class="text-rose-300 font-bold">⚠ Melebihi Pagu: ${formatRupiah(Math.abs(selisih))}</span>`;
+            }
+
+            // Buku (Komponen 3 -> Index 2)
+            const bukuVal = sums[2];
+            const bukuPct = pagu > 0 ? (bukuVal / pagu) * 100 : 0;
+            const bukuOk = pagu > 0 && bukuPct >= 10;
+            document.getElementById('rkas-card-buku-pct').textContent = `${bukuPct.toFixed(1)}%`;
+            document.getElementById('rkas-card-buku-val').textContent = formatRupiah(bukuVal);
+            document.getElementById('rkas-card-buku-box').className = `p-4 rounded-2xl border space-y-1 ${bukuOk ? 'bg-emerald-50 border-emerald-200' : 'bg-rose-50 border-rose-200'}`;
+            document.getElementById('rkas-card-buku-pct').className = `px-2 py-0.5 rounded font-extrabold ${bukuOk ? 'bg-emerald-200 text-emerald-950' : 'bg-rose-200 text-rose-950'}`;
+            document.getElementById('rkas-card-buku-st').className = `text-[11px] font-bold ${bukuOk ? 'text-emerald-800' : 'text-rose-800'}`;
+            document.getElementById('rkas-card-buku-st').textContent = bukuOk ? '✓ Memenuhi wajib ≥ 10%' : '⚠ Kurang dari wajib 10%';
+
+            // Sarpras (Komponen 9 -> Index 8)
+            const sarprasVal = sums[8];
+            const sarprasPct = pagu > 0 ? (sarprasVal / pagu) * 100 : 0;
+            const sarprasOk = pagu > 0 && sarprasPct <= 20;
+            document.getElementById('rkas-card-sarpras-pct').textContent = `${sarprasPct.toFixed(1)}%`;
+            document.getElementById('rkas-card-sarpras-val').textContent = formatRupiah(sarprasVal);
+            document.getElementById('rkas-card-sarpras-box').className = `p-4 rounded-2xl border space-y-1 ${sarprasOk ? 'bg-emerald-50 border-emerald-200' : 'bg-rose-50 border-rose-200'}`;
+            document.getElementById('rkas-card-sarpras-pct').className = `px-2 py-0.5 rounded font-extrabold ${sarprasOk ? 'bg-emerald-200 text-emerald-950' : 'bg-rose-200 text-rose-950'}`;
+            document.getElementById('rkas-card-sarpras-st').className = `text-[11px] font-bold ${sarprasOk ? 'text-emerald-800' : 'text-rose-800'}`;
+            document.getElementById('rkas-card-sarpras-st').textContent = sarprasOk ? '✓ Aman di bawah batas 20%' : '⚠ Melebihi batas maks. 20%';
+
+            // Honor (Komponen 12 -> Index 11)
+            const honorVal = sums[11];
+            const honorPct = pagu > 0 ? (honorVal / pagu) * 100 : 0;
+            const honorOk = pagu > 0 && honorPct <= maxHonorPct;
+            document.getElementById('rkas-card-honor-label').textContent = `3. Honor Non-ASN (Maks. ${maxHonorPct}%)`;
+            document.getElementById('rkas-card-honor-pct').textContent = `${honorPct.toFixed(1)}%`;
+            document.getElementById('rkas-card-honor-val').textContent = formatRupiah(honorVal);
+            document.getElementById('rkas-card-honor-box').className = `p-4 rounded-2xl border space-y-1 ${honorOk ? 'bg-emerald-50 border-emerald-200' : 'bg-rose-50 border-rose-200'}`;
+            document.getElementById('rkas-card-honor-pct').className = `px-2 py-0.5 rounded font-extrabold ${honorOk ? 'bg-emerald-200 text-emerald-950' : 'bg-rose-200 text-rose-950'}`;
+            document.getElementById('rkas-card-honor-st').className = `text-[11px] font-bold ${honorOk ? 'text-emerald-800' : 'text-rose-800'}`;
+            document.getElementById('rkas-card-honor-st').textContent = honorOk ? `✓ Aman (≤ ${maxHonorPct}% ${lkState.status})` : `⚠ Melebihi batas ${maxHonorPct}%`;
+
+            // Update Rekap PBD Rapor Pendidikan
+            const mutuPct = grandTotal > 0 ? (totalMutuPbd / grandTotal) * 100 : 0;
+            const pbdBadge = document.getElementById('rkas-pbd-mutu-badge');
+            if (pbdBadge) {
+                pbdBadge.className = `px-3 py-1 rounded-full font-extrabold text-xs ${mutuPct >= 50 ? 'bg-emerald-100 text-emerald-900' : 'bg-amber-100 text-amber-900'}`;
+                pbdBadge.textContent = `Porsi Langsung Mutu Pembelajaran (PBD): ${mutuPct.toFixed(1)}% (${formatRupiah(totalMutuPbd)})`;
+            }
+            const pbdBox = document.getElementById('rkas-pbd-breakdown');
+            if (pbdBox) {
+                pbdBox.innerHTML = Object.entries(pbdClusters).map(([label, val]) => {
+                    const p = grandTotal > 0 ? (val / grandTotal) * 100 : 0;
+                    return `
+                        <div class="p-3 rounded-xl bg-white border border-teal-100 shadow-2xs">
+                            <span class="block text-[11px] font-bold text-slate-600">${label}</span>
+                            <p class="font-display font-extrabold text-sm text-teal-900 mt-1">${formatRupiah(val)}</p>
+                            <span class="text-[11px] font-semibold text-teal-700">${p.toFixed(1)}% dari total RKAS</span>
+                        </div>
+                    `;
+                }).join('');
+            }
+
+            // Update Footer Tabel RKAS
+            const totalPct = pagu > 0 ? (grandTotal / pagu) * 100 : 0;
+            document.getElementById('rkas-table-foot').innerHTML = `
+                <tr>
+                    <td colspan="7" class="p-3 text-right uppercase">Total Rincian RKAS BOSP TA 2027 (${totalPct.toFixed(1)}% dari Pagu)</td>
+                    <td class="p-3 text-right text-amber-300 text-sm">${formatRupiah(grandTotal)}</td>
+                    <td class="p-3 no-print"></td>
+                </tr>
+            `;
+
+            // Update Rekapitulasi 12 Komponen
+            const rekapBody = document.getElementById('rkas-rekap-body');
+            if (rekapBody) {
+                rekapBody.innerHTML = KOMPONEN_BOSP.map((k, idx) => {
+                    const sub = sums[idx];
+                    const pct = pagu > 0 ? (sub / pagu) * 100 : 0;
+                    return `
+                        <tr class="hover:bg-slate-50">
+                            <td class="p-2.5 text-center font-bold">${k.no}</td>
+                            <td class="p-2.5 font-medium"><span class="font-bold text-teal-800">[${k.kode}]</span> ${k.nama}</td>
+                            <td class="p-2.5 text-center font-semibold text-slate-600">${counts[idx]} Rincian</td>
+                            <td class="p-2.5 text-right font-bold text-slate-900">${formatRupiah(sub)}</td>
+                            <td class="p-2.5 text-center font-extrabold text-teal-900">${pct.toFixed(1)}%</td>
+                        </tr>
+                    `;
+                }).join('');
+            }
+        }
+
+        function renderRkasTable() {
+            const tbody = document.getElementById('rkas-table-body');
+            if (!tbody) return;
+
+            populateRkasFilter();
+            const filterVal = document.getElementById('rkas-filter-komponen')?.value || 'ALL';
+
+            const visibleRows = rkasItems
+                .map((item, idx) => ({ item, idx }))
+                .filter(({ item }) => filterVal === 'ALL' || String(item.kompIdx) === filterVal);
+
+            if (visibleRows.length === 0) {
+                tbody.innerHTML = `
+                    <tr>
+                        <td colspan="9" class="p-6 text-center text-slate-500 font-medium">
+                            Belum ada rincian belanja pada komponen ini. Klik tombol <strong>"Tambah Rincian Belanja RKAS"</strong> di atas.
+                        </td>
+                    </tr>
+                `;
+            } else {
+                tbody.innerHTML = visibleRows.map(({ item, idx }, displayNo) => {
+                    const rowTotal = Math.round((item.vol || 0) * (item.harga || 0));
+                    const kompOptions = KOMPONEN_BOSP.map((k, kIdx) =>
+                        `<option value="${kIdx}" ${item.kompIdx === kIdx ? 'selected' : ''}>${k.no}. [${k.kode}] ${k.nama.split('(')[0].trim()}</option>`
+                    ).join('');
+
+                    return `
+                        <tr class="hover:bg-slate-50/90 align-top">
+                            <td class="p-2.5 text-center font-bold text-slate-700">${displayNo + 1}</td>
+                            <td class="p-2 space-y-1">
+                                <select onchange="updateRkasField(${idx}, 'kompIdx', this.value)" class="w-full rounded-lg border border-slate-300 px-2 py-1 text-[11px] bg-white font-semibold text-slate-800">
+                                    ${kompOptions}
+                                </select>
+                                <input type="text" value="${escapeAttr(item.kode)}" oninput="updateRkasField(${idx}, 'kode', this.value)" placeholder="Kode ARKAS" class="w-full rounded-lg border border-slate-200 px-2 py-1 text-[11px] font-mono text-teal-800 bg-slate-50">
+                            </td>
+                            <td class="p-2">
+                                <textarea rows="2" oninput="updateRkasField(${idx}, 'uraian', this.value)" placeholder="Uraian kegiatan & rincian SSH/SBU..." class="w-full rounded-lg border border-slate-200 px-2.5 py-1.5 text-xs text-slate-900 leading-snug">${escapeAttr(item.uraian)}</textarea>
+                            </td>
+                            <td class="p-2">
+                                <input type="text" value="${escapeAttr(item.pbd)}" oninput="updateRkasField(${idx}, 'pbd', this.value)" placeholder="Indikator Rapor" class="w-full rounded-lg border border-slate-200 px-2 py-1.5 text-[11px] font-medium text-teal-900 bg-teal-50/50">
+                            </td>
+                            <td class="p-2">
+                                <input type="number" min="0" value="${item.vol || ''}" oninput="updateRkasField(${idx}, 'vol', this.value)" class="w-full rounded-lg border border-slate-300 px-2 py-1.5 text-center font-bold">
+                            </td>
+                            <td class="p-2">
+                                <input type="text" value="${escapeAttr(item.satuan)}" oninput="updateRkasField(${idx}, 'satuan', this.value)" placeholder="Paket/Unit" class="w-full rounded-lg border border-slate-200 px-2 py-1.5 text-xs">
+                            </td>
+                            <td class="p-2">
+                                <input type="number" min="0" value="${item.harga || ''}" oninput="updateRkasField(${idx}, 'harga', this.value)" class="w-full rounded-lg border border-slate-300 px-2 py-1.5 text-right font-semibold">
+                            </td>
+                            <td class="p-2.5 text-right font-extrabold text-slate-900" id="rkas-row-total-${idx}">
+                                ${formatRupiah(rowTotal)}
+                            </td>
+                            <td class="p-2.5 text-center no-print">
+                                <button type="button" onclick="removeRkasItem(${idx})" class="text-rose-600 hover:text-rose-800 font-bold text-base" title="Hapus Baris">×</button>
+                            </td>
+                        </tr>
+                    `;
+                }).join('');
+            }
+
+            recalcRkasSummary();
+            lucide.createIcons();
         }
 
         // =========================================================================
@@ -2576,10 +3534,8 @@ Terima kasih, sampai bertemu besok dalam keadaan sehat walafiat.</textarea>
             const activePanel = document.getElementById(`panel-${currentModule}`);
             const clone = activePanel.cloneNode(true);
 
-            // Hapus elemen yang bertanda no-print
             clone.querySelectorAll('.no-print').forEach(el => el.remove());
 
-            // Ubah semua input, select, dan textarea menjadi teks statis agar rapi di Preview, PDF & Word
             const origInputs = activePanel.querySelectorAll('input, select, textarea');
             const cloneInputs = clone.querySelectorAll('input, select, textarea');
 
@@ -2648,7 +3604,6 @@ Terima kasih, sampai bertemu besok dalam keadaan sehat walafiat.</textarea>
             const cleanContent = buildCleanPrintableHTML();
             const isLandscape = currentOrientation === 'landscape';
 
-            // Membuat dokumen HTML berformat Word (.doc) yang kompatibel penuh dengan Microsoft Word & Google Docs
             const wordHtml = `
                 <html xmlns:o='urn:schemas-microsoft-com:office:office'
                       xmlns:w='urn:schemas-microsoft-com:office:word'
@@ -2705,67 +3660,131 @@ Terima kasih, sampai bertemu besok dalam keadaan sehat walafiat.</textarea>
         const FOKUS_PENDAMPINGAN_BULANAN = [
             'Pengesahan RKAS 2027 (+SiLPA) & Tutup BKU Jan',
             'Pembayaran Honor/Daya Jasa & Tutup BKU Feb',
-            'Cadangan Buku/Sarpras & Tutup BKU Mar',
+            'Cadangan Modal/Sarpras & Tutup BKU Mar',
             'Persiapan Asesmen Akhir & Tutup BKU Apr',
             'Belanja Rutin & Tutup BKU Mei',
             'Rekon Semester 1 & Pemeliharaan Sarpras 1',
-            'Persiapan Tahun Ajaran Baru & BKU Jul',
+            'Wajib Lapor Realisasi Tahap I (Maks. 31 Juli)',
             'Pergeseran RKAS (Jika Perlu) & BKU Ags',
-            'Evaluasi Serapan Triwulan 3 & BKU Sep',
-            'Belanja Rutin & Tutup BKU Okt',
-            'Finalisasi Belanja Barang/Jasa (Batas Akhir)',
-            'Pemeliharaan Sarpras 2, Setor Pajak & LPJ 2027'
+            'Rekonsiliasi Aset/KIB TW 3 & Tutup BKU Sep',
+            'Fokus Operasional Rutin & Tutup BKU Okt',
+            'Finalisasi Kontrak Jasa & Tutup BKU Nov',
+            'Pelunasan Sarpras Ringan, Setor Pajak & LPJ 2027'
         ];
 
+        function simulateCashflowMinus(silpaAwal, schedBuku, schedSarpras) {
+            let pagu = (lkState.siswa || 0) * (lkState.satuan || 0);
+            let totalModal = (Number(lkState.alokasiC[2]) || 0) + (Number(lkState.alokasiC[9]) || 0);
+            let totalSarpras = Number(lkState.alokasiC[8]) || 0;
+            let totalRutin = 0;
+            for (let i = 0; i < lkState.alokasiC.length; i++) {
+                if (i !== 2 && i !== 8 && i !== 9) {
+                    totalRutin += Number(lkState.alokasiC[i]) || 0;
+                }
+            }
+            if (pagu <= 0) {
+                pagu = 550000000;
+                totalModal = 82500000;
+                totalSarpras = 27500000;
+                totalRutin = 440000000;
+            }
+
+            const monthlyInflow = pagu / 12;
+            const monthlyRutin = totalRutin / 12;
+            const bukuMonthsMap = { mei_sep: [5, 9], apr_ags: [4, 8], mar_ags: [3, 8], ags_full: [8], sep_full: [9] };
+            const sarprasMonthsMap = { jun_des: [6, 12], jun_nov: [6, 11], jun_sep: [6, 9], triwulan: [3, 6, 9, 12], bulanan: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12] };
+            const bukuMonths = bukuMonthsMap[schedBuku] || [5, 9];
+            const sarprasMonths = sarprasMonthsMap[schedSarpras] || [6, 12];
+
+            let bal = silpaAwal;
+            for (let m = 1; m <= 12; m++) {
+                const spendModal = bukuMonths.includes(m) ? (totalModal / bukuMonths.length) : 0;
+                const spendSarpras = sarprasMonths.includes(m) ? (totalSarpras / sarprasMonths.length) : 0;
+                bal = bal + monthlyInflow - (monthlyRutin + spendModal + spendSarpras);
+                const checkBal = (m === 12 && Math.abs(bal - silpaAwal) < 50) ? silpaAwal : bal;
+                if (checkBal < -50) return true;
+            }
+            return false;
+        }
+
         function resetArusKasDefault() {
-            document.getElementById('ak-silpa').value = 0;
-            document.getElementById('ak-sched-buku').value = 'mei_okt';
-            document.getElementById('ak-sched-sarpras').value = 'jun_des';
+            syncSilpaFromLk(false);
+            const silpaAwal = parseFloat(document.getElementById('ak-silpa')?.value) || 0;
+
+            const candidatePairs = [
+                ['mei_sep', 'jun_des'],
+                ['mei_sep', 'triwulan'],
+                ['mei_sep', 'bulanan'],
+                ['sep_full', 'jun_des'],
+                ['sep_full', 'triwulan'],
+                ['sep_full', 'bulanan'],
+                ['ags_full', 'jun_des'],
+                ['ags_full', 'triwulan']
+            ];
+
+            let chosenBuku = 'mei_sep';
+            let chosenSarpras = 'jun_des';
+            for (const [bOpt, sOpt] of candidatePairs) {
+                if (!simulateCashflowMinus(silpaAwal, bOpt, sOpt)) {
+                    chosenBuku = bOpt;
+                    chosenSarpras = sOpt;
+                    break;
+                }
+            }
+
+            const elBuku = document.getElementById('ak-sched-buku');
+            const elSarpras = document.getElementById('ak-sched-sarpras');
+            if (elBuku) elBuku.value = chosenBuku;
+            if (elSarpras) elSarpras.value = chosenSarpras;
+
             renderArusKasTable();
-            showToast('Jadwal ideal Mei & Oktober (Buku) serta Juni & Desember (Sarpras) diterapkan.');
+            scheduleAutoSave();
+            showToast('Jadwal ideal diterapkan! Seluruh saldo kas 12 bulan positif & Belanja Modal tuntas di TW 3.');
         }
 
         function renderArusKasTable() {
             const tbody = document.getElementById('ak-table-body');
             if (!tbody) return;
 
-            // Ambil pagu dan komponen dari lkState agar terintegrasi penuh (fallback ke Rp 550.000.000 jika LK kosong)
             let pagu = (lkState.siswa || 0) * (lkState.satuan || 0);
-            let totalBuku = Number(lkState.alokasiC[0]) || 0;
-            let totalSarpras = Number(lkState.alokasiC[1]) || 0;
+            let totalBuku = Number(lkState.alokasiC[2]) || 0;
+            let totalMultimedia = Number(lkState.alokasiC[9]) || 0;
+            let totalModal = totalBuku + totalMultimedia;
+            let totalSarpras = Number(lkState.alokasiC[8]) || 0;
             let totalRutin = 0;
-            for (let i = 2; i < lkState.alokasiC.length; i++) {
-                totalRutin += Number(lkState.alokasiC[i]) || 0;
+            for (let i = 0; i < lkState.alokasiC.length; i++) {
+                if (i !== 2 && i !== 8 && i !== 9) {
+                    totalRutin += Number(lkState.alokasiC[i]) || 0;
+                }
             }
 
             if (pagu <= 0) {
                 pagu = 550000000;
-                totalBuku = 55000000;    // 10%
-                totalSarpras = 27500000; // 5%
-                totalRutin = 467500000;  // 85%
+                totalModal = 82500000;
+                totalSarpras = 27500000;
+                totalRutin = 440000000;
             }
 
             const silpaAwal = parseFloat(document.getElementById('ak-silpa')?.value) || 0;
-            const schedBuku = document.getElementById('ak-sched-buku')?.value || 'mei_okt';
+            const schedBuku = document.getElementById('ak-sched-buku')?.value || 'mei_sep';
             const schedSarpras = document.getElementById('ak-sched-sarpras')?.value || 'jun_des';
 
             const monthlyInflow = pagu / 12;
             const monthlyRutin = totalRutin / 12;
 
-            // Tentukan bulan eksekusi buku
             const bukuMonthsMap = {
-                mei_okt: [5, 10],
-                apr_sep: [4, 9],
+                mei_sep: [5, 9],
+                apr_ags: [4, 8],
                 mar_ags: [3, 8],
                 ags_full: [8],
-                bulanan: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+                sep_full: [9]
             };
-            const bukuMonths = bukuMonthsMap[schedBuku] || [5, 10];
+            const bukuMonths = bukuMonthsMap[schedBuku] || [5, 9];
 
-            // Tentukan bulan eksekusi sarpras
             const sarprasMonthsMap = {
                 jun_des: [6, 12],
                 jun_nov: [6, 11],
+                jun_sep: [6, 9],
                 triwulan: [3, 6, 9, 12],
                 bulanan: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
             };
@@ -2777,21 +3796,22 @@ Terima kasih, sampai bertemu besok dalam keadaan sehat walafiat.</textarea>
             document.getElementById('ak-monthly-inflow-label').textContent = `Dana Cair: ${formatRupiah(Math.round(monthlyInflow))} / bln`;
             document.getElementById('ak-card-inflow').textContent = formatRupiah(Math.round(monthlyInflow));
             document.getElementById('ak-card-rutin').textContent = formatRupiah(Math.round(monthlyRutin));
-            document.getElementById('ak-card-buku').textContent = formatRupiah(Math.round(totalBuku));
+            document.getElementById('ak-card-buku').textContent = formatRupiah(Math.round(totalModal));
             document.getElementById('ak-card-sarpras').textContent = formatRupiah(Math.round(totalSarpras));
 
             const bukuLabelMap = {
-                mei_okt: 'Dieksekusi Mei & Oktober (2 Termin)',
-                apr_sep: 'Dieksekusi April & September (2 Termin)',
-                mar_ags: 'Dieksekusi Maret & Agustus (2 Termin)',
-                ags_full: 'Dieksekusi Penuh Bulan Agustus',
-                bulanan: 'Dicicil Rata 12 Bulan'
+                mei_sep: 'Buku & TIK: Mei & September (Maks. TW 3)',
+                apr_ags: 'Buku & TIK: April & Agustus (TW 2 & TW 3)',
+                mar_ags: 'Buku & TIK: Maret & Agustus (TW 1 & TW 3)',
+                ags_full: 'Buku & TIK: Penuh Bulan Agustus (TW 3)',
+                sep_full: 'Buku & TIK: Penuh Bulan September (Batas TW 3)'
             };
             const sarprasLabelMap = {
-                jun_des: 'Dieksekusi Juni & Desember (2 Termin)',
-                jun_nov: 'Dieksekusi Juni & November (2 Termin)',
-                triwulan: 'Dieksekusi Per Triwulan (4 Termin)',
-                bulanan: 'Perawatan Rutin 12 Bulan'
+                jun_des: 'Pemeliharaan Ringan: Juni & Desember (Bebas Minus Nov)',
+                jun_nov: 'Pemeliharaan Ringan: Juni & November',
+                jun_sep: 'Pemeliharaan Ringan: Juni & September',
+                triwulan: 'Pemeliharaan Ringan: Mar, Jun, Sep, Des',
+                bulanan: 'Perawatan Ringan Rutin 12 Bulan'
             };
             document.getElementById('ak-card-buku-sub').textContent = bukuLabelMap[schedBuku];
             document.getElementById('ak-card-sarpras-sub').textContent = sarprasLabelMap[schedSarpras];
@@ -2800,15 +3820,20 @@ Terima kasih, sampai bertemu besok dalam keadaan sehat walafiat.</textarea>
             let anyMinus = false;
             let minusMonths = [];
             let sumInflow = 0, sumRutin = 0, sumBukuSarpras = 0, sumTotalBelanja = 0;
+            let sem1Spend = 0; // Akumulasi belanja Januari s.d. Juni
 
             tbody.innerHTML = NAMA_BULAN_2027.map((bulan, idx) => {
                 const mNum = idx + 1;
                 const danaMasuk = mNum === 1 ? monthlyInflow + silpaAwal : monthlyInflow;
 
-                const spendBuku = bukuMonths.includes(mNum) ? (totalBuku / bukuMonths.length) : 0;
+                const spendModal = bukuMonths.includes(mNum) ? (totalModal / bukuMonths.length) : 0;
                 const spendSarpras = sarprasMonths.includes(mNum) ? (totalSarpras / sarprasMonths.length) : 0;
-                const spendBukuSarpras = spendBuku + spendSarpras;
+                const spendBukuSarpras = spendModal + spendSarpras;
                 const totalBelanjaBln = monthlyRutin + spendBukuSarpras;
+
+                if (mNum <= 6) {
+                    sem1Spend += totalBelanjaBln;
+                }
 
                 runningBalance = runningBalance + monthlyInflow - totalBelanjaBln;
                 const displayBalance = (mNum === 12 && Math.abs(runningBalance - silpaAwal) < 50) ? silpaAwal : runningBalance;
@@ -2824,29 +3849,30 @@ Terima kasih, sampai bertemu besok dalam keadaan sehat walafiat.</textarea>
                 sumBukuSarpras += spendBukuSarpras;
                 sumTotalBelanja += totalBelanjaBln;
 
-                // Badge keterangan Buku & Sarpras
                 let badges = [];
-                if (spendBuku > 0 && schedBuku !== 'bulanan') {
+                if (spendModal > 0) {
                     const tIdx = bukuMonths.indexOf(mNum) + 1;
-                    const tText = bukuMonths.length === 1 ? 'Buku Penuh (SIPLah)' : `Buku Termin ${tIdx}/${bukuMonths.length} (SIPLah)`;
+                    const tText = bukuMonths.length === 1 ? 'Modal Buku/TIK (TW 3)' : `Modal Buku/TIK Termin ${tIdx}/${bukuMonths.length}`;
                     badges.push(`<span class="inline-block px-2 py-0.5 rounded bg-emerald-100 text-emerald-900 font-bold text-[10px]">${tText}</span>`);
                 }
                 if (spendSarpras > 0 && schedSarpras !== 'bulanan') {
-                    badges.push(`<span class="inline-block px-2 py-0.5 rounded bg-amber-100 text-amber-900 font-bold text-[10px]">Sarpras</span>`);
+                    badges.push(`<span class="inline-block px-2 py-0.5 rounded bg-amber-100 text-amber-900 font-bold text-[10px]">Sarpras Ringan</span>`);
                 }
                 const badgeHtml = badges.length > 0 ? `<div class="mt-1 flex flex-wrap justify-end gap-1">${badges.join('')}</div>` : '';
 
-                // Fokus Pendampingan dinamis
                 let fokusText = FOKUS_PENDAMPINGAN_BULANAN[idx];
-                if (spendBuku > 0 && schedBuku !== 'bulanan') {
+                if (spendModal > 0) {
                     const tIdx = bukuMonths.indexOf(mNum) + 1;
-                    const tLabel = bukuMonths.length === 1 ? 'Eksekusi Buku Penuh (SIPLah)' : `Eksekusi Buku Tahap ${tIdx}/${bukuMonths.length} (SIPLah)`;
+                    const tLabel = bukuMonths.length === 1 ? 'Eksekusi Modal Buku & TIK (SIPLah)' : `Eksekusi Modal Buku & TIK Termin ${tIdx}/${bukuMonths.length} (SIPLah)`;
                     fokusText = `${tLabel} & ${FOKUS_PENDAMPINGAN_BULANAN[idx]}`;
+                }
+                if (mNum === 9) {
+                    fokusText += ' • Batas Akhir Belanja Modal TW 3 (Nihil Modal di TW 4)';
                 }
 
                 const rowBg = isMinus
                     ? 'bg-rose-50 text-rose-950'
-                    : (spendBuku > 0 && schedBuku !== 'bulanan')
+                    : spendModal > 0
                         ? 'bg-emerald-50/40'
                         : (spendSarpras > 0 && schedSarpras !== 'bulanan')
                             ? 'bg-amber-50/40'
@@ -2873,6 +3899,26 @@ Terima kasih, sampai bertemu besok dalam keadaan sehat walafiat.</textarea>
                 `;
             }).join('');
 
+            // Update Indikator Uji Syarat Salur Tahap II (Pasal 56: Serapan Semester 1 >= 50% Tahap I)
+            const tahap1Pagu = pagu * 0.5;
+            const tahap1Pct = tahap1Pagu > 0 ? (sem1Spend / tahap1Pagu) * 100 : 0;
+            const tahap1Ok = tahap1Pct >= 50;
+            const t1Box = document.getElementById('ak-tahap1-box');
+            const t1Detail = document.getElementById('ak-tahap1-detail');
+            const t1Badge = document.getElementById('ak-tahap1-badge');
+            if (t1Box && t1Detail && t1Badge) {
+                t1Box.className = `p-4 sm:p-5 rounded-2xl border flex flex-col md:flex-row md:items-center justify-between gap-4 text-xs sm:text-sm ${tahap1Ok ? 'bg-sky-50 border-sky-200' : 'bg-amber-50 border-amber-300'}`;
+                t1Detail.innerHTML = `
+                    Akumulasi belanja Jan–Jun 2027: <strong>${formatRupiah(Math.round(sem1Spend))}</strong> (<strong>${tahap1Pct.toFixed(1)}%</strong> dari Pagu Tahap I sebesar <strong>${formatRupiah(Math.round(tahap1Pagu))}</strong>). Wajib dilaporkan di ARKAS paling lambat <strong>31 Juli 2027</strong>.
+                `;
+                t1Badge.className = `px-4 py-2 rounded-xl border font-extrabold text-xs shrink-0 text-center ${tahap1Ok ? 'bg-emerald-100 text-emerald-900 border-emerald-300' : 'bg-rose-100 text-rose-900 border-rose-300'}`;
+                t1Badge.textContent = tahap1Ok
+                    ? `✓ Memenuhi Syarat Salur Tahap II (${tahap1Pct.toFixed(1)}% ≥ 50%)`
+                    : `⚠ Realisasi Sem. 1 Baru ${tahap1Pct.toFixed(1)}% (< 50% Tahap I)`;
+            }
+
+            const silpaFootNote = silpaAwal > 0 ? ` • Sisa Saldo SiLPA 2026: ${formatRupiah(Math.round(silpaAwal))} (Wajib dianggarkan)` : ' • Serapan 100%';
+
             document.getElementById('ak-table-foot').innerHTML = `
                 <tr>
                     <td class="p-3 uppercase">Total 12 Bulan</td>
@@ -2881,7 +3927,7 @@ Terima kasih, sampai bertemu besok dalam keadaan sehat walafiat.</textarea>
                     <td class="p-3 text-right">${formatRupiah(Math.round(sumBukuSarpras))}</td>
                     <td class="p-3 text-right text-emerald-300">${formatRupiah(Math.round(sumTotalBelanja))}</td>
                     <td class="p-3 text-right text-amber-300">${formatRupiah(Math.round(runningBalance))}</td>
-                    <td class="p-3 text-xs font-normal text-slate-300">Serapan 100% Pagu TA 2027</td>
+                    <td class="p-3 text-xs font-normal text-slate-300">Modal Tuntas TW 3${silpaFootNote}</td>
                 </tr>
             `;
 
@@ -2895,23 +3941,21 @@ Terima kasih, sampai bertemu besok dalam keadaan sehat walafiat.</textarea>
 
                 adviceBox.className = 'p-4 sm:p-5 rounded-2xl bg-rose-50 border border-rose-200 text-rose-950 text-xs sm:text-sm leading-relaxed';
                 adviceBox.innerHTML = `
-                    <strong>Perhatian Pengawas Pembina:</strong> Pada bulan <strong>${minusMonths.join(', ')}</strong>, total rencana belanja melebihi akumulasi saldo kas yang tersedia di rekening sekolah. Sesuai disiplin BKU ARKAS, sekolah tidak boleh berutang. Silakan geser jadwal termin buku ke bulan berikutnya (misalnya <strong>Mei & Oktober</strong>) atau klik tombol <em>"Terapkan Jadwal Ideal"</em>.
+                    <strong>Perhatian Pengawas Pembina:</strong> Pada bulan <strong>${minusMonths.join(', ')}</strong>, total rencana belanja melebihi akumulasi saldo kas yang tersedia di rekening sekolah. Sesuai disiplin BKU ARKAS, sekolah tidak boleh berutang. Silakan ubah <strong>Jadwal Pemeliharaan Ringan</strong> ke opsi <em>"2 Termin: Juni &amp; Desember"</em> atau <em>"Per Triwulan"</em>, atau klik tombol <strong>"Terapkan Jadwal Ideal"</strong> di kanan atas agar otomatis disesuaikan.
                 `;
             } else {
                 statusBadge.className = 'px-4 py-2 rounded-xl bg-emerald-100 text-emerald-900 border border-emerald-300 text-xs font-extrabold flex items-center gap-2 shrink-0 self-start';
-                statusBadge.innerHTML = `<i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-700"></i><span>Arus Kas Sehat (Bebas Minus & Serapan Optimal)</span>`;
+                statusBadge.innerHTML = `<i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-700"></i><span>Arus Kas Sehat &amp; Bebas Belanja Modal di TW 4</span>`;
 
                 adviceBox.className = 'p-4 sm:p-5 rounded-2xl bg-emerald-50 border border-emerald-200 text-emerald-950 text-xs sm:text-sm leading-relaxed';
                 adviceBox.innerHTML = `
-                    <strong>Simulasi Arus Kas Ideal untuk Pendampingan:</strong> Sisa dana bulanan ditabung terlebih dahulu di rekening bank sekolah hingga mencukupi untuk belanja buku & sarpras pada bulan eksekusi yang dipilih, sehingga <strong>saldo kas tidak pernah minus</strong> dan tepat mencapai <strong>${formatRupiah(Math.round(silpaAwal))} (${silpaAwal === 0 ? '100% terserap' : 'sesuai sisa SiLPA'})</strong> pada tutup buku Desember 2027.
+                    <strong>Kepatuhan Siklus Aset &amp; Arus Kas Ideal:</strong> Seluruh <strong>Belanja Modal (Buku Perpustakaan &amp; Alat Multimedia/TIK)</strong> telah dikunci maksimal pada <strong>Triwulan 3 (September)</strong> sehingga <strong>tidak ada belanja modal pada Triwulan 4 (Oktober–Desember)</strong> dan proses pencatatan aset (KIB/BMD) aman dari keterlambatan pengiriman. Saldo kas juga tetap positif sepanjang tahun dan terserap 100% di Desember 2027.
                 `;
             }
 
             lucide.createIcons();
         }
 
-        // =========================================================================
-        // 7. HELPER FORMATTING & INITIALIZATION
         // =========================================================================
         // 6C. MATRIKS SOLUSI LAPANGAN & TINDAKAN COACHING PENGAWAS
         // =========================================================================
@@ -2920,7 +3964,7 @@ Terima kasih, sampai bertemu besok dalam keadaan sehat walafiat.</textarea>
             {
                 masalah: 'Kas bulan berjalan minus saat akan membeli paket buku/sarpras sekaligus.',
                 kategori: 'Cashflow Bulanan',
-                solusi: 'Pilih pola 2 termin (Maret–Agustus, April–September, atau Mei–Oktober) atau geser belanja penuh ke Bulan Agustus/September setelah akumulasi kas mencukupi.'
+                solusi: 'Pilih pola 2 termin pada Triwulan 2 & 3 (April–Agustus atau Mei–September) atau belanja penuh di Agustus/September (maksimal TW 3) setelah akumulasi kas mencukupi.'
             },
             {
                 masalah: 'Belanja barang/jasa di atas Rp 1 Juta dilakukan manual tanpa melalui SIPLah.',
@@ -2958,9 +4002,9 @@ Terima kasih, sampai bertemu besok dalam keadaan sehat walafiat.</textarea>
                 solusi: 'Dampingi Bendahara membuat kode billing e-Billing dan menginput seluruh bukti setor (NTPN) ke ARKAS sebelum tutup BKU Desember.'
             },
             {
-                masalah: 'Belanja modal (buku/alat TIK) belum dicatat sebagai aset sekolah.',
+                masalah: 'Belanja modal (buku/alat TIK) masih dianggarkan di Triwulan 4 (Oktober–Desember) atau belum dicatat sebagai aset sekolah.',
                 kategori: 'Aset & Akhir Tahun',
-                solusi: 'Lakukan rekonsiliasi antara Bendahara BOSP dan Pengurus Barang sekolah sebelum tanda tangan berita acara akhir tahun.'
+                solusi: 'Kunci seluruh belanja modal (Buku & Alat TIK/Multimedia) maksimal pada Triwulan 3 (September), dan lakukan rekonsiliasi antara Bendahara BOSP dan Pengurus Barang sekolah ke KIB sebelum tutup buku.'
             },
             {
                 masalah: 'Pembayaran Honor kepada Guru/Tendik tanpa NUPTK atau belum masuk Dapodik.',
@@ -3059,11 +4103,32 @@ Terima kasih, sampai bertemu besok dalam keadaan sehat walafiat.</textarea>
         }
 
         window.addEventListener('DOMContentLoaded', () => {
+            const restored = loadSessionFromLocal();
+
             renderLkAll();
+            renderRkasTable();
             renderPengawasChecklist();
-            renderArusKasTable();
+
+            if (restored) {
+                const autoSyncEl = document.getElementById('rkas-autosync-toggle');
+                if (autoSyncEl) autoSyncEl.checked = rkasAutoSync;
+                if (restored.akSilpa !== undefined) {
+                    document.getElementById('ak-silpa').value = restored.akSilpa;
+                } else {
+                    syncSilpaFromLk(false);
+                }
+                if (restored.akSchedBuku) document.getElementById('ak-sched-buku').value = restored.akSchedBuku;
+                if (restored.akSchedSarpras) document.getElementById('ak-sched-sarpras').value = restored.akSchedSarpras;
+                renderArusKasTable();
+            } else {
+                syncSilpaFromLk(false);
+                resetArusKasDefault();
+            }
+
             renderSolusiTable();
+            updateGlobalSyncIndicator(true);
             updateActiveDocInfo();
+            saveSessionToLocal();
             lucide.createIcons();
         });
     </script>
