@@ -51,6 +51,7 @@
         .nav-active {
             background-color: #0d9488 !important;
             color: #ffffff !important;
+            border-color: #2dd4bf !important;
             box-shadow: 0 4px 12px rgba(13, 148, 136, 0.35);
         }
 
@@ -157,18 +158,18 @@
     <!-- Header Utama & Kontrol Aksesibilitas Lansia (50+) -->
     <header class="bg-gradient-to-r from-tealbrand-900 via-slate-900 to-tealbrand-800 text-white shadow-lg sticky top-0 z-40 no-print">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between py-3.5 gap-3">
+            <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between py-3 gap-3">
                 <!-- Identitas Aplikasi -->
                 <div class="flex items-center gap-3.5">
-                    <div class="w-12 h-12 rounded-2xl bg-amber-500/20 border border-amber-400/40 flex items-center justify-center shrink-0">
-                        <i data-lucide="briefcase" class="w-6 h-6 text-amber-300"></i>
+                    <div class="w-11 h-11 rounded-2xl bg-amber-500/20 border border-amber-400/40 flex items-center justify-center shrink-0">
+                        <i data-lucide="briefcase" class="w-5 h-5 text-amber-300"></i>
                     </div>
                     <div>
                         <div class="flex flex-wrap items-center gap-2">
                             <span class="px-2.5 py-0.5 text-[11px] font-bold uppercase tracking-wider bg-teal-500/25 text-teal-200 border border-teal-400/30 rounded-full">Permendikdasmen No. 8/2026</span>
                             <span class="text-xs text-amber-300 font-semibold">Pendampingan November 2026</span>
                         </div>
-                        <h1 class="font-display font-extrabold text-lg sm:text-xl tracking-tight text-white mt-0.5">
+                        <h1 class="font-display font-extrabold text-base sm:text-xl tracking-tight text-white mt-0.5">
                             PENDAMPINGAN PERENCANAAN BOSP TA 2027
                         </h1>
                     </div>
@@ -213,35 +214,55 @@
                 </div>
             </div>
 
-            <!-- Navigasi Utama (9 Modul Terpadu - Tersusun Sistematis dari Persiapan ke Praktik) -->
-            <nav class="flex overflow-x-auto gap-2 pb-3.5 pt-1" aria-label="Menu Modul Pendampingan">
-                <button type="button" onclick="switchModule('panduan')" id="nav-panduan" class="nav-btn nav-active px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap flex items-center gap-2 transition">
-                    <i data-lucide="book-open" class="w-4 h-4"></i> 1. Panduan Pendampingan
-                </button>
-                <button type="button" onclick="switchModule('checklist')" id="nav-checklist" class="nav-btn bg-white/10 text-slate-200 hover:bg-white/20 hover:text-white px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap flex items-center gap-2 transition">
-                    <i data-lucide="check-square" class="w-4 h-4"></i> 2. Checklist Persiapan & WA
-                </button>
-                <button type="button" onclick="switchModule('kajianregulasi')" id="nav-kajianregulasi" class="nav-btn bg-white/10 text-slate-200 hover:bg-white/20 hover:text-white px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap flex items-center gap-2 transition">
-                    <i data-lucide="scale" class="w-4 h-4"></i> 3. Kajian Regulasi Permendikdasmen 8/2026
-                </button>
-                <button type="button" onclick="switchModule('perbandingan')" id="nav-perbandingan" class="nav-btn bg-white/10 text-slate-200 hover:bg-white/20 hover:text-white px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap flex items-center gap-2 transition">
-                    <i data-lucide="git-compare" class="w-4 h-4"></i> 4. Perbandingan Regulasi 8/2026
-                </button>
-                <button type="button" onclick="switchModule('presentasi')" id="nav-presentasi" class="nav-btn bg-white/10 text-slate-200 hover:bg-white/20 hover:text-white px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap flex items-center gap-2 transition">
-                    <i data-lucide="presentation" class="w-4 h-4"></i> 5. Bahan Tayang Presentasi (12 Slide)
-                </button>
-                <button type="button" onclick="switchModule('lembarkerja')" id="nav-lembarkerja" class="nav-btn bg-white/10 text-slate-200 hover:bg-white/20 hover:text-white px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap flex items-center gap-2 transition">
-                    <i data-lucide="calculator" class="w-4 h-4"></i> 6. Lembar Kerja & Simulasi Sekolah
-                </button>
-                <button type="button" onclick="switchModule('rkas')" id="nav-rkas" class="nav-btn bg-white/10 text-slate-200 hover:bg-white/20 hover:text-white px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap flex items-center gap-2 transition">
-                    <i data-lucide="file-spreadsheet" class="w-4 h-4"></i> 7. Simulator Rincian RKAS BOSP 2027
-                </button>
-                <button type="button" onclick="switchModule('aruskas')" id="nav-aruskas" class="nav-btn bg-white/10 text-slate-200 hover:bg-white/20 hover:text-white px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap flex items-center gap-2 transition">
-                    <i data-lucide="calendar-range" class="w-4 h-4"></i> 8. Simulasi Arus Kas 12 Bulan (2027)
-                </button>
-                <button type="button" onclick="switchModule('solusi')" id="nav-solusi" class="nav-btn bg-white/10 text-slate-200 hover:bg-white/20 hover:text-white px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap flex items-center gap-2 transition">
-                    <i data-lucide="lightbulb" class="w-4 h-4"></i> 9. Solusi Lapangan
-                </button>
+            <!-- Navigasi Utama 2 Baris Simetris (5 Kolom x 2 Baris) -->
+            <nav class="pb-3 pt-1.5 border-t border-white/10 space-y-1.5" aria-label="Menu Modul Pendampingan">
+                <!-- Baris 1: Fase Persiapan, Regulasi & Paparan Pengawas (Menu 1 - 5) -->
+                <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-1.5">
+                    <button type="button" onclick="switchModule('panduan')" id="nav-panduan" class="nav-btn nav-active border border-white/15 px-3 py-2 rounded-xl text-xs font-bold flex items-center justify-start gap-2 text-left leading-snug transition">
+                        <i data-lucide="book-open" class="w-4 h-4 shrink-0"></i>
+                        <span>1. Panduan Pendampingan</span>
+                    </button>
+                    <button type="button" onclick="switchModule('checklist')" id="nav-checklist" class="nav-btn bg-white/10 border border-white/10 text-slate-200 hover:bg-white/20 hover:text-white px-3 py-2 rounded-xl text-xs font-bold flex items-center justify-start gap-2 text-left leading-snug transition">
+                        <i data-lucide="check-square" class="w-4 h-4 shrink-0"></i>
+                        <span>2. Checklist Persiapan & WA</span>
+                    </button>
+                    <button type="button" onclick="switchModule('kajianregulasi')" id="nav-kajianregulasi" class="nav-btn bg-white/10 border border-white/10 text-slate-200 hover:bg-white/20 hover:text-white px-3 py-2 rounded-xl text-xs font-bold flex items-center justify-start gap-2 text-left leading-snug transition">
+                        <i data-lucide="scale" class="w-4 h-4 shrink-0"></i>
+                        <span>3. Kajian Regulasi 8/2026</span>
+                    </button>
+                    <button type="button" onclick="switchModule('perbandingan')" id="nav-perbandingan" class="nav-btn bg-white/10 border border-white/10 text-slate-200 hover:bg-white/20 hover:text-white px-3 py-2 rounded-xl text-xs font-bold flex items-center justify-start gap-2 text-left leading-snug transition">
+                        <i data-lucide="git-compare" class="w-4 h-4 shrink-0"></i>
+                        <span>4. Perbandingan Regulasi 8/2026</span>
+                    </button>
+                    <button type="button" onclick="switchModule('presentasi')" id="nav-presentasi" class="nav-btn bg-white/10 border border-white/10 text-slate-200 hover:bg-white/20 hover:text-white px-3 py-2 rounded-xl text-xs font-bold flex items-center justify-start gap-2 text-left leading-snug transition">
+                        <i data-lucide="presentation" class="w-4 h-4 shrink-0"></i>
+                        <span>5. Bahan Tayang (12 Slide)</span>
+                    </button>
+                </div>
+
+                <!-- Baris 2: Fase Praktik Sekolah & Klinik Lapangan (Menu 6 - 10) -->
+                <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-1.5">
+                    <button type="button" onclick="switchModule('pbd')" id="nav-pbd" class="nav-btn bg-white/10 border border-white/10 text-slate-200 hover:bg-white/20 hover:text-white px-3 py-2 rounded-xl text-xs font-bold flex items-center justify-start gap-2 text-left leading-snug transition">
+                        <i data-lucide="bar-chart-2" class="w-4 h-4 shrink-0"></i>
+                        <span>6. Perencanaan Berbasis Data</span>
+                    </button>
+                    <button type="button" onclick="switchModule('lembarkerja')" id="nav-lembarkerja" class="nav-btn bg-white/10 border border-white/10 text-slate-200 hover:bg-white/20 hover:text-white px-3 py-2 rounded-xl text-xs font-bold flex items-center justify-start gap-2 text-left leading-snug transition">
+                        <i data-lucide="calculator" class="w-4 h-4 shrink-0"></i>
+                        <span>7. Lembar Kerja & Simulasi</span>
+                    </button>
+                    <button type="button" onclick="switchModule('rkas')" id="nav-rkas" class="nav-btn bg-white/10 border border-white/10 text-slate-200 hover:bg-white/20 hover:text-white px-3 py-2 rounded-xl text-xs font-bold flex items-center justify-start gap-2 text-left leading-snug transition">
+                        <i data-lucide="file-spreadsheet" class="w-4 h-4 shrink-0"></i>
+                        <span>8. Simulator Rincian RKAS</span>
+                    </button>
+                    <button type="button" onclick="switchModule('aruskas')" id="nav-aruskas" class="nav-btn bg-white/10 border border-white/10 text-slate-200 hover:bg-white/20 hover:text-white px-3 py-2 rounded-xl text-xs font-bold flex items-center justify-start gap-2 text-left leading-snug transition">
+                        <i data-lucide="calendar-range" class="w-4 h-4 shrink-0"></i>
+                        <span>9. Simulasi Arus Kas 12 Bln</span>
+                    </button>
+                    <button type="button" onclick="switchModule('solusi')" id="nav-solusi" class="nav-btn bg-white/10 border border-white/10 text-slate-200 hover:bg-white/20 hover:text-white px-3 py-2 rounded-xl text-xs font-bold flex items-center justify-start gap-2 text-left leading-snug transition">
+                        <i data-lucide="lightbulb" class="w-4 h-4 shrink-0"></i>
+                        <span>10. Solusi Lapangan</span>
+                    </button>
+                </div>
             </nav>
         </div>
     </header>
@@ -254,7 +275,7 @@
                 <span>Dokumen Aktif:</span>
                 <strong id="active-doc-title" class="text-slate-900">1. Panduan Pendampingan Perencanaan BOSP TA 2027</strong>
                 <span id="global-sync-badge" class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-900 font-bold text-[11px]">
-                    <i data-lucide="check-circle-2" class="w-3.5 h-3.5 text-emerald-700"></i> Data LK ↔ RKAS ↔ Arus Kas Tersinkron
+                    <i data-lucide="check-circle-2" class="w-3.5 h-3.5 text-emerald-700"></i> Data PBD ↔ LK ↔ RKAS ↔ Arus Kas Tersinkron
                 </span>
                 <span id="autosave-status-badge" class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-sky-50 text-sky-900 border border-sky-200 font-semibold text-[11px]">
                     <i data-lucide="hard-drive" class="w-3 h-3 text-sky-700"></i> Auto-Save Aktif
@@ -293,20 +314,32 @@
                         Bulan November merupakan titik krusial dalam siklus manajemen sekolah sebelum memasuki tahun anggaran baru. Pendampingan ini bertujuan memastikan satuan pendidikan binaan:
                     </p>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div class="p-4 rounded-xl bg-slate-50 border border-slate-200">
-                            <h4 class="font-bold text-sm text-slate-900 mb-1">1. Evaluasi Serapan & Dampak 2026</h4>
+                        <div class="p-4 rounded-xl bg-slate-50 border border-slate-200 hover:border-teal-400 transition cursor-pointer" onclick="switchModule('lembarkerja')" title="Klik untuk membuka Evaluasi & Pemetaan LK">
+                            <h4 class="font-bold text-sm text-slate-900 mb-1 flex items-center justify-between">
+                                <span>1. Evaluasi Serapan & Dampak 2026</span>
+                                <span class="text-[11px] font-bold text-teal-700 no-print">Buka LK →</span>
+                            </h4>
                             <p class="text-xs sm:text-sm text-slate-600">Mengidentifikasi proyeksi sisa anggaran (SiLPA), menindaklanjuti catatan Monev 2026, serta mengevaluasi manfaat program yang berjalan.</p>
                         </div>
-                        <div class="p-4 rounded-xl bg-slate-50 border border-slate-200">
-                            <h4 class="font-bold text-sm text-slate-900 mb-1">2. Perencanaan Berbasis Data (PBD)</h4>
-                            <p class="text-xs sm:text-sm text-slate-600">Menyelaraskan RKT dan RKAS/ARKAS 2027 dengan akar masalah pada <strong>Rapor Pendidikan</strong> dan hasil Evaluasi Diri Sekolah (EDS).</p>
+                        <div class="p-4 rounded-xl bg-teal-50/70 border border-teal-300 hover:border-teal-500 transition cursor-pointer" onclick="switchModule('pbd')" title="Klik untuk membuka Modul Perencanaan Berbasis Data (PBD)">
+                            <h4 class="font-bold text-sm text-teal-950 mb-1 flex items-center justify-between">
+                                <span>2. Perencanaan Berbasis Data (PBD)</span>
+                                <span class="text-[11px] font-bold text-teal-700 bg-white px-2 py-0.5 rounded-full border border-teal-200 no-print">Buka Modul PBD (Menu 6) →</span>
+                            </h4>
+                            <p class="text-xs sm:text-sm text-slate-700">Menyelaraskan RKT dan RKAS/ARKAS 2027 dengan akar masalah pada <strong>Rapor Pendidikan</strong> dan hasil Evaluasi Diri Sekolah (EDS).</p>
                         </div>
-                        <div class="p-4 rounded-xl bg-slate-50 border border-slate-200">
-                            <h4 class="font-bold text-sm text-slate-900 mb-1">3. Kepatuhan Regulasi (Permendikdasmen 8/2026)</h4>
+                        <div class="p-4 rounded-xl bg-slate-50 border border-slate-200 hover:border-teal-400 transition cursor-pointer" onclick="switchModule('kajianregulasi')" title="Klik untuk membuka Kajian Regulasi 8/2026">
+                            <h4 class="font-bold text-sm text-slate-900 mb-1 flex items-center justify-between">
+                                <span>3. Kepatuhan Regulasi (Permendikdasmen 8/2026)</span>
+                                <span class="text-[11px] font-bold text-teal-700 no-print">Buka Regulasi →</span>
+                            </h4>
                             <p class="text-xs sm:text-sm text-slate-600">Memastikan alokasi anggaran memenuhi ambang batas wajib (buku ≥ 10%, sarpras ≤ 20%, honor ≤ 20% negeri / 40% swasta) dan syarat penerima honor.</p>
                         </div>
-                        <div class="p-4 rounded-xl bg-slate-50 border border-slate-200">
-                            <h4 class="font-bold text-sm text-slate-900 mb-1">4. Tata Kelola Partisipatif & Transparan</h4>
+                        <div class="p-4 rounded-xl bg-slate-50 border border-slate-200 hover:border-teal-400 transition cursor-pointer" onclick="switchModule('lembarkerja')" title="Klik untuk membuka Tim Penyusun & RTL">
+                            <h4 class="font-bold text-sm text-slate-900 mb-1 flex items-center justify-between">
+                                <span>4. Tata Kelola Partisipatif & Transparan</span>
+                                <span class="text-[11px] font-bold text-teal-700 no-print">Buka Tim BOS →</span>
+                            </h4>
                             <p class="text-xs sm:text-sm text-slate-600">Melibatkan perwakilan guru, tenaga kependidikan, dan Komite Sekolah sejak tahap pemetaan kebutuhan.</p>
                         </div>
                     </div>
@@ -345,7 +378,7 @@
                                 <tr>
                                     <td class="p-3.5 font-bold bg-slate-50">1. Pra-Pendampingan</td>
                                     <td class="p-3.5 text-center font-semibold">H-3</td>
-                                    <td class="p-3.5">Pengawas meminta sekolah menyiapkan Rapor Pendidikan, BKU/Realisasi 2026 s.d. Nov, Rekap Monev 2026, Cut-off Dapodik, dan mengisi awal LK Pemetaan.</td>
+                                    <td class="p-3.5">Pengawas meminta sekolah menyiapkan Rapor Pendidikan, BKU/Realisasi 2026 s.d. Nov, Rekap Monev 2026, Cut-off Dapodik, dan mengisi awal LK Pemetaan (Menu 2).</td>
                                     <td class="p-3.5">Kesiapan data dasar satuan pendidikan sebelum sesi pendampingan.</td>
                                 </tr>
                                 <tr>
@@ -355,10 +388,10 @@
                                     <td class="p-3.5">Peta sisa anggaran & daftar perbaikan tata kelola 2026.</td>
                                 </tr>
                                 <tr>
-                                    <td class="p-3.5 font-bold bg-slate-50">3. Bedah Rapor Pendidikan (PBD)</td>
+                                    <td class="p-3.5 font-bold bg-slate-50">3. Bedah Rapor Pendidikan & EDS (PBD)</td>
                                     <td class="p-3.5 text-center font-semibold">60 Menit</td>
-                                    <td class="p-3.5">Analisis akar masalah indikator prioritas (Literasi, Numerasi, Karakter, Kualitas Pembelajaran, Iklim Keamanan) & rumusan kegiatan benahi (LK Bagian B).</td>
-                                    <td class="p-3.5">Daftar program prioritas berbasis akar masalah mutu.</td>
+                                    <td class="p-3.5">Analisis akar masalah indikator prioritas (Literasi, Numerasi, Karakter, Kualitas Pembelajaran, Iklim Keamanan) & rumusan kegiatan benahi (Menu 6 PBD & LK Bagian B).</td>
+                                    <td class="p-3.5">Daftar program prioritas berbasis akar masalah mutu & EDS.</td>
                                 </tr>
                                 <tr>
                                     <td class="p-3.5 font-bold bg-slate-50">4. Pemetaan Pagu & Regulasi</td>
@@ -400,7 +433,141 @@
         </section>
 
         <!-- =================================================================== -->
-        <!-- MODUL 6: LEMBAR KERJA INTERAKTIF & SIMULASI (SMPN CIGEDUG & AL MU'AWANAH) -->
+        <!-- MODUL 6: PERENCANAAN BERBASIS DATA (PBD) - RAPOR PENDIDIKAN & EDS   -->
+        <!-- =================================================================== -->
+        <section id="panel-pbd" class="tab-panel hidden space-y-6">
+            <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 sm:p-8 space-y-6">
+                <!-- Header Modul PBD -->
+                <div class="border-b-2 border-teal-700 pb-4 flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+                    <div>
+                        <span class="px-3 py-1 rounded-full bg-teal-50 text-teal-800 text-xs font-bold uppercase tracking-wider">Tahap Inti Substansi Mutu • Identifikasi – Refleksi – Benahi (IRB)</span>
+                        <h2 class="font-display font-extrabold text-2xl sm:text-3xl text-slate-900 mt-2">
+                            PERENCANAAN BERBASIS DATA (PBD): BEDAH RAPOR PENDIDIKAN & EDS
+                        </h2>
+                        <p class="text-sm text-slate-600 mt-1">
+                            Menyelaraskan <strong>RKT dan RKAS/ARKAS 2027</strong> dengan akar masalah pada <strong>Rapor Pendidikan</strong> dan hasil <strong>Evaluasi Diri Sekolah (EDS)</strong>.
+                        </p>
+                    </div>
+                    <div class="flex flex-wrap items-center gap-2 no-print">
+                        <button type="button" onclick="syncPbdToLkAndRkas(true)" class="px-4 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold flex items-center gap-1.5 shadow-sm transition" title="Kirim hasil analisis PBD & EDS ini ke LK Bagian B">
+                            <i data-lucide="refresh-cw" class="w-4 h-4"></i> Sinkronkan ke LK Bagian B
+                        </button>
+                        <button type="button" onclick="switchModule('lembarkerja')" class="px-3.5 py-2.5 rounded-xl bg-teal-700 hover:bg-teal-800 text-white text-xs font-bold flex items-center gap-1.5 shadow-sm transition">
+                            <span>Lanjut ke Lembar Kerja (Menu 7) →</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Banner Alur 3 Langkah IRB (Identifikasi - Refleksi - Benahi) -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div class="p-4 rounded-2xl bg-slate-900 text-white space-y-1.5">
+                        <div class="flex items-center justify-between">
+                            <span class="px-2.5 py-0.5 rounded bg-amber-500 text-slate-950 font-extrabold text-[11px] uppercase">Langkah 1: Identifikasi</span>
+                            <i data-lucide="search-check" class="w-4 h-4 text-amber-300"></i>
+                        </div>
+                        <h3 class="font-display font-bold text-base">Potret Rapor Pendidikan &amp; EDS</h3>
+                        <p class="text-xs text-slate-300 leading-relaxed">Memilih indikator prioritas dengan capaian <strong>Kurang (Merah)</strong> atau <strong>Sedang (Kuning)</strong> serta temuan Evaluasi Diri Sekolah (EDS) terkait iklim belajar &amp; sarpras.</p>
+                    </div>
+                    <div class="p-4 rounded-2xl bg-tealbrand-900 text-white space-y-1.5">
+                        <div class="flex items-center justify-between">
+                            <span class="px-2.5 py-0.5 rounded bg-teal-400 text-slate-950 font-extrabold text-[11px] uppercase">Langkah 2: Refleksi</span>
+                            <i data-lucide="microscope" class="w-4 h-4 text-teal-300"></i>
+                        </div>
+                        <h3 class="font-display font-bold text-base">Gali Akar Masalah (Level 1 &amp; 2)</h3>
+                        <p class="text-xs text-teal-100 leading-relaxed">Menelusuri penyebab utama di ruang kelas (misal: kualitas pembelajaran, refleksi guru/Kombel, ketersediaan buku bacaan, atau keamanan lingkungan).</p>
+                    </div>
+                    <div class="p-4 rounded-2xl bg-emerald-900 text-white space-y-1.5">
+                        <div class="flex items-center justify-between">
+                            <span class="px-2.5 py-0.5 rounded bg-emerald-300 text-slate-950 font-extrabold text-[11px] uppercase">Langkah 3: Benahi</span>
+                            <i data-lucide="git-merge" class="w-4 h-4 text-emerald-300"></i>
+                        </div>
+                        <h3 class="font-display font-bold text-base">Rumusan RKT &amp; Kode ARKAS 2027</h3>
+                        <p class="text-xs text-emerald-100 leading-relaxed">Menerjemahkan program benahi RKT menjadi kegiatan spesifik pada <strong>LK Bagian B</strong> dan rincian SSH/SBU pada <strong>Simulator RKAS (Menu 8)</strong>.</p>
+                    </div>
+                </div>
+
+                <!-- 4 Kartu Monitoring Sinkronisasi PBD -> LK -> RKAS -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5 text-xs">
+                    <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-1">
+                        <span class="text-[11px] uppercase tracking-wider text-slate-500 font-bold">Sekolah &amp; Total Pagu 2027</span>
+                        <p id="pbd-card-school" class="font-display font-extrabold text-base text-slate-900">SMPN Cigedug (Negeri)</p>
+                        <p id="pbd-card-pagu" class="text-xs font-bold text-teal-800">Pagu: Rp 660.000.000</p>
+                    </div>
+                    <div class="p-4 rounded-2xl bg-rose-50 border border-rose-200 space-y-1">
+                        <span class="text-[11px] uppercase tracking-wider text-rose-900 font-bold">Indikator Merah / Kuning</span>
+                        <p id="pbd-card-priority-count" class="font-display font-extrabold text-lg text-rose-800">0 Indikator Prioritas</p>
+                        <p class="text-[11px] text-rose-700 font-medium">Wajib menjadi fokus utama RKT 2027</p>
+                    </div>
+                    <div class="p-4 rounded-2xl bg-teal-50 border border-teal-200 space-y-1">
+                        <span class="text-[11px] uppercase tracking-wider text-teal-900 font-bold">Target Pagu Benahi RKT (LK B)</span>
+                        <p id="pbd-card-rkt-total" class="font-display font-extrabold text-base text-teal-950">Rp 0</p>
+                        <p id="pbd-card-rkt-pct" class="text-[11px] font-bold text-teal-800">0% dari total pagu BOSP</p>
+                    </div>
+                    <div id="pbd-card-rkas-box" class="p-4 rounded-2xl bg-emerald-50 border border-emerald-200 space-y-1">
+                        <span class="text-[11px] uppercase tracking-wider text-emerald-900 font-bold">Realisasi di RKAS (Menu 8)</span>
+                        <p id="pbd-card-rkas-total" class="font-display font-extrabold text-base text-emerald-950">Rp 0</p>
+                        <p id="pbd-card-rkas-status" class="text-[11px] font-bold text-emerald-800">✓ Tersinkron dengan Tagging PBD RKAS</p>
+                    </div>
+                </div>
+
+                <!-- Matriks Kerja IRB (Identifikasi Rapor Pendidikan & EDS -> Refleksi Akar Masalah -> Benahi RKT & RKAS 2027) -->
+                <div class="space-y-3">
+                    <div class="flex flex-wrap items-center justify-between gap-2">
+                        <div>
+                            <h3 class="font-display font-bold text-base text-teal-950">
+                                Matriks Penyelarasan Rapor Pendidikan &amp; Evaluasi Diri Sekolah (EDS) ke RKT &amp; RKAS 2027
+                            </h3>
+                            <p class="text-xs text-slate-500">Setiap perubahan pada kolom Capaian, Akar Masalah, Kegiatan Benahi, atau Estimasi Anggaran otomatis tersinkron ke <strong>LK Bagian B (Menu 7)</strong> dan dibandingkan dengan <strong>Simulator RKAS (Menu 8)</strong>.</p>
+                        </div>
+                        <span class="px-3 py-1 rounded-full bg-emerald-100 text-emerald-900 font-bold text-[11px] no-print">
+                            ✓ Sinkron Otomatis 2-Arah dengan LK Bagian B &amp; Simulator RKAS
+                        </span>
+                    </div>
+
+                    <div class="overflow-x-auto rounded-xl border border-slate-300">
+                        <table class="w-full text-left border-collapse text-xs">
+                            <thead>
+                                <tr class="bg-tealbrand-900 text-white uppercase tracking-wider text-[11px]">
+                                    <th class="p-3 w-10 text-center">No</th>
+                                    <th class="p-3 w-44">Indikator Rapor Pendidikan</th>
+                                    <th class="p-3 w-36">Capaian Rapor</th>
+                                    <th class="p-3 w-48">Temuan Evaluasi Diri Sekolah (EDS)</th>
+                                    <th class="p-3">Refleksi Akar Masalah (Level 1 &amp; 2)</th>
+                                    <th class="p-3">Program Benahi RKT &amp; Kode ARKAS 2027</th>
+                                    <th class="p-3 w-36 text-right">Target RKT (Rp)</th>
+                                    <th class="p-3 w-36 text-right">Terinci di RKAS (Rp)</th>
+                                </tr>
+                            </thead>
+                            <tbody id="pbd-matrix-body" class="divide-y divide-slate-200 bg-white">
+                                <!-- Dirender via JS -->
+                            </tbody>
+                            <tfoot id="pbd-matrix-foot" class="bg-slate-900 text-white font-bold">
+                                <!-- Rekap otomatis -->
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Catatan Coaching Pengawas untuk PBD & EDS -->
+                <div class="p-5 rounded-2xl bg-amber-50 border border-amber-200 space-y-2 text-xs sm:text-sm text-amber-950">
+                    <h4 class="font-display font-bold text-base text-amber-900 flex items-center gap-2">
+                        <i data-lucide="compass" class="w-5 h-5 text-amber-700"></i>
+                        Checklist Verifikasi Substansi PBD bagi Pengawas Pembina
+                    </h4>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3 pt-1">
+                        <div class="bg-white/80 p-3 rounded-xl border border-amber-200">
+                            <strong>1. Integrasi Rapor Pendidikan &amp; EDS:</strong> Pastikan indikator Rapor Pendidikan yang <em>Merah/Kuning</em> dipadukan dengan temuan kualitatif EDS (misalnya kondisi pojok baca, alat peraga kelas, atau iklim anti-perundungan).
+                        </div>
+                        <div class="bg-white/80 p-3 rounded-xl border border-amber-200">
+                            <strong>2. Konsistensi Angka RKT vs RKAS:</strong> Bandingkan kolom <em>Target RKT (Rp)</em> dengan kolom <em>Terinci di RKAS (Rp)</em>. Jika indikator masih <em>Merah</em> namun nilai RKAS-nya Rp 0, arahkan sekolah menambahkan rinciannya di <strong>Menu 8 (Simulator RKAS)</strong>.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- =================================================================== -->
+        <!-- MODUL 7: LEMBAR KERJA INTERAKTIF & SIMULASI (SMPN CIGEDUG & AL MU'AWANAH) -->
         <!-- =================================================================== -->
         <section id="panel-lembarkerja" class="tab-panel hidden space-y-6">
             <!-- Control Bar Preset Sekolah -->
@@ -502,7 +669,7 @@
                     <div class="flex flex-wrap items-center justify-between gap-2">
                         <h3 class="font-display font-bold text-base text-teal-900">BAGIAN A: EVALUASI SERAPAN & TINDAK LANJUT BOSP TA 2026</h3>
                         <span class="text-[11px] font-semibold text-teal-800 bg-teal-50 border border-teal-200 px-2.5 py-1 rounded-full no-print">
-                            ✓ Nominal Proyeksi SiLPA (Baris 4) otomatis mengalir ke Arus Kas Januari 2027 (Menu 8)
+                            ✓ Nominal Proyeksi SiLPA (Baris 4) otomatis mengalir ke Arus Kas Januari 2027 (Menu 9)
                         </span>
                     </div>
                     <div class="overflow-x-auto rounded-xl border border-slate-300">
@@ -524,7 +691,12 @@
 
                 <!-- BAGIAN B: PEMETAAN RAPOR PENDIDIKAN (PBD) -->
                 <div class="space-y-3">
-                    <h3 class="font-display font-bold text-base text-teal-900">BAGIAN B: PEMETAAN KEBUTUHAN BERBASIS RAPOR PENDIDIKAN (PBD)</h3>
+                    <div class="flex flex-wrap items-center justify-between gap-2">
+                        <h3 class="font-display font-bold text-base text-teal-900">BAGIAN B: PEMETAAN KEBUTUHAN BERBASIS RAPOR PENDIDIKAN & EDS (PBD)</h3>
+                        <button type="button" onclick="switchModule('pbd')" class="text-xs font-bold text-teal-800 bg-teal-50 hover:bg-teal-100 border border-teal-300 px-3 py-1.5 rounded-full flex items-center gap-1 transition no-print">
+                            <i data-lucide="bar-chart-2" class="w-3.5 h-3.5"></i> Bedah Detail Rapor Pendidikan &amp; EDS di Menu 6 →
+                        </button>
+                    </div>
                     <div class="overflow-x-auto rounded-xl border border-slate-300">
                         <table class="w-full text-left border-collapse text-xs sm:text-sm">
                             <thead>
@@ -550,7 +722,7 @@
                         <h3 class="font-display font-bold text-base text-teal-900">BAGIAN C: MATRIKS PEMETAAN PAGU & KEPATUHAN REGULASI (PERMENDIKDASMEN 8/2026)</h3>
                         <div class="flex flex-wrap items-center gap-2 no-print">
                             <button type="button" onclick="switchModule('rkas')" class="text-xs font-bold text-white bg-teal-700 hover:bg-teal-800 px-3 py-1.5 rounded-full shadow-xs flex items-center gap-1 transition">
-                                <i data-lucide="file-spreadsheet" class="w-3.5 h-3.5"></i> Rincikan di Simulator RKAS (Menu 7) →
+                                <i data-lucide="file-spreadsheet" class="w-3.5 h-3.5"></i> Rincikan di Simulator RKAS (Menu 8) →
                             </button>
                         </div>
                     </div>
@@ -759,12 +931,12 @@ Terima kasih, sampai bertemu besok dalam keadaan sehat walafiat.</textarea>
                                 <tr>
                                     <td class="p-3.5 font-bold">08.45 – 09.15</td>
                                     <td class="p-3.5 text-center">30'</td>
-                                    <td class="p-3.5">Bedah <strong>Contoh LK & Simulator RKAS</strong> (simulasi perbedaan sekolah Negeri vs Swasta & cara menjaga keseimbangan pagu 100%).</td>
+                                    <td class="p-3.5">Bedah <strong>Rapor Pendidikan &amp; EDS (PBD)</strong>, <strong>Contoh LK</strong>, &amp; <strong>Simulator RKAS</strong> (simulasi perbedaan Negeri vs Swasta &amp; keseimbangan pagu 100%).</td>
                                 </tr>
                                 <tr>
                                     <td class="p-3.5 font-bold">09.15 – 10.30</td>
                                     <td class="p-3.5 text-center">75'</td>
-                                    <td class="p-3.5"><strong>Praktik Kerja Mandiri Tim Sekolah</strong> mengisi LK Bagian A s.d. D & rincian RKAS BOSP 2027 (Pengawas membimbing & memverifikasi kelayakan honor serta Rapor Pendidikan).</td>
+                                    <td class="p-3.5"><strong>Praktik Kerja Mandiri Tim Sekolah</strong> mengisi Matriks PBD &amp; EDS (Menu 6), LK Bagian A s.d. D (Menu 7), &amp; rincian RKAS BOSP 2027 (Menu 8).</td>
                                 </tr>
                                 <tr>
                                     <td class="p-3.5 font-bold">10.30 – 11.15</td>
@@ -930,7 +1102,7 @@ Terima kasih, sampai bertemu besok dalam keadaan sehat walafiat.</textarea>
                             <span class="px-2.5 py-1 rounded-full bg-white/10 text-teal-200 text-xs font-bold">Slide 1 / 12</span>
                         </div>
                         <h2 contenteditable="true" class="font-display font-extrabold text-3xl sm:text-5xl leading-tight max-w-4xl">Perencanaan &amp; Pemetaan Dana BOSP TA 2027</h2>
-                        <p contenteditable="true" class="text-lg sm:text-2xl text-slate-200 mt-4 max-w-3xl">Selaras Perencanaan Berbasis Data (Rapor Pendidikan) &amp; Permendikdasmen Nomor 8 Tahun 2026</p>
+                        <p contenteditable="true" class="text-lg sm:text-2xl text-slate-200 mt-4 max-w-3xl">Selaras Perencanaan Berbasis Data (Rapor Pendidikan &amp; EDS) &amp; Permendikdasmen Nomor 8 Tahun 2026</p>
                         <div class="w-20 h-1.5 bg-amber-500 my-6"></div>
                         <p contenteditable="true" class="text-xs sm:text-sm text-teal-200/90 max-w-3xl leading-relaxed">
                             Fasilitasi penyusunan draf RKT &amp; RKAS TA 2027 secara partisipatif bersama Kepala Sekolah, Bendahara BOS, Operator ARKAS, Perwakilan Guru, dan Komite Sekolah.
@@ -957,7 +1129,7 @@ Terima kasih, sampai bertemu besok dalam keadaan sehat walafiat.</textarea>
                             </div>
                             <div class="bg-white p-4 rounded-xl border-l-4 border-teal-600 shadow-2xs">
                                 <h3 contenteditable="true" class="font-bold text-base sm:text-lg text-slate-900">2. Perencanaan Berbasis Data (PBD)</h3>
-                                <p contenteditable="true" class="text-xs sm:text-sm text-slate-600 mt-1">Mengarahkan alokasi anggaran langsung pada akar masalah indikator Rapor Pendidikan (Literasi, Numerasi, Karakter, Iklim Keamanan).</p>
+                                <p contenteditable="true" class="text-xs sm:text-sm text-slate-600 mt-1">Menyelaraskan RKT dan RKAS/ARKAS 2027 dengan akar masalah pada Rapor Pendidikan dan hasil Evaluasi Diri Sekolah (EDS).</p>
                             </div>
                             <div class="bg-white p-4 rounded-xl border-l-4 border-amber-600 shadow-2xs">
                                 <h3 contenteditable="true" class="font-bold text-base sm:text-lg text-slate-900">3. Kepatuhan Regulasi Baru (8/2026)</h3>
@@ -1050,14 +1222,14 @@ Terima kasih, sampai bertemu besok dalam keadaan sehat walafiat.</textarea>
                             <span class="px-2.5 py-1 rounded-full bg-teal-200/70 text-teal-950 text-xs font-bold">Slide 5 / 12</span>
                         </div>
                         <p contenteditable="true" class="text-sm sm:text-base font-bold uppercase tracking-widest text-teal-700 mb-3">Alur Kerja Praktik Pendampingan</p>
-                        <h2 contenteditable="true" class="font-display font-extrabold text-3xl sm:text-5xl text-[#0f292e] max-w-4xl leading-tight mb-4">Langkah Pengisian Lembar Kerja &amp; Simulator RKAS 2027</h2>
+                        <h2 contenteditable="true" class="font-display font-extrabold text-3xl sm:text-5xl text-[#0f292e] max-w-4xl leading-tight mb-4">Langkah Pengisian PBD, Lembar Kerja &amp; Simulator RKAS 2027</h2>
                         <p contenteditable="true" class="text-sm sm:text-lg text-slate-700 max-w-3xl leading-relaxed">
-                            Pendekatan bertahap dari <strong>Evaluasi Anggaran 2026</strong> → <strong>Bedah Rapor Pendidikan</strong> → <strong>Distribusi Pagu Makro</strong> → <strong>Rincian Mikro SSH/SBU</strong> → <strong>Simulasi Arus Kas 12 Bulan</strong>.
+                            Pendekatan bertahap dari <strong>Bedah Rapor Pendidikan &amp; EDS (PBD)</strong> → <strong>Evaluasi Anggaran 2026</strong> → <strong>Distribusi Pagu Makro</strong> → <strong>Rincian Mikro SSH/SBU</strong> → <strong>Simulasi Arus Kas 12 Bulan</strong>.
                         </p>
                     </div>
                     <div class="slide-note-box hidden bg-amber-50/90 border border-amber-200 rounded-xl p-4 text-xs sm:text-sm text-slate-800">
                         <strong class="text-amber-900 block mb-1">📌 Catatan Penjelasan Pengawas (Slide 5):</strong>
-                        <p contenteditable="true">Slide ini merupakan pembatas sesi teori menuju sesi praktik. Arahkan peserta membuka laptop dan mengakses <strong>Tab 6 (Lembar Kerja)</strong> serta <strong>Tab 7 (Simulator RKAS)</strong>.</p>
+                        <p contenteditable="true">Slide ini merupakan pembatas sesi teori menuju sesi praktik. Arahkan peserta membuka laptop dan mengakses <strong>Tab 6 (Perencanaan Berbasis Data)</strong>, <strong>Tab 7 (Lembar Kerja)</strong>, serta <strong>Tab 8 (Simulator RKAS)</strong>.</p>
                     </div>
                 </div>
 
@@ -1065,7 +1237,7 @@ Terima kasih, sampai bertemu besok dalam keadaan sehat walafiat.</textarea>
                 <div class="space-y-2.5">
                     <div class="slide-card bg-white text-slate-900 p-8 sm:p-12 flex flex-col">
                         <div class="flex items-center justify-between">
-                            <p contenteditable="true" class="text-xs sm:text-sm font-bold uppercase tracking-wider text-teal-600">Sistematika LK Sekolah (Tab 6)</p>
+                            <p contenteditable="true" class="text-xs sm:text-sm font-bold uppercase tracking-wider text-teal-600">Sistematika LK Sekolah (Tab 7)</p>
                             <span class="px-2.5 py-1 rounded-full bg-slate-100 text-slate-700 text-xs font-bold">Slide 6 / 12</span>
                         </div>
                         <h2 contenteditable="true" class="font-display font-extrabold text-2xl sm:text-4xl mt-1 mb-6">Lima Tahap Pemetaan Anggaran pada Lembar Kerja</h2>
@@ -1081,8 +1253,8 @@ Terima kasih, sampai bertemu besok dalam keadaan sehat walafiat.</textarea>
                             <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 flex flex-col justify-between">
                                 <div>
                                     <span class="w-9 h-9 rounded-full bg-teal-600 text-white font-bold flex items-center justify-center mb-3">B</span>
-                                    <h3 contenteditable="true" class="font-bold text-base mb-1">Bedah PBD</h3>
-                                    <p contenteditable="true" class="text-xs text-slate-600 leading-relaxed">Identifikasi indikator merah/kuning Rapor Pendidikan beserta akar masalahnya.</p>
+                                    <h3 contenteditable="true" class="font-bold text-base mb-1">Bedah PBD &amp; EDS</h3>
+                                    <p contenteditable="true" class="text-xs text-slate-600 leading-relaxed">Identifikasi indikator merah/kuning Rapor Pendidikan &amp; EDS beserta akar masalahnya.</p>
                                 </div>
                                 <span class="text-[11px] font-bold text-teal-700 mt-3">Output: Program Benahi</span>
                             </div>
@@ -1114,7 +1286,7 @@ Terima kasih, sampai bertemu besok dalam keadaan sehat walafiat.</textarea>
                     </div>
                     <div class="slide-note-box hidden bg-amber-50/90 border border-amber-200 rounded-xl p-4 text-xs sm:text-sm text-slate-800">
                         <strong class="text-amber-900 block mb-1">📌 Catatan Penjelasan Pengawas (Slide 6):</strong>
-                        <p contenteditable="true">Pastikan sekolah mengisi LK secara berurutan dari Bagian A ke Bagian E. Jangan langsung membagi rupiah di Bagian C sebelum memetakan kebutuhan mutu di Bagian B.</p>
+                        <p contenteditable="true">Pastikan sekolah mengisi LK secara berurutan dari Bagian A ke Bagian E. Jangan langsung membagi rupiah di Bagian C sebelum memetakan kebutuhan mutu di Menu 6 (PBD) &amp; LK Bagian B.</p>
                     </div>
                 </div>
 
@@ -1122,7 +1294,7 @@ Terima kasih, sampai bertemu besok dalam keadaan sehat walafiat.</textarea>
                 <div class="space-y-2.5">
                     <div class="slide-card bg-slate-50 text-slate-900 p-8 sm:p-12 flex flex-col">
                         <div class="flex items-center justify-between">
-                            <p contenteditable="true" class="text-xs sm:text-sm font-bold uppercase tracking-wider text-teal-600">Bagian A &amp; B Lembar Kerja</p>
+                            <p contenteditable="true" class="text-xs sm:text-sm font-bold uppercase tracking-wider text-teal-600">Menu 6 (PBD) &amp; LK Bagian A–B</p>
                             <span class="px-2.5 py-1 rounded-full bg-slate-200 text-slate-700 text-xs font-bold">Slide 7 / 12</span>
                         </div>
                         <h2 contenteditable="true" class="font-display font-extrabold text-2xl sm:text-4xl mt-1 mb-6">Tiga Fondasi Data Sebelum Membagi Pagu</h2>
@@ -1138,8 +1310,8 @@ Terima kasih, sampai bertemu besok dalam keadaan sehat walafiat.</textarea>
                             <div class="bg-white p-6 rounded-2xl border border-slate-200 flex flex-col justify-between">
                                 <div>
                                     <i data-lucide="trending-up" class="w-8 h-8 text-amber-600 mb-3"></i>
-                                    <h3 contenteditable="true" class="font-bold text-lg mb-2">2. Indikator Merah &amp; Kuning</h3>
-                                    <p contenteditable="true" class="text-xs sm:text-sm text-slate-600 leading-relaxed">Prioritaskan belanja peningkatan mutu pada capaian terendah: Literasi, Numerasi, Karakter, Kualitas Pembelajaran, &amp; Iklim Keamanan.</p>
+                                    <h3 contenteditable="true" class="font-bold text-lg mb-2">2. Rapor Pendidikan &amp; EDS</h3>
+                                    <p contenteditable="true" class="text-xs sm:text-sm text-slate-600 leading-relaxed">Prioritaskan belanja peningkatan mutu pada capaian terendah (Merah/Kuning) dan temuan EDS: Literasi, Numerasi, Karakter, Kualitas Pembelajaran, &amp; Iklim Keamanan.</p>
                                 </div>
                                 <p class="text-xs font-semibold text-amber-900 bg-amber-50 p-2 rounded-lg mt-4">Termasuk dukungan Deep Learning, Koding &amp; KA</p>
                             </div>
@@ -1155,7 +1327,7 @@ Terima kasih, sampai bertemu besok dalam keadaan sehat walafiat.</textarea>
                     </div>
                     <div class="slide-note-box hidden bg-amber-50/90 border border-amber-200 rounded-xl p-4 text-xs sm:text-sm text-slate-800">
                         <strong class="text-amber-900 block mb-1">📌 Catatan Penjelasan Pengawas (Slide 7):</strong>
-                        <p contenteditable="true">Tunjukkan pada aplikasi bahwa angka proyeksi SiLPA yang diisikan di <strong>LK Bagian A Baris 4</strong> otomatis mengalir ke saldo awal bulan Januari pada <strong>Tab 8 (Simulasi Arus Kas 12 Bulan)</strong>.</p>
+                        <p contenteditable="true">Tunjukkan pada aplikasi bahwa angka proyeksi SiLPA yang diisikan di <strong>LK Bagian A Baris 4</strong> otomatis mengalir ke saldo awal bulan Januari pada <strong>Tab 9 (Simulasi Arus Kas 12 Bulan)</strong>.</p>
                     </div>
                 </div>
 
@@ -1404,7 +1576,7 @@ Terima kasih, sampai bertemu besok dalam keadaan sehat walafiat.</textarea>
                     </div>
                     <div class="slide-note-box hidden bg-amber-50/90 border border-amber-200 rounded-xl p-4 text-xs sm:text-sm text-slate-800">
                         <strong class="text-amber-900 block mb-1">📌 Catatan Penjelasan Pengawas (Slide 10):</strong>
-                        <p contenteditable="true">Ajak peserta mencocokkan daftar ini dengan 15 Larangan Pasal 66 pada <strong>Tab 3 (Kajian Regulasi)</strong> dan matrik penanganan kendala di <strong>Tab 9 (Solusi Lapangan)</strong>.</p>
+                        <p contenteditable="true">Ajak peserta mencocokkan daftar ini dengan 15 Larangan Pasal 66 pada <strong>Tab 3 (Kajian Regulasi)</strong> dan matrik penanganan kendala di <strong>Tab 10 (Solusi Lapangan)</strong>.</p>
                     </div>
                 </div>
 
@@ -1425,7 +1597,7 @@ Terima kasih, sampai bertemu besok dalam keadaan sehat walafiat.</textarea>
                             <div class="md:col-span-7 flex flex-col justify-center gap-3.5">
                                 <div class="bg-white p-4 rounded-xl border border-slate-200">
                                     <h4 contenteditable="true" class="font-bold text-base text-teal-700">Minggu ke-4 November 2026</h4>
-                                    <p contenteditable="true" class="text-xs sm:text-sm text-slate-700">Finalisasi kertas kerja rincian SSH/SBU pada Simulator RKAS (Tab 7) &amp; uji arus kas 12 bulan (Tab 8).</p>
+                                    <p contenteditable="true" class="text-xs sm:text-sm text-slate-700">Finalisasi kertas kerja rincian SSH/SBU pada Simulator RKAS (Tab 8) &amp; uji arus kas 12 bulan (Tab 9).</p>
                                 </div>
                                 <div class="bg-white p-4 rounded-xl border border-slate-200">
                                     <h4 contenteditable="true" class="font-bold text-base text-teal-700">Minggu ke-1 Desember 2026</h4>
@@ -1449,20 +1621,20 @@ Terima kasih, sampai bertemu besok dalam keadaan sehat walafiat.</textarea>
                     <div class="slide-card bg-[#0f292e] text-white p-8 sm:p-14 flex flex-col justify-center items-center text-center">
                         <span class="px-3 py-1 rounded-full bg-white/10 text-teal-200 text-xs font-bold mb-4">Slide 12 / 12</span>
                         <div class="w-16 h-1.5 bg-amber-500 mb-6"></div>
-                        <h2 contenteditable="true" class="font-display font-extrabold text-3xl sm:text-5xl max-w-4xl leading-tight mb-4">Mari Praktikkan Pemetaan pada Lembar Kerja Sekolah</h2>
-                        <p contenteditable="true" class="text-base sm:text-xl text-slate-300 mb-6 max-w-2xl">Sesi Praktik Mandiri Pengisian LK (Tab 6), Rincian RKAS (Tab 7), Simulasi Arus Kas (Tab 8), &amp; Klinik Konsultasi</p>
+                        <h2 contenteditable="true" class="font-display font-extrabold text-3xl sm:text-5xl max-w-4xl leading-tight mb-4">Mari Praktikkan Pemetaan pada PBD &amp; Lembar Kerja Sekolah</h2>
+                        <p contenteditable="true" class="text-base sm:text-xl text-slate-300 mb-6 max-w-2xl">Sesi Praktik Mandiri Bedah PBD/EDS (Tab 6), Pengisian LK (Tab 7), Rincian RKAS (Tab 8), Simulasi Arus Kas (Tab 9), &amp; Klinik Konsultasi</p>
                         <p contenteditable="true" class="text-xs sm:text-sm font-bold uppercase tracking-widest text-amber-400">Pengawas Pembina Satuan Pendidikan</p>
                     </div>
                     <div class="slide-note-box hidden bg-amber-50/90 border border-amber-200 rounded-xl p-4 text-xs sm:text-sm text-slate-800">
                         <strong class="text-amber-900 block mb-1">📌 Catatan Penjelasan Pengawas (Slide 12):</strong>
-                        <p contenteditable="true">Pendampingan bergeser ke pola <em>coaching</em> meja-ke-meja. Pengawas berkeliling memeriksa hasil isian LK &amp; Simulator RKAS masing-masing sekolah binaan, lalu mengarsipkan file `.json` tiap sekolah.</p>
+                        <p contenteditable="true">Pendampingan bergeser ke pola <em>coaching</em> meja-ke-meja. Pengawas berkeliling memeriksa hasil isian PBD, LK &amp; Simulator RKAS masing-masing sekolah binaan, lalu mengarsipkan file `.json` tiap sekolah.</p>
                     </div>
                 </div>
             </div>
         </section>
 
         <!-- =================================================================== -->
-        <!-- MODUL 7: SIMULATOR RINCIAN RKAS BOSP TA 2027 (TERINTEGRASI)         -->
+        <!-- MODUL 8: SIMULATOR RINCIAN RKAS BOSP TA 2027 (TERINTEGRASI)         -->
         <!-- =================================================================== -->
         <section id="panel-rkas" class="tab-panel hidden space-y-6">
             <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 sm:p-8 space-y-6">
@@ -1478,11 +1650,11 @@ Terima kasih, sampai bertemu besok dalam keadaan sehat walafiat.</textarea>
                         </p>
                     </div>
                     <div class="flex flex-wrap items-center gap-2 no-print">
-                        <label class="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-teal-50 border border-teal-200 text-teal-950 text-xs font-bold cursor-pointer select-none" title="Jika aktif, setiap perubahan volume/harga di RKAS langsung memperbarui LK Bagian C & Arus Kas 12 Bulan secara otomatis">
+                        <label class="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-teal-50 border border-teal-200 text-teal-950 text-xs font-bold cursor-pointer select-none" title="Jika aktif, setiap perubahan volume/harga di RKAS langsung memperbarui PBD, LK Bagian C & Arus Kas 12 Bulan secara otomatis">
                             <input type="checkbox" id="rkas-autosync-toggle" checked onchange="toggleRkasAutoSync(this.checked)" class="w-4 h-4 rounded text-teal-600 focus:ring-teal-500">
-                            <span>Auto-Sync ke LK & Arus Kas</span>
+                            <span>Auto-Sync ke PBD, LK & Arus Kas</span>
                         </label>
-                        <button type="button" onclick="syncRkasToLkAndCashflow(true)" id="btn-sync-rkas" class="px-4 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold flex items-center gap-1.5 shadow-sm transition" title="Kirim total tiap komponen RKAS ini ke LK Bagian C dan Arus Kas 12 Bulan">
+                        <button type="button" onclick="syncRkasToLkAndCashflow(true)" id="btn-sync-rkas" class="px-4 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold flex items-center gap-1.5 shadow-sm transition" title="Kirim total tiap komponen RKAS ini ke PBD, LK Bagian C dan Arus Kas 12 Bulan">
                             <i data-lucide="refresh-cw" class="w-4 h-4"></i> Sinkronkan Sekarang
                         </button>
                         <button type="button" onclick="openPreviewModal('landscape')" class="px-3.5 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-900 text-white text-xs font-bold flex items-center gap-1.5 shadow-sm transition">
@@ -1498,9 +1670,9 @@ Terima kasih, sampai bertemu besok dalam keadaan sehat walafiat.</textarea>
                             <span class="font-bold text-slate-500 uppercase">Sekolah Aktif:</span>
                             <strong id="rkas-school-badge" class="px-2.5 py-0.5 rounded-md bg-teal-900 text-amber-300 font-bold">SMPN Cigedug (Negeri)</strong>
                             <span id="rkas-pagu-badge" class="px-2.5 py-0.5 rounded-md bg-white border border-slate-300 text-slate-800 font-bold">Pagu: Rp 660.000.000</span>
-                            <span id="rkas-sync-status-pill" class="px-2.5 py-0.5 rounded-md bg-emerald-100 text-emerald-900 font-bold">✓ Tersinkron Otomatis ke LK & Arus Kas</span>
+                            <span id="rkas-sync-status-pill" class="px-2.5 py-0.5 rounded-md bg-emerald-100 text-emerald-900 font-bold">✓ Tersinkron Otomatis ke PBD, LK & Arus Kas</span>
                         </div>
-                        <p class="text-xs text-slate-500">Perubahan rincian di bawah ini otomatis menghitung persentase kepatuhan Pasal 42 Permendikdasmen 8/2026 serta porsi belanja PBD Rapor Pendidikan.</p>
+                        <p class="text-xs text-slate-500">Perubahan rincian di bawah ini otomatis menghitung persentase kepatuhan Pasal 42 Permendikdasmen 8/2026 serta porsi belanja PBD Rapor Pendidikan (Menu 6).</p>
                     </div>
                     <div class="flex flex-wrap items-center gap-2">
                         <button type="button" onclick="loadRkasPreset('cigedug')" class="px-3 py-2 rounded-xl text-xs font-bold border border-teal-600 bg-teal-50 text-teal-900 hover:bg-teal-100 transition">
@@ -1594,7 +1766,7 @@ Terima kasih, sampai bertemu besok dalam keadaan sehat walafiat.</textarea>
                                 <i data-lucide="bar-chart-3" class="w-4 h-4 text-teal-700"></i>
                                 Rekapitulasi Porsi Belanja Berbasis PBD Rapor Pendidikan vs Operasional Rutin
                             </h3>
-                            <p class="text-xs text-slate-600">Membantu Pengawas Pembina menilai keselarasan anggaran terhadap peningkatan mutu pembelajaran (Rapor Pendidikan).</p>
+                            <p class="text-xs text-slate-600">Membantu Pengawas Pembina menilai keselarasan anggaran terhadap peningkatan mutu pembelajaran (Rapor Pendidikan &amp; EDS pada Menu 6).</p>
                         </div>
                         <span id="rkas-pbd-mutu-badge" class="px-3 py-1 rounded-full bg-emerald-100 text-emerald-900 font-extrabold text-xs">
                             Porsi Mutu Pembelajaran (PBD): 0%
@@ -1629,7 +1801,7 @@ Terima kasih, sampai bertemu besok dalam keadaan sehat walafiat.</textarea>
         </section>
 
         <!-- =================================================================== -->
-        <!-- MODUL 8: SIMULASI PETA ARUS KAS & RENCANA BELANJA 12 BULAN (2027)    -->
+        <!-- MODUL 9: SIMULASI PETA ARUS KAS & RENCANA BELANJA 12 BULAN (2027)    -->
         <!-- =================================================================== -->
         <section id="panel-aruskas" class="tab-panel hidden space-y-6">
             <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 sm:p-8 space-y-6">
@@ -2394,7 +2566,7 @@ Terima kasih, sampai bertemu besok dalam keadaan sehat walafiat.</textarea>
         </section>
 
         <!-- =================================================================== -->
-        <!-- MODUL 9: SOLUSI LAPANGAN & TINDAKAN COACHING PENGAWAS               -->
+        <!-- MODUL 10: SOLUSI LAPANGAN & TINDAKAN COACHING PENGAWAS              -->
         <!-- =================================================================== -->
         <section id="panel-solusi" class="tab-panel hidden space-y-6">
             <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 sm:p-8 space-y-6">
@@ -2494,7 +2666,7 @@ Terima kasih, sampai bertemu besok dalam keadaan sehat walafiat.</textarea>
         // =========================================================================
         // 1. STATE GLOBAL APLIKASI & AUTO-SAVE STORAGE
         // =========================================================================
-        const STORAGE_KEY = 'portal_bosp_2027_session_v1';
+        const STORAGE_KEY = 'portal_bosp_2027_session_v2';
 
         let currentZoom = 1.0;
         let currentModule = 'panduan';
@@ -2525,29 +2697,36 @@ Terima kasih, sampai bertemu besok dalam keadaan sehat walafiat.</textarea>
                 title: '5. Bahan Tayang Presentasi Pendampingan (12 Slide)',
                 getFileName: () => 'Bahan_Tayang_Presentasi_BOSP_TA_2027'
             },
+            pbd: {
+                title: '6. Perencanaan Berbasis Data (PBD): Bedah Rapor Pendidikan & EDS',
+                getFileName: () => {
+                    const namaSekolah = (lkState.nama || '').trim().replace(/[^a-zA-Z0-9\s]/g, '').replace(/\s+/g, '_');
+                    return namaSekolah ? `Perencanaan_Berbasis_Data_PBD_2027_${namaSekolah}` : 'Perencanaan_Berbasis_Data_PBD_TA_2027';
+                }
+            },
             lembarkerja: {
-                title: '6. Lembar Kerja Pemetaan & Perencanaan BOSP TA 2027',
+                title: '7. Lembar Kerja Pemetaan & Perencanaan BOSP TA 2027',
                 getFileName: () => {
                     const namaSekolah = (lkState.nama || '').trim().replace(/[^a-zA-Z0-9\s]/g, '').replace(/\s+/g, '_');
                     return namaSekolah ? `LK_Pemetaan_BOSP_2027_${namaSekolah}` : 'LK_Pemetaan_BOSP_TA_2027_Kosong';
                 }
             },
             rkas: {
-                title: '7. Simulator Rincian RKAS BOSP TA 2027 (SSH/SBU & Kode ARKAS)',
+                title: '8. Simulator Rincian RKAS BOSP TA 2027 (SSH/SBU & Kode ARKAS)',
                 getFileName: () => {
                     const namaSekolah = (lkState.nama || '').trim().replace(/[^a-zA-Z0-9\s]/g, '').replace(/\s+/g, '_');
                     return namaSekolah ? `RKAS_BOSP_2027_${namaSekolah}` : 'RKAS_BOSP_TA_2027';
                 }
             },
             aruskas: {
-                title: '8. Simulasi Peta Arus Kas & Rencana Belanja 12 Bulan (TA 2027)',
+                title: '9. Simulasi Peta Arus Kas & Rencana Belanja 12 Bulan (TA 2027)',
                 getFileName: () => {
                     const namaSekolah = (lkState.nama || '').trim().replace(/[^a-zA-Z0-9\s]/g, '').replace(/\s+/g, '_');
                     return namaSekolah ? `Simulasi_Arus_Kas_12_Bulan_2027_${namaSekolah}` : 'Simulasi_Arus_Kas_12_Bulan_BOSP_TA_2027';
                 }
             },
             solusi: {
-                title: '9. Matriks Solusi Lapangan & Tindakan Coaching Pengawas',
+                title: '10. Matriks Solusi Lapangan & Tindakan Coaching Pengawas',
                 getFileName: () => 'Matriks_Solusi_Lapangan_Coaching_Pengawas_BOSP'
             }
         };
@@ -2627,12 +2806,12 @@ Terima kasih, sampai bertemu besok dalam keadaan sehat walafiat.</textarea>
                     { uraian: 'Catatan/Rekomendasi Hasil Monev Pengawas 2026', nilai: '', implikasi: '' }
                 ],
                 bagianB: [
-                    { indikator: 'Kemampuan Literasi', capaian: '', masalah: '', benahi: '', anggaran: 0 },
-                    { indikator: 'Kemampuan Numerasi', capaian: '', masalah: '', benahi: '', anggaran: 0 },
-                    { indikator: 'Karakter Peserta Didik', capaian: '', masalah: '', benahi: '', anggaran: 0 },
-                    { indikator: 'Kualitas Pembelajaran', capaian: '', masalah: '', benahi: '', anggaran: 0 },
-                    { indikator: 'Iklim Keamanan & Inklusivitas', capaian: '', masalah: '', benahi: '', anggaran: 0 },
-                    { indikator: 'Kompetensi Pendidik & Tendik', capaian: '', masalah: '', benahi: '', anggaran: 0 }
+                    { indikator: 'Kemampuan Literasi', capaian: '', eds: '', masalah: '', benahi: '', anggaran: 0 },
+                    { indikator: 'Kemampuan Numerasi', capaian: '', eds: '', masalah: '', benahi: '', anggaran: 0 },
+                    { indikator: 'Karakter Peserta Didik', capaian: '', eds: '', masalah: '', benahi: '', anggaran: 0 },
+                    { indikator: 'Kualitas Pembelajaran', capaian: '', eds: '', masalah: '', benahi: '', anggaran: 0 },
+                    { indikator: 'Iklim Keamanan & Inklusivitas', capaian: '', eds: '', masalah: '', benahi: '', anggaran: 0 },
+                    { indikator: 'Kompetensi Pendidik & Tendik', capaian: '', eds: '', masalah: '', benahi: '', anggaran: 0 }
                 ],
                 alokasiC: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
                 honor: [
@@ -2662,12 +2841,12 @@ Terima kasih, sampai bertemu besok dalam keadaan sehat walafiat.</textarea>
                     { uraian: 'Catatan/Rekomendasi Hasil Monev Pengawas 2026', nilai: 'Daftar hadir rapat & pemanfaatan buku perpus', implikasi: 'Penguatan SOP administrasi SPJ & program wajib baca' }
                 ],
                 bagianB: [
-                    { indikator: 'Kemampuan Literasi', capaian: 'Sedang (Kuning)', masalah: 'Koleksi buku pengayaan terbatas & pojok baca belum aktif', benahi: 'Pengadaan buku pengayaan literasi & lomba literasi bulanan', anggaran: 72600000 },
-                    { indikator: 'Kemampuan Numerasi', capaian: 'Kurang (Merah)', masalah: 'Pembelajaran matematika abstrak & minim alat peraga', benahi: 'IHT Pembelajaran Numerasi Kontekstual & alat peraga', anggaran: 38000000 },
-                    { indikator: 'Karakter Peserta Didik', capaian: 'Baik (Hijau)', masalah: 'Perlu pencegahan perundungan siber & penguatan karakter', benahi: 'Workshop anti-perundungan & kegiatan kokurikuler karakter', anggaran: 28400000 },
-                    { indikator: 'Kualitas Pembelajaran', capaian: 'Sedang (Kuning)', masalah: 'Metode masih ceramah dan minim asesmen formatif', benahi: 'Aktivasi Komunitas Belajar (Kombel) & supervisi klinis', anggaran: 24000000 },
-                    { indikator: 'Iklim Keamanan & Inklusivitas', capaian: 'Baik (Hijau)', masalah: 'Plafon 3 ruang kelas VII bocor & kunci toilet rusak ringan', benahi: 'Pemeliharaan ringan atap/plafon kelas & sanitasi toilet', anggaran: 66000000 },
-                    { indikator: 'Kompetensi Pendidik & Tendik', capaian: 'Sedang (Kuning)', masalah: 'Pemanfaatan TIK dan asesmen digital guru belum merata', benahi: 'Pelatihan penyusunan asesmen digital bagi guru', anggaran: 18000000 }
+                    { indikator: 'Kemampuan Literasi', capaian: 'Sedang (Kuning)', eds: 'Rasio buku nonteks baru 1:3 & pojok baca kelas belum tertata', masalah: 'Koleksi buku pengayaan terbatas & pojok baca belum aktif', benahi: 'Pengadaan buku pengayaan literasi & lomba literasi bulanan', anggaran: 72600000 },
+                    { indikator: 'Kemampuan Numerasi', capaian: 'Kurang (Merah)', eds: 'Alat peraga matematika di lab IPA/Matematika rusak & kurang', masalah: 'Pembelajaran matematika abstrak & minim alat peraga', benahi: 'IHT Pembelajaran Numerasi Kontekstual & alat peraga', anggaran: 38000000 },
+                    { indikator: 'Karakter Peserta Didik', capaian: 'Baik (Hijau)', eds: 'Perlu penguatan literasi digital & pencegahan perundungan siber', masalah: 'Perlu pencegahan perundungan siber & penguatan karakter', benahi: 'Workshop anti-perundungan & kegiatan kokurikuler karakter', anggaran: 28400000 },
+                    { indikator: 'Kualitas Pembelajaran', capaian: 'Sedang (Kuning)', eds: 'Supervisi kelas menunjukkan 65% guru masih dominan ceramah', masalah: 'Metode masih ceramah dan minim asesmen formatif', benahi: 'Aktivasi Komunitas Belajar (Kombel) & supervisi klinis', anggaran: 24000000 },
+                    { indikator: 'Iklim Keamanan & Inklusivitas', capaian: 'Baik (Hijau)', eds: 'Plafon 3 kelas VII lembap & 6 pintu toilet siswa perlu perbaikan', masalah: 'Plafon 3 ruang kelas VII bocor & kunci toilet rusak ringan', benahi: 'Pemeliharaan ringan atap/plafon kelas & sanitasi toilet', anggaran: 66000000 },
+                    { indikator: 'Kompetensi Pendidik & Tendik', capaian: 'Sedang (Kuning)', eds: 'Guru membutuhkan pendampingan perangkat ajar Deep Learning & TIK', masalah: 'Pemanfaatan TIK dan asesmen digital guru belum merata', benahi: 'Pelatihan penyusunan asesmen digital bagi guru', anggaran: 18000000 }
                 ],
                 alokasiC: [16500000, 12000000, 72600000, 93500000, 59400000, 48000000, 25000000, 57600000, 99000000, 39600000, 18000000, 118800000],
                 honor: [
@@ -2703,12 +2882,12 @@ Terima kasih, sampai bertemu besok dalam keadaan sehat walafiat.</textarea>
                     { uraian: 'Catatan/Rekomendasi Hasil Monev Pengawas 2026', nilai: 'Lampiran presensi bulanan & SK Yayasan honor', implikasi: 'Wajib dilampirkan rutin setiap bulan pada SPJ 2027' }
                 ],
                 bagianB: [
-                    { indikator: 'Kemampuan Literasi', capaian: 'Baik (Hijau)', masalah: 'Perlu variasi buku referensi sains populer & dwibahasa', benahi: 'Pengadaan buku pengayaan dwibahasa & jurnal literasi', anggaran: 38115000 },
-                    { indikator: 'Kemampuan Numerasi', capaian: 'Sedang (Kuning)', masalah: 'Siswa kesulitan pada soal pemecahan masalah AKM', benahi: 'Klinik Numerasi & pengadaan modul latihan berbasis AKM', anggaran: 18500000 },
-                    { indikator: 'Karakter Peserta Didik', capaian: 'Baik (Hijau)', masalah: 'Perlu penguatan kepemimpinan siswa & kepedulian lingkungan', benahi: 'Latihan Dasar Kepemimpinan Siswa (LDKS) & ekopeduli', anggaran: 15000000 },
-                    { indikator: 'Kualitas Pembelajaran', capaian: 'Sedang (Kuning)', masalah: 'Guru muda perlu pendampingan penyusunan modul ajar aktif', benahi: 'Lesson study internal & workshop perangkat ajar Kombel', anggaran: 12000000 },
-                    { indikator: 'Iklim Keamanan & Inklusivitas', capaian: 'Sedang (Kuning)', masalah: 'Belum ada papan alur pengaduan & perlengkapan UKS kurang', benahi: 'Pengadaan perlengkapan UKS/P3K & poster anti-bullying', anggaran: 14000000 },
-                    { indikator: 'Kompetensi Pendidik & Tendik', capaian: 'Sedang (Kuning)', masalah: 'Guru butuh pelatihan asesmen diagnostik & media interaktif', benahi: 'Workshop internal asesmen diagnostik & media digital', anggaran: 10395000 }
+                    { indikator: 'Kemampuan Literasi', capaian: 'Baik (Hijau)', eds: 'Minat baca tinggi namun koleksi buku sains populer terbatas', masalah: 'Perlu variasi buku referensi sains populer & dwibahasa', benahi: 'Pengadaan buku pengayaan dwibahasa & jurnal literasi', anggaran: 38115000 },
+                    { indikator: 'Kemampuan Numerasi', capaian: 'Sedang (Kuning)', eds: 'Hasil latihan soal penalaran AKM kelas VIII masih di bawah target', masalah: 'Siswa kesulitan pada soal pemecahan masalah AKM', benahi: 'Klinik Numerasi & pengadaan modul latihan berbasis AKM', anggaran: 18500000 },
+                    { indikator: 'Karakter Peserta Didik', capaian: 'Baik (Hijau)', eds: 'Program OSIS & pembiasaan akhlak berjalan baik', masalah: 'Perlu penguatan kepemimpinan siswa & kepedulian lingkungan', benahi: 'Latihan Dasar Kepemimpinan Siswa (LDKS) & ekopeduli', anggaran: 15000000 },
+                    { indikator: 'Kualitas Pembelajaran', capaian: 'Sedang (Kuning)', eds: 'Sebagian guru baru memerlukan pendampingan pembelajaran aktif', masalah: 'Guru muda perlu pendampingan penyusunan modul ajar aktif', benahi: 'Lesson study internal & workshop perangkat ajar Kombel', anggaran: 12000000 },
+                    { indikator: 'Iklim Keamanan & Inklusivitas', capaian: 'Sedang (Kuning)', eds: 'Ruang UKS sempit & perlengkapan P3K perlu dilengkapi', masalah: 'Belum ada papan alur pengaduan & perlengkapan UKS kurang', benahi: 'Pengadaan perlengkapan UKS/P3K & poster anti-bullying', anggaran: 14000000 },
+                    { indikator: 'Kompetensi Pendidik & Tendik', capaian: 'Sedang (Kuning)', eds: 'Guru memerlukan penguatan asesmen diagnostik digital', masalah: 'Guru butuh pelatihan asesmen diagnostik & media interaktif', benahi: 'Workshop internal asesmen diagnostik & media digital', anggaran: 10395000 }
                 ],
                 alokasiC: [10395000, 5500000, 38115000, 38010000, 27720000, 17580000, 10395000, 24000000, 34650000, 10395000, 5000000, 124740000],
                 honor: [
@@ -2756,7 +2935,7 @@ Terima kasih, sampai bertemu besok dalam keadaan sehat walafiat.</textarea>
         function saveSessionToLocal() {
             try {
                 const payload = {
-                    version: '2027.1',
+                    version: '2027.2',
                     savedAt: new Date().toISOString(),
                     lkState: lkState,
                     rkasItems: rkasItems,
@@ -2847,6 +3026,7 @@ Terima kasih, sampai bertemu besok dalam keadaan sehat walafiat.</textarea>
                     rkasItems = data.rkasItems;
                     silpaManualOverride = false;
 
+                    renderPbdModule();
                     renderLkAll();
                     renderRkasTable();
                     if (data.akSilpa !== undefined) {
@@ -2915,13 +3095,17 @@ Terima kasih, sampai bertemu besok dalam keadaan sehat walafiat.</textarea>
                 targetBtn.classList.add('nav-active');
             }
 
-            if (['presentasi', 'perbandingan', 'rkas', 'aruskas', 'kajianregulasi', 'solusi'].includes(modId)) {
+            if (['presentasi', 'perbandingan', 'pbd', 'rkas', 'aruskas', 'kajianregulasi', 'solusi'].includes(modId)) {
                 setPrintOrientation('landscape', true);
             } else {
                 setPrintOrientation('portrait', true);
             }
 
+            if (modId === 'pbd') {
+                renderPbdModule();
+            }
             if (modId === 'lembarkerja') {
+                renderLkBagianB();
                 renderLkBagianC();
                 renderLkHonor();
                 renderLkSarpras();
@@ -2957,11 +3141,11 @@ Terima kasih, sampai bertemu besok dalam keadaan sehat walafiat.</textarea>
             if (synced) {
                 if (globalBadge) {
                     globalBadge.className = 'inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-900 font-bold text-[11px]';
-                    globalBadge.innerHTML = `<i data-lucide="check-circle-2" class="w-3.5 h-3.5 text-emerald-700"></i> Data LK ↔ RKAS ↔ Arus Kas Tersinkron`;
+                    globalBadge.innerHTML = `<i data-lucide="check-circle-2" class="w-3.5 h-3.5 text-emerald-700"></i> Data PBD ↔ LK ↔ RKAS ↔ Arus Kas Tersinkron`;
                 }
                 if (rkasPill) {
                     rkasPill.className = 'px-2.5 py-0.5 rounded-md bg-emerald-100 text-emerald-900 font-bold';
-                    rkasPill.textContent = '✓ Tersinkron Otomatis ke LK & Arus Kas';
+                    rkasPill.textContent = '✓ Tersinkron Otomatis ke PBD, LK & Arus Kas';
                 }
             } else {
                 if (globalBadge) {
@@ -2988,6 +3172,133 @@ Terima kasih, sampai bertemu besok dalam keadaan sehat walafiat.</textarea>
                 el.style.opacity = '0';
                 setTimeout(() => el.remove(), 300);
             }, 2800);
+        }
+
+        // =========================================================================
+        // 3B. LOGIKA MODUL 6: PERENCANAAN BERBASIS DATA (PBD) - RAPOR & EDS
+        // =========================================================================
+
+        function computeRkasTotalByIndicator(idx) {
+            const matchers = [
+                ['literasi', 'a.1'],
+                ['numerasi', 'a.2'],
+                ['karakter', 'kebinekaan', 'a.3', 'd.8'],
+                ['kualitas pembelajaran', 'd.1'],
+                ['keamanan', 'inklusivitas', 'd.4'],
+                ['refleksi', 'pendidik', 'tendik', 'kombel', 'd.2']
+            ];
+            const keys = matchers[idx] || [];
+            return rkasItems.reduce((sum, item) => {
+                const tag = (item.pbd || '').toLowerCase();
+                const isMatch = keys.some(k => tag.includes(k));
+                return isMatch ? sum + Math.round((item.vol || 0) * (item.harga || 0)) : sum;
+            }, 0);
+        }
+
+        function onPbdFieldChange(idx, field, val) {
+            if (!lkState.bagianB[idx]) return;
+            lkState.bagianB[idx][field] = field === 'anggaran' ? (parseInt(val) || 0) : val;
+            renderLkBagianB();
+            updatePbdSummaryCards();
+            scheduleAutoSave();
+        }
+
+        function syncPbdToLkAndRkas(notify = true) {
+            renderLkBagianB();
+            renderPbdModule();
+            scheduleAutoSave();
+            if (notify) {
+                showToast('Hasil analisis PBD (Rapor Pendidikan & EDS) berhasil disinkronkan ke LK Bagian B (Menu 7)!');
+            }
+        }
+
+        function updatePbdSummaryCards() {
+            const pagu = (lkState.siswa || 0) * (lkState.satuan || 0);
+            const schoolName = (lkState.nama || '').trim() || 'Satuan Pendidikan Binaan';
+            const cardSchool = document.getElementById('pbd-card-school');
+            if (cardSchool) cardSchool.textContent = `${schoolName} (${lkState.status})`;
+            const cardPagu = document.getElementById('pbd-card-pagu');
+            if (cardPagu) cardPagu.textContent = `Pagu: ${formatRupiah(pagu)}`;
+
+            const priorityCount = lkState.bagianB.filter(b => {
+                const c = (b.capaian || '').toLowerCase();
+                return c.includes('kurang') || c.includes('merah') || c.includes('sedang') || c.includes('kuning');
+            }).length;
+
+            const cardCount = document.getElementById('pbd-card-priority-count');
+            if (cardCount) cardCount.textContent = `${priorityCount} Indikator Merah / Kuning`;
+
+            const totalRkt = lkState.bagianB.reduce((acc, b) => acc + (parseInt(b.anggaran) || 0), 0);
+            const rktPct = pagu > 0 ? (totalRkt / pagu) * 100 : 0;
+            const cardRktTotal = document.getElementById('pbd-card-rkt-total');
+            if (cardRktTotal) cardRktTotal.textContent = formatRupiah(totalRkt);
+            const cardRktPct = document.getElementById('pbd-card-rkt-pct');
+            if (cardRktPct) cardRktPct.textContent = `${rktPct.toFixed(1)}% dari total pagu BOSP`;
+
+            let totalRkasPbd = 0;
+            lkState.bagianB.forEach((_, idx) => {
+                totalRkasPbd += computeRkasTotalByIndicator(idx);
+            });
+            const cardRkasTotal = document.getElementById('pbd-card-rkas-total');
+            if (cardRkasTotal) cardRkasTotal.textContent = formatRupiah(totalRkasPbd);
+
+            const footEl = document.getElementById('pbd-matrix-foot');
+            if (footEl) {
+                footEl.innerHTML = `
+                    <tr>
+                        <td colspan="6" class="p-3 text-right uppercase">Total Anggaran Program Benahi PBD (RKT vs Terinci di RKAS 2027)</td>
+                        <td class="p-3 text-right text-amber-300 text-sm">${formatRupiah(totalRkt)}</td>
+                        <td class="p-3 text-right text-emerald-300 text-sm">${formatRupiah(totalRkasPbd)}</td>
+                    </tr>
+                `;
+            }
+        }
+
+        function renderPbdModule() {
+            const tbody = document.getElementById('pbd-matrix-body');
+            if (!tbody) return;
+
+            tbody.innerHTML = lkState.bagianB.map((row, idx) => {
+                const cap = (row.capaian || '').toLowerCase();
+                let badgeClass = 'bg-slate-100 text-slate-700';
+                if (cap.includes('kurang') || cap.includes('merah')) {
+                    badgeClass = 'bg-rose-100 text-rose-900 border-rose-300 font-bold';
+                } else if (cap.includes('sedang') || cap.includes('kuning')) {
+                    badgeClass = 'bg-amber-100 text-amber-900 border-amber-300 font-bold';
+                } else if (cap.includes('baik') || cap.includes('hijau')) {
+                    badgeClass = 'bg-emerald-100 text-emerald-900 border-emerald-300 font-bold';
+                }
+
+                const rkasMatched = computeRkasTotalByIndicator(idx);
+
+                return `
+                    <tr class="hover:bg-slate-50/90 align-top">
+                        <td class="p-2.5 text-center font-bold text-slate-700">${idx + 1}</td>
+                        <td class="p-2.5 font-bold bg-slate-50 text-slate-900">${row.indikator}</td>
+                        <td class="p-2">
+                            <input type="text" value="${escapeAttr(row.capaian)}" oninput="onPbdFieldChange(${idx}, 'capaian', this.value)" placeholder="Kurang (Merah) / Sedang / Baik" class="w-full rounded-lg border px-2 py-1.5 text-xs ${badgeClass}">
+                        </td>
+                        <td class="p-2">
+                            <textarea rows="2" oninput="onPbdFieldChange(${idx}, 'eds', this.value)" placeholder="Temuan Evaluasi Diri Sekolah (EDS)..." class="w-full rounded-lg border border-slate-200 px-2 py-1.5 text-xs text-slate-800 leading-snug">${escapeAttr(row.eds || '')}</textarea>
+                        </td>
+                        <td class="p-2">
+                            <textarea rows="2" oninput="onPbdFieldChange(${idx}, 'masalah', this.value)" placeholder="Akar masalah Level 1 & 2..." class="w-full rounded-lg border border-slate-200 px-2 py-1.5 text-xs text-slate-800 leading-snug">${escapeAttr(row.masalah)}</textarea>
+                        </td>
+                        <td class="p-2">
+                            <textarea rows="2" oninput="onPbdFieldChange(${idx}, 'benahi', this.value)" placeholder="Program benahi RKT & kode ARKAS..." class="w-full rounded-lg border border-slate-200 px-2 py-1.5 text-xs font-medium text-teal-950 bg-teal-50/30 leading-snug">${escapeAttr(row.benahi)}</textarea>
+                        </td>
+                        <td class="p-2">
+                            <input type="number" value="${row.anggaran || ''}" oninput="onPbdFieldChange(${idx}, 'anggaran', this.value)" placeholder="0" class="w-full rounded-lg border border-slate-300 px-2 py-1.5 text-right font-bold text-slate-900">
+                        </td>
+                        <td class="p-2.5 text-right font-extrabold ${rkasMatched > 0 ? 'text-emerald-800' : 'text-slate-400'}">
+                            ${formatRupiah(rkasMatched)}
+                        </td>
+                    </tr>
+                `;
+            }).join('');
+
+            updatePbdSummaryCards();
+            lucide.createIcons();
         }
 
         // =========================================================================
@@ -3055,6 +3366,7 @@ Terima kasih, sampai bertemu besok dalam keadaan sehat walafiat.</textarea>
                 activeBtn.className = 'lk-preset-btn px-3.5 py-2.5 rounded-xl text-xs font-bold border border-teal-600 bg-teal-600 text-white shadow-sm flex items-center gap-1.5 transition';
             }
 
+            renderPbdModule();
             renderLkAll();
             renderRkasTable();
             syncSilpaFromLk(false);
@@ -3072,12 +3384,14 @@ Terima kasih, sampai bertemu besok dalam keadaan sehat walafiat.</textarea>
         function syncLkField(field, val) {
             lkState[field] = val;
             if (field === 'status') {
+                renderPbdModule();
                 renderLkBagianC();
                 renderLkHonor();
                 renderRkasTable();
             }
             if (field === 'nama') {
                 updateActiveDocInfo();
+                renderPbdModule();
                 renderRkasTable();
                 renderArusKasTable();
             }
@@ -3092,12 +3406,28 @@ Terima kasih, sampai bertemu besok dalam keadaan sehat walafiat.</textarea>
             lkState.satuan = parseInt(document.getElementById('lk-satuan').value) || 0;
             const totalPagu = lkState.siswa * lkState.satuan;
             document.getElementById('lk-total-pagu-display').textContent = formatRupiah(totalPagu);
+            renderPbdModule();
             renderLkBagianC();
             renderLkHonor();
             renderLkSarpras();
             renderRkasTable();
             renderArusKasTable();
             scheduleAutoSave();
+        }
+
+        function renderLkBagianB() {
+            const tbody = document.getElementById('lk-bagian-b-body');
+            if (!tbody) return;
+            tbody.innerHTML = lkState.bagianB.map((row, idx) => `
+                <tr>
+                    <td class="p-2.5 text-center font-bold">${idx + 1}</td>
+                    <td class="p-2.5 font-bold bg-slate-50">${row.indikator}</td>
+                    <td class="p-2"><input type="text" value="${escapeAttr(row.capaian)}" oninput="lkState.bagianB[${idx}].capaian=this.value;renderPbdModule();scheduleAutoSave()" placeholder="Baik/Sedang/Kurang" class="w-full rounded-lg border border-slate-200 px-2.5 py-1.5"></td>
+                    <td class="p-2"><input type="text" value="${escapeAttr(row.masalah)}" oninput="lkState.bagianB[${idx}].masalah=this.value;renderPbdModule();scheduleAutoSave()" placeholder="Akar masalah..." class="w-full rounded-lg border border-slate-200 px-2.5 py-1.5"></td>
+                    <td class="p-2"><input type="text" value="${escapeAttr(row.benahi)}" oninput="lkState.bagianB[${idx}].benahi=this.value;renderPbdModule();scheduleAutoSave()" placeholder="Program benahi..." class="w-full rounded-lg border border-slate-200 px-2.5 py-1.5"></td>
+                    <td class="p-2"><input type="number" value="${row.anggaran || ''}" oninput="lkState.bagianB[${idx}].anggaran=parseInt(this.value)||0;renderPbdModule();scheduleAutoSave()" placeholder="0" class="w-full rounded-lg border border-slate-200 px-2.5 py-1.5 text-right font-semibold"></td>
+                </tr>
+            `).join('');
         }
 
         function renderLkAll() {
@@ -3131,16 +3461,7 @@ Terima kasih, sampai bertemu besok dalam keadaan sehat walafiat.</textarea>
             `).join('');
 
             // Bagian B
-            document.getElementById('lk-bagian-b-body').innerHTML = lkState.bagianB.map((row, idx) => `
-                <tr>
-                    <td class="p-2.5 text-center font-bold">${idx + 1}</td>
-                    <td class="p-2.5 font-bold bg-slate-50">${row.indikator}</td>
-                    <td class="p-2"><input type="text" value="${escapeAttr(row.capaian)}" oninput="lkState.bagianB[${idx}].capaian=this.value;scheduleAutoSave()" placeholder="Baik/Sedang/Kurang" class="w-full rounded-lg border border-slate-200 px-2.5 py-1.5"></td>
-                    <td class="p-2"><input type="text" value="${escapeAttr(row.masalah)}" oninput="lkState.bagianB[${idx}].masalah=this.value;scheduleAutoSave()" placeholder="Akar masalah..." class="w-full rounded-lg border border-slate-200 px-2.5 py-1.5"></td>
-                    <td class="p-2"><input type="text" value="${escapeAttr(row.benahi)}" oninput="lkState.bagianB[${idx}].benahi=this.value;scheduleAutoSave()" placeholder="Program benahi..." class="w-full rounded-lg border border-slate-200 px-2.5 py-1.5"></td>
-                    <td class="p-2"><input type="number" value="${row.anggaran || ''}" oninput="lkState.bagianB[${idx}].anggaran=parseInt(this.value)||0;scheduleAutoSave()" placeholder="0" class="w-full rounded-lg border border-slate-200 px-2.5 py-1.5 text-right font-semibold"></td>
-                </tr>
-            `).join('');
+            renderLkBagianB();
 
             // Bagian C
             renderLkBagianC();
@@ -3409,7 +3730,7 @@ Terima kasih, sampai bertemu besok dalam keadaan sehat walafiat.</textarea>
         }
 
         // =========================================================================
-        // 4B. LOGIKA SIMULATOR RINCIAN RKAS BOSP TA 2027 (MODUL 7)
+        // 4B. LOGIKA SIMULATOR RINCIAN RKAS BOSP TA 2027 (MODUL 8)
         // =========================================================================
 
         function populateRkasFilter() {
@@ -3427,13 +3748,14 @@ Terima kasih, sampai bertemu besok dalam keadaan sehat walafiat.</textarea>
             if (rkasAutoSync && !isRkasSynced) {
                 syncRkasToLkAndCashflow(true);
             } else {
-                showToast(enabled ? 'Mode Auto-Sync RKAS ke LK & Arus Kas diaktifkan.' : 'Mode Auto-Sync dimatikan (gunakan tombol Sinkronkan Sekarang).', 'info');
+                showToast(enabled ? 'Mode Auto-Sync RKAS ke PBD, LK & Arus Kas diaktifkan.' : 'Mode Auto-Sync dimatikan (gunakan tombol Sinkronkan Sekarang).', 'info');
             }
         }
 
         function loadRkasPreset(presetKey) {
             rkasItems = JSON.parse(JSON.stringify(RKAS_PRESETS[presetKey] || RKAS_PRESETS.blank));
             renderRkasTable();
+            renderPbdModule();
             if (rkasAutoSync) {
                 syncRkasToLkAndCashflow(false);
             } else {
@@ -3457,6 +3779,7 @@ Terima kasih, sampai bertemu besok dalam keadaan sehat walafiat.</textarea>
                 harga: 0
             });
             renderRkasTable();
+            renderPbdModule();
             if (rkasAutoSync) {
                 syncRkasToLkAndCashflow(false);
             } else {
@@ -3469,6 +3792,7 @@ Terima kasih, sampai bertemu besok dalam keadaan sehat walafiat.</textarea>
         function removeRkasItem(idx) {
             rkasItems.splice(idx, 1);
             renderRkasTable();
+            renderPbdModule();
             if (rkasAutoSync) {
                 syncRkasToLkAndCashflow(false);
             } else {
@@ -3484,6 +3808,7 @@ Terima kasih, sampai bertemu besok dalam keadaan sehat walafiat.</textarea>
                 const prefix = KOMPONEN_BOSP[rkasItems[idx].kompIdx]?.kode || '03.03';
                 rkasItems[idx].kode = `${prefix}.01`;
                 renderRkasTable();
+                renderPbdModule();
                 if (rkasAutoSync) {
                     syncRkasToLkAndCashflow(false);
                 } else {
@@ -3498,6 +3823,7 @@ Terima kasih, sampai bertemu besok dalam keadaan sehat walafiat.</textarea>
                 const subEl = document.getElementById(`rkas-row-total-${idx}`);
                 if (subEl) subEl.textContent = formatRupiah(Math.round(rowSub));
                 recalcRkasSummary();
+                renderPbdModule();
                 if (rkasAutoSync) {
                     syncRkasToLkAndCashflow(false);
                 } else {
@@ -3509,6 +3835,7 @@ Terima kasih, sampai bertemu besok dalam keadaan sehat walafiat.</textarea>
             rkasItems[idx][field] = val;
             if (field === 'pbd') {
                 recalcRkasSummary();
+                renderPbdModule();
             }
             scheduleAutoSave();
         }
@@ -3522,6 +3849,7 @@ Terima kasih, sampai bertemu besok dalam keadaan sehat walafiat.</textarea>
                 }
             });
             lkState.alokasiC = sums;
+            renderPbdModule();
             renderLkBagianC();
             renderLkHonor();
             renderLkSarpras();
@@ -3529,7 +3857,7 @@ Terima kasih, sampai bertemu besok dalam keadaan sehat walafiat.</textarea>
             updateGlobalSyncIndicator(true);
             scheduleAutoSave();
             if (notify) {
-                showToast('Total 12 komponen RKAS berhasil disinkronkan ke LK Bagian C & Simulasi Arus Kas 12 Bulan!');
+                showToast('Total 12 komponen RKAS berhasil disinkronkan ke PBD, LK Bagian C & Simulasi Arus Kas 12 Bulan!');
             }
         }
 
@@ -3585,7 +3913,7 @@ Terima kasih, sampai bertemu besok dalam keadaan sehat walafiat.</textarea>
             document.getElementById('rkas-card-total').textContent = formatRupiah(grandTotal);
             const sisaEl = document.getElementById('rkas-card-sisa');
             if (pagu <= 0) {
-                sisaEl.textContent = 'Atur jumlah siswa di Modul 6';
+                sisaEl.textContent = 'Atur jumlah siswa di Modul 7';
             } else if (selisih === 0) {
                 sisaEl.innerHTML = `<span class="text-emerald-300 font-bold">✓ Seimbang 100% dengan Pagu</span>`;
             } else if (selisih > 0) {
@@ -3822,7 +4150,6 @@ Terima kasih, sampai bertemu besok dalam keadaan sehat walafiat.</textarea>
             let v4 = Math.max(0, Math.min(100, parseFloat(el4.value) || 0));
 
             if (changedIdx === 4) {
-                // Jika Komponen 4 (Operasional & Pembelajaran) diubah langsung, sesuaikan komponen lain secara proporsional
                 const targetRest = Math.max(0, Math.round((100 - v4) * 10) / 10);
                 const sum123 = v1 + v2 + v3;
                 if (sum123 > 0) {
@@ -3838,7 +4165,6 @@ Terima kasih, sampai bertemu besok dalam keadaan sehat walafiat.</textarea>
                 el2.value = v2;
                 el3.value = v3;
             } else {
-                // Jika Komponen 1, 2, atau 3 diubah, pastikan jumlah (1+2+3) tidak melebihi 100%, lalu Komponen 4 otomatis = 100 - (1+2+3)
                 if (v1 + v2 + v3 > 100) {
                     if (changedIdx === 1) {
                         v1 = Math.max(0, Math.round((100 - v2 - v3) * 10) / 10);
@@ -3855,7 +4181,6 @@ Terima kasih, sampai bertemu besok dalam keadaan sehat walafiat.</textarea>
                 el4.value = v4;
             }
 
-            // Perbarui visual progress bar & validasi kepatuhan Pasal 42
             const maxHonor = group === 'neg' ? 20 : 40;
             const vals = [v1, v2, v3, v4];
             vals.forEach((val, i) => {
@@ -3920,7 +4245,7 @@ Terima kasih, sampai bertemu besok dalam keadaan sehat walafiat.</textarea>
         function applySlide8ToLk() {
             const pagu = (lkState.siswa || 0) * (lkState.satuan || 0);
             if (pagu <= 0) {
-                showToast('Isi terlebih dahulu Jumlah Siswa pada Menu 6 (Lembar Kerja) agar pagu dapat dihitung.', 'error');
+                showToast('Isi terlebih dahulu Jumlah Siswa pada Menu 7 (Lembar Kerja) agar pagu dapat dihitung.', 'error');
                 return;
             }
             const group = lkState.status === 'Swasta' ? 'swa' : 'neg';
@@ -3933,7 +4258,6 @@ Terima kasih, sampai bertemu besok dalam keadaan sehat walafiat.</textarea>
             const nomHonor = Math.round(pagu * pHonor);
             const sisaOps = Math.max(0, pagu - (nomBuku + nomSarpras + nomHonor));
 
-            // Distribusikan sisa ruang fleksibel ke 9 komponen operasional & pembelajaran secara proporsional
             const opsIndices = [0, 1, 3, 4, 5, 6, 7, 9, 10];
             const weights = [0.04, 0.03, 0.25, 0.16, 0.13, 0.07, 0.16, 0.11, 0.05];
             let allocatedOps = 0;
@@ -4564,6 +4888,7 @@ Terima kasih, sampai bertemu besok dalam keadaan sehat walafiat.</textarea>
         window.addEventListener('DOMContentLoaded', () => {
             const restored = loadSessionFromLocal();
 
+            renderPbdModule();
             renderLkAll();
             renderRkasTable();
             renderPengawasChecklist();
